@@ -12,7 +12,7 @@
         <div class="bg-surface-container-low p-stack-md rounded-lg border border-outline-variant">
             <h2 class="font-h3 text-h3 text-on-surface mb-2">Get in Touch</h2>
             <p>You can reach us at:</p>
-            <p class="font-h2 text-h2 text-secondary font-bold">support@@toolsite.com</p>
+            <p class="font-h2 text-h2 text-secondary font-bold">support@toolsite.com</p>
             <p class="mt-4 opacity-70 italic text-body-md">We typically respond to all inquiries within 24-48 business hours.</p>
         </div>
 

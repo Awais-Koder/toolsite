@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\SitemapController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -49,3 +50,5 @@ Route::get('/api/history/{month}/{day}', function ($month, $day) {
         return ['text' => 'On this day, something remarkable happened in history!'];
     }
 });
+
+Route::get('/sitemap.xml', [SitemapController::class, 'index'])->name('sitemap');

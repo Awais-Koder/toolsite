@@ -1,7 +1,24 @@
 @extends('layouts.app')
 
-@section('title', 'Time & Date Tools - Free Online Calculators')
-@section('meta_description', 'Explore a variety of free online time and date tools, including an exact age calculator, date difference tool, and more.')
+@section('title', 'Free Online Calculators - Age, Time & Date Tools')
+@section('meta_description', 'Free online tools to calculate your exact age, time duration, and date differences. Fast, accurate, and 100% private calculations.')
+
+@push('head')
+<script type="application/ld+json">
+{
+  "{{ '@' }}context": "https://schema.org",
+  "{{ '@' }}type": "WebSite",
+  "name": "Time&Date Tools",
+  "url": "{{ url('/') }}",
+  "description": "Free online calculators for age, time, and date.",
+  "potentialAction": {
+    "{{ '@' }}type": "SearchAction",
+    "target": "{{ url('/') }}/search?q={search_term_string}",
+    "query-input": "required name=search_term_string"
+  }
+}
+</script>
+@endpush
 
 @section('content')
     <!-- Hero Section -->
@@ -18,9 +35,8 @@
     </section>
 
     <!-- AdSense Top Placeholder -->
-    <div class="w-full max-w-[728px] h-[90px] mx-auto bg-surface-container-high border border-dashed border-outline-variant flex items-center justify-center relative">
-        <span class="font-label-caps text-label-caps text-outline absolute top-2">Advertisement</span>
-        <span class="text-on-surface-variant opacity-50">728x90 Leaderboard Placeholder</span>
+    <div class="adsense-slot mx-auto my-base" style="display:none;">
+        <!-- AdSense Slot (Top) -->
     </div>
 
     <!-- Popular Tools -->
@@ -38,37 +54,13 @@
                     Use Tool <span class="material-symbols-outlined text-[20px]">arrow_forward</span>
                 </div>
             </a>
-            <!-- Tool Card 2 -->
-            <a class="bg-surface-container-lowest border border-surface-variant rounded-lg p-stack-md hover:flat-shadow transition-shadow group flex flex-col h-full cursor-pointer" href="#" x-on:click.prevent="$dispatch('open-coming-soon')">
-                <div class="mb-stack-sm flex items-center justify-center w-12 h-12 bg-primary-fixed rounded-full text-on-primary-fixed group-hover:bg-secondary group-hover:text-on-secondary transition-colors">
-                    <span class="material-symbols-outlined text-[24px]">hourglass_bottom</span>
-                </div>
-                <h3 class="font-h2 text-h2 text-on-surface mb-base">Time Duration</h3>
-                <p class="font-body-md text-body-md text-on-surface-variant mb-stack-md flex-grow">Find out exactly how many hours, minutes, and seconds are between two specific times.</p>
-                <div class="font-h3 text-h3 text-secondary flex items-center gap-2 mt-auto">
-                    Use Tool <span class="material-symbols-outlined text-[20px]">arrow_forward</span>
-                </div>
-            </a>
-            
-            <!-- Tool Card 3 -->
-            <a class="bg-surface-container-lowest border border-surface-variant rounded-lg p-stack-md hover:flat-shadow transition-shadow group flex flex-col h-full cursor-pointer" href="#" x-on:click.prevent="$dispatch('open-coming-soon')">
-                <div class="mb-stack-sm flex items-center justify-center w-12 h-12 bg-primary-fixed rounded-full text-on-primary-fixed group-hover:bg-secondary group-hover:text-on-secondary transition-colors">
-                    <span class="material-symbols-outlined text-[24px]">calendar_month</span>
-                </div>
-                <h3 class="font-h2 text-h2 text-on-surface mb-base">Date Calculator</h3>
-                <p class="font-body-md text-body-md text-on-surface-variant mb-stack-md flex-grow">Add or subtract days, weeks, months, or years from a given date easily.</p>
-                <div class="font-h3 text-h3 text-secondary flex items-center gap-2 mt-auto">
-                    Use Tool <span class="material-symbols-outlined text-[20px]">arrow_forward</span>
-                </div>
-            </a>
            
         </div>
     </section>
 
     <!-- In-feed Ad Placeholder -->
-    <div class="w-full max-w-[300px] h-[250px] mx-auto bg-surface-container-high border border-dashed border-outline-variant flex items-center justify-center relative my-stack-lg">
-        <span class="font-label-caps text-label-caps text-outline absolute top-2">Advertisement</span>
-        <span class="text-on-surface-variant opacity-50">300x250 Medium Rectangle</span>
+    <div class="adsense-slot mx-auto my-stack-lg" style="display:none;">
+        <!-- AdSense Slot (In-feed) -->
     </div>
 
     {{-- 
@@ -125,83 +117,86 @@
     </section>
     --}}
 
-    <!-- SEO Text Section -->
-    <section class="max-w-[900px] mx-auto space-y-stack-md py-stack-lg bg-surface-container-lowest p-stack-lg rounded-xl border border-surface-variant">
-        <h2 class="font-h1 text-h1 text-on-surface">Your Reliable Suite of Time and Date Utilities</h2>
-        <div class="space-y-6 font-body-md text-body-md text-on-surface-variant">
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                <div class="space-y-3">
-                    <h3 class="font-h3 text-secondary">Precision You Can Trust</h3>
-                    <p>
-                        In a world where every second counts, our tools are built on robust mathematical algorithms that account for all time-related anomalies. From leap years in our <strong>Exact Age Calculator</strong> to daylight saving transitions, we ensure that the data you receive is accurate down to the smallest unit.
-                    </p>
-                </div>
-                <div class="space-y-3">
-                    <h3 class="font-h3 text-secondary">Privacy First</h3>
-                    <p>
-                        We believe your data belongs to you. All calculations performed on <strong>Time&Date Tools</strong> happen locally in your browser. This means your birth dates, event timings, and personal milestones are never stored on our servers, providing a secure and private experience.
-                    </p>
-                </div>
-                <div class="space-y-3">
-                    <h3 class="font-h3 text-secondary">Designed for Simplicity</h3>
-                    <p>
-                        No account creation, no subscriptions, and no hidden fees. Our mission is to provide high-utility tools with a premium design aesthetic that makes navigation effortless. Whether you're on a desktop or a mobile device, our responsive interface ensures a seamless experience.
-                    </p>
-                </div>
-                <div class="space-y-3">
-                    <h3 class="font-h3 text-secondary">More Than Just Numbers</h3>
-                    <p>
-                        We strive to make data meaningful. Our tools don't just provide raw results; they offer context. Discover historical facts associated with your milestones, visualize your life progress, and gain new perspectives on how you spend your most valuable asset: time.
-                    </p>
-                </div>
-            </div>
-            
-            <div class="pt-6 border-t border-surface-variant">
-                <h3 class="font-h3 text-on-surface mb-3">Comprehensive Coverage for Every Need</h3>
-                <p>
-                    From legal professionals determining statutory ages to parents tracking their child's growth, our tools serve a diverse range of purposes. We are constantly expanding our library of calculators—including <strong>Time Duration</strong>, <strong>Date Difference</strong>, and <strong>Business Day Calculators</strong>—to become your ultimate destination for everything time-related.
+    <!-- SEO Article Section -->
+    <section class="mt-section-gap pt-12 border-t border-outline-variant/30">
+        <div class="max-w-4xl mx-auto space-y-12">
+            <header class="text-center space-y-4">
+                <h2 class="font-h1 text-h1 text-on-surface">The Ultimate Exact Age Calculator & Life Progress Tracker</h2>
+                <p class="font-body-lg text-body-lg text-on-surface-variant leading-relaxed">
+                    Welcome to the most precise and engaging age calculator on the web. Whether you need to calculate your chronological age for a job application, an official document, or simply want a reliable birth date calculator to check your exact age in years, months, and days, our tool is built to provide instant, flawless results.
                 </p>
+            </header>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="bg-surface-container-lowest p-6 rounded-xl border border-outline-variant/50 shadow-sm">
+                    <h3 class="font-h3 text-h3 text-on-surface mb-4 flex items-center gap-2">
+                        <span class="material-symbols-outlined text-secondary">auto_stories</span>
+                        Go Beyond Numbers: Discover Your "Life Story"
+                    </h3>
+                    <p class="font-body-md text-body-md text-on-surface-variant mb-6">
+                        We believe that your time is your most valuable asset, and a simple number doesn't tell the whole story. That is why our platform goes beyond a standard age calculator. With a single click, you can unlock your unique "Life Story" mode. Discover fascinating milestones about your journey:
+                    </p>
+                    <ul class="space-y-4">
+                        <li class="flex gap-3">
+                            <span class="material-symbols-outlined text-secondary shrink-0">calendar_month</span>
+                            <span class="font-body-md text-on-surface"><strong class="text-secondary">The 4,000 Weeks Perspective:</strong> See exactly how many weeks you have lived and how many weekends you have left to make an impact.</span>
+                        </li>
+                        <li class="flex gap-3">
+                            <span class="material-symbols-outlined text-secondary shrink-0">favorite</span>
+                            <span class="font-body-md text-on-surface"><strong class="text-secondary">Your Biological Engine:</strong> Find out the massive number of heartbeats and breaths your body has taken since the day you were born.</span>
+                        </li>
+                        <li class="flex gap-3">
+                            <span class="material-symbols-outlined text-secondary shrink-0">history_edu</span>
+                            <span class="font-body-md text-on-surface"><strong class="text-secondary">Historical Trivia:</strong> Instantly discover which globally hit movie and song were released the year your journey began.</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="space-y-6">
+                    <div class="bg-white p-6 rounded-xl border border-outline-variant/30">
+                        <h3 class="font-h3 text-h3 text-on-surface mb-3 flex items-center gap-2">
+                            <span class="material-symbols-outlined text-secondary">shield_lock</span>
+                            100% Private & Secure
+                        </h3>
+                        <p class="font-body-md text-body-md text-on-surface-variant">
+                            Your personal data belongs to you. Unlike other platforms that might track your inputs, our age calculator processes everything directly inside your local browser. Your date of birth and milestones are never uploaded or saved to our servers.
+                        </p>
+                    </div>
+                    <div class="bg-white p-6 rounded-xl border border-outline-variant/30">
+                        <h3 class="font-h3 text-h3 text-on-surface mb-3 flex items-center gap-2">
+                            <span class="material-symbols-outlined text-secondary">bolt</span>
+                            Lightning-Fast Precision
+                        </h3>
+                        <p class="font-body-md text-body-md text-on-surface-variant">
+                            No account creation or subscriptions. Whether you are a professional calculating statutory age limits or a parent tracking a child's exact age, our responsive interface guarantees a seamless experience on any device.
+                        </p>
+                    </div>
+                </div>
             </div>
-        </div>
-    </section>
 
-    <!-- SEO Content Section -->
-    <section class="max-w-[1200px] mx-auto px-gutter py-section-gap">
-        <div class="bg-surface-container-low rounded-2xl border border-outline-variant p-stack-lg space-y-stack-md">
-            <h2 class="font-h2 text-h2 text-on-surface">The Ultimate Hub for Free Online Time & Date Calculators</h2>
-            <p class="font-body-lg text-on-surface-variant leading-relaxed">
-                Whether you need to figure out the exact number of days between two events, manage your work hours, or find out your exact age, Time&Date Tools has you covered. We offer a comprehensive suite of highly accurate, instant, and 100% free online calculators designed to make your daily computations effortless.
-            </p>
-
-            <div class="grid md:grid-cols-2 gap-stack-lg pt-6">
+            <article class="prose prose-slate max-w-none space-y-8 pt-8">
                 <div class="space-y-4">
-                    <h3 class="font-h3 text-h3 text-secondary">The Most Accurate Age & Birth Date Calculator</h3>
-                    <p class="text-on-surface-variant">
-                        Have you ever wondered exactly how many days, weeks, or even heartbeats you have experienced since you were born? Our highly advanced age calculator goes far beyond basic math. Acting as a precise birth date calculator, it not only tells you your chronological age in years, months, and days but also unlocks your "Life Story." Find out your life's progress, what hit movie was released in your birth year, and exactly how many days are left until your next big milestone.
+                    <h2 class="font-h2 text-h2 text-on-surface">Why Precision Matters in a Date and Time Calculator</h2>
+                    <p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">
+                        When we talk about measuring time, accuracy is everything. A standard days calculator might simply subtract two dates, but true chronological tracking requires much more. It involves calculating leap years, understanding varying month durations, and adjusting for historical calendar shifts. We built our platform to be the most reliable date and time calculator you will ever use, ensuring that whether you are counting days for a legal document or tracking milestones, the math is flawless.
                     </p>
                 </div>
 
                 <div class="space-y-4">
-                    <h3 class="font-h3 text-h3 text-secondary">Seamless Date to Date & Time Duration Calculators</h3>
-                    <p class="text-on-surface-variant">
-                        Planning a project deadline or counting down to a special event? Our date to date calculator makes it incredibly simple to add or subtract days from a specific date. If you need to track hours and minutes, our time duration calculator (often used as a reliable time calculator for scheduling) gives you the exact difference between two specific times. We've optimized our date and time calculator tools to handle leap years, differing month lengths, and complex time values so you don't have to.
+                    <h2 class="font-h2 text-h2 text-on-surface">The Philosophy Behind Chronological Age</h2>
+                    <p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">
+                        Age is often viewed as just a number, but we see it as a journey. The concept of tracking your exact age down to the days, minutes, and even heartbeats offers a fresh perspective on life.
+                        Did you know the average human lifespan is roughly 4,000 weeks? By using our advanced birth date calculator, you don't just find out how old you are; you gain a profound understanding of the time you have spent and the time you have ahead. This "Life Story" approach turns a basic calculation into an insightful experience, motivating you to make every weekend and every milestone count.
                     </p>
                 </div>
 
-                <div class="space-y-4">
-                    <h3 class="font-h3 text-h3 text-secondary">Manage Your Work with Days & Time Calculators</h3>
-                    <p class="text-on-surface-variant">
-                        Professionals, HR managers, and freelancers love our platform for quick verifications. While our days calculator helps you count business days or total calendar days instantly, you can also use our specialized time card calculator and time clock calculator concepts to estimate hours worked.
+                <div class="rounded-2xl border border-primary-fixed/20">
+                    <h2 class="font-h2 text-h2 text-on-surface mb-4">The Future of Browser-Based Tools</h2>
+                    <p class="font-body-md text-body-md text-on-surface-variant leading-relaxed mb-0">
+                        In an era where digital privacy is constantly under threat, we are proud to offer a completely secure alternative. Many online tools send your personal inputs, like your date of birth, to remote servers for processing. Our architecture is different. Every calculation performed on our age calculator and time duration tools happens strictly within your local web browser. We do not use databases to store your personal queries. This local-processing method not only guarantees absolute privacy but also delivers instant, zero-lag results regardless of your internet connection speed.
                     </p>
                 </div>
-
-                <div class="space-y-4">
-                    <h3 class="font-h3 text-h3 text-secondary">100% Private, Fast, and Secure</h3>
-                    <p class="text-on-surface-variant">
-                        Unlike other platforms, every date time calculator on our site runs entirely in your browser using modern web technologies. This means your data is never uploaded to external servers. Your calculations are lightning-fast, highly secure, and completely private.
-                    </p>
-                </div>
-            </div>
+            </article>
         </div>
     </section>
 @endsection

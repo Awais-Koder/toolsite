@@ -8,13 +8,11 @@
         <!-- Left Column (2/3) -->
         <div class="lg:w-2/3 flex flex-col gap-stack-lg order-2 lg:order-1">
             
-            <!-- Top Ad Placeholder -->
-            <div class="bg-surface-container-low border-2 border-dashed border-outline-variant rounded-xl p-4 flex items-center justify-center min-h-[90px] text-on-surface-variant font-body-sm italic">
-                <div class="text-center">
-                    <p>AdSense Placeholder (Top Banner)</p>
-                    <p class="text-[10px] mt-1 opacity-50">Responsive / Auto Ad Unit</p>
-                </div>
+            <!-- AdSense Top Placeholder -->
+            <div class="adsense-slot mx-auto my-base" style="display:none;">
+                <!-- AdSense Slot (Top) -->
             </div>
+            
             <!-- Tool Interface -->
             <section class="bg-surface-container-lowest rounded-xl shadow-sm border border-outline-variant p-6 sm:p-8">
                 <h1 class="font-h1 text-on-surface mb-2" x-text="mode === 'age' ? 'Exact Age Calculator' : 'Age Difference Calculator'">Exact Age Calculator</h1>
@@ -33,19 +31,19 @@
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-stack-md mb-6">
                     <div class="flex-1">
                         <label class="block font-label-caps text-on-surface mb-2 uppercase" x-text="mode === 'age' ? 'Your Name (Optional)' : 'Person 1 Name'"></label>
-                        <input x-model="p1Name" placeholder="Enter name" class="form-input w-full rounded-lg border-outline focus:border-secondary focus:ring-secondary h-12 px-4 text-on-surface bg-surface-container-lowest font-body-md" type="text"/>
+                        <input x-model="p1Name" placeholder="Enter name" class="form-input w-full rounded-lg border-outline focus:border-secondary focus:ring-secondary h-12 px-4 text-on-surface bg-surface-container-lowest font-body-md border" type="text"/>
                     </div>
                     <div class="flex-1" x-show="mode === 'diff'">
                         <label class="block font-label-caps text-on-surface mb-2 uppercase">Person 2 Name</label>
-                        <input x-model="p2Name" placeholder="Enter name" class="form-input w-full rounded-lg border-outline focus:border-secondary focus:ring-secondary h-12 px-4 text-on-surface bg-surface-container-lowest font-body-md" type="text"/>
+                        <input x-model="p2Name" placeholder="Enter name" class="form-input w-full rounded-lg border-outline focus:border-secondary focus:ring-secondary h-12 px-4 text-on-surface bg-surface-container-lowest font-body-md border" type="text"/>
                     </div>
                     <div class="flex-1">
                         <label class="block font-label-caps text-on-surface mb-2 uppercase" for="dob" x-text="mode === 'age' ? 'Date of Birth' : (p1Name || 'Person 1') + '\'s Birth Date'"></label>
-                        <input x-model="dob" class="form-input w-full rounded-lg border-outline focus:border-secondary focus:ring-secondary h-12 px-4 text-on-surface bg-surface-container-lowest font-body-md" id="dob" type="date"/>
+                        <input x-model="dob" class="form-input w-full rounded-lg border-outline focus:border-secondary focus:ring-secondary h-12 px-4 text-on-surface bg-surface-container-lowest font-body-md border" id="dob" type="date"/>
                     </div>
                     <div class="flex-1">
                         <label class="block font-label-caps text-on-surface mb-2 uppercase" for="calc-date" x-text="mode === 'age' ? 'Calculate Age At' : (p2Name || 'Person 2') + '\'s Birth Date'"></label>
-                        <input x-model="targetDate" class="form-input w-full rounded-lg border-outline focus:border-secondary focus:ring-secondary h-12 px-4 text-on-surface bg-surface-container-lowest font-body-md" id="calc-date" type="date"/>
+                        <input x-model="targetDate" class="form-input w-full rounded-lg border-outline focus:border-secondary focus:ring-secondary h-12 px-4 text-on-surface bg-surface-container-lowest font-body-md border" id="calc-date" type="date"/>
                     </div>
                 </div>
 
@@ -458,10 +456,10 @@
                 <section class="mb-stack-md">
                     <h3 class="font-h3 text-on-surface mb-3">Understanding Exact Age Calculation</h3>
                     <p class="text-on-surface-variant font-body-md mb-4">
-                        Age calculation might seem straightforward at first glance, but it involves several mathematical complexities. Our **Exact Age Calculator** is designed to handle these nuances, providing you with a high-precision breakdown of your journey through time. But how exactly does it work, and why is this level of detail important?
+                        Age calculation might seem straightforward at first glance, but it involves several mathematical complexities. Our <strong>Exact Age Calculator</strong> is designed to handle these nuances, providing you with a high-precision breakdown of your journey through time. But how exactly does it work, and why is this level of detail important?
                     </p>
                     <p class="text-on-surface-variant font-body-md mb-4">
-                        The most common method used globally is the Western system, where a person's age increases on their birthday. However, calculating the time between two dates requires accounting for **leap years** (which add an extra day every four years) and the varying lengths of months (ranging from 28 to 31 days). Our tool uses a precise algorithm that calculates the difference between your date of birth and the target date, normalizing these variables to give you an accurate count of years, months, and days.
+                        The most common method used globally is the Western system, where a person's age increases on their birthday. However, calculating the time between two dates requires accounting for <strong>leap years</strong> (which add an extra day every four years) and the varying lengths of months (ranging from 28 to 31 days). Our tool uses a precise algorithm that calculates the difference between your date of birth and the target date, normalizing these variables to give you an accurate count of years, months, and days.
                     </p>
                 </section>
 
@@ -540,29 +538,6 @@
             <script type="application/ld+json">
             {
               "{{ '@' }}context": "https://schema.org",
-              "{{ '@' }}type": "SoftwareApplication",
-              "name": "Exact Age Calculator",
-              "operatingSystem": "Web",
-              "applicationCategory": "EducationalApplication",
-              "url": "{{ url()->current() }}",
-              "description": "Calculate your exact age in years, months, days, hours, and seconds. Discover fun facts, life story statistics, and zodiac signs.",
-              "offers": {
-                "{{ '@' }}type": "Offer",
-                "price": "0",
-                "priceCurrency": "USD"
-              },
-              "featureList": [
-                "Exact age in Y/M/D",
-                "Real-time countdown to next birthday",
-                "Zodiac sign and leap years lived",
-                "Historical events on birth date",
-                "Life story biological statistics"
-              ]
-            }
-            </script>
-            <script type="application/ld+json">
-            {
-              "{{ '@' }}context": "https://schema.org",
               "{{ '@' }}type": "FAQPage",
               "mainEntity": [{
                 "{{ '@' }}type": "Question",
@@ -582,11 +557,8 @@
             }
             </script>
             <!-- Bottom Ad Placeholder -->
-            <div class="bg-surface-container-low border-2 border-dashed border-outline-variant rounded-xl p-4 flex items-center justify-center min-h-[250px] text-on-surface-variant font-body-sm italic">
-                <div class="text-center">
-                    <p>AdSense Placeholder (Bottom Responsive)</p>
-                    <p class="text-[10px] mt-1 opacity-50">Recommended: Multiplex Ad or Square unit</p>
-                </div>
+            <div class="adsense-slot mx-auto my-base" style="display:none;">
+                <!-- AdSense Slot (Bottom) -->
             </div>
         </div>
 
@@ -594,24 +566,16 @@
         <div class="lg:w-1/3 flex flex-col gap-stack-lg order-1 lg:order-2">
             
             <!-- Sidebar Ad Placeholder -->
-            <div class="bg-surface-container-low border-2 border-dashed border-outline-variant rounded-xl p-4 flex items-center justify-center min-h-[600px] text-on-surface-variant font-body-sm italic sticky top-4">
-                <div class="text-center">
-                    <p>AdSense Placeholder (Vertical Banner)</p>
-                    <p class="text-[10px] mt-1 opacity-50">Recommended: 300x600 Skyscraper</p>
-                </div>
+            <div class="adsense-slot mx-auto my-base" style="display:none;">
+                <!-- AdSense Slot (Sidebar) -->
             </div>
             <div class="sticky top-24 flex flex-col gap-stack-lg">
                 <div class="bg-surface-container-lowest rounded-xl shadow-sm border border-outline-variant p-6">
-                    <h3 class="font-h3 text-on-surface mb-4 pb-2 border-b border-outline-variant">Related Tools</h3>
+                    <h3 class="font-h3 text-on-surface mb-4 pb-2 border-b border-outline-variant">Navigation</h3>
                     <ul class="space-y-3">
-                        <li>
-                            <a class="flex items-center gap-3 text-on-surface-variant hover:text-secondary transition-colors group" href="#">
-                                <div class="bg-surface-container-low text-on-surface p-2 rounded-lg group-hover:bg-secondary group-hover:text-on-secondary transition-colors border border-outline-variant group-hover:border-secondary">
-                                    <span class="material-symbols-outlined text-xl block">timer</span>
-                                </div>
-                                <span class="font-body-md font-medium">Time Duration Calculator</span>
-                            </a>
-                        </li>
+                        <li><a class="text-on-surface-variant hover:text-secondary hover:underline transition-all" href="{{ route('home') }}">Home</a></li>
+                        <li><a class="text-on-surface-variant hover:text-secondary hover:underline transition-all" href="{{ route('about') }}">About Us</a></li>
+                        <li><a class="text-on-surface-variant hover:text-secondary hover:underline transition-all" href="{{ route('contact') }}">Contact</a></li>
                     </ul>
                 </div>
             </div>
