@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
-@section('title', 'Time&Date Tools - Free Online Calculators & Tools')
+@section('title', 'Time & Date Tools - Free Online Calculators')
+@section('meta_description', 'Explore a variety of free online time and date tools, including an exact age calculator, date difference tool, and more.')
 
 @section('content')
     <!-- Hero Section -->
@@ -38,7 +39,7 @@
                 </div>
             </a>
             <!-- Tool Card 2 -->
-            <a class="bg-surface-container-lowest border border-surface-variant rounded-lg p-stack-md hover:flat-shadow transition-shadow group flex flex-col h-full cursor-pointer" href="#">
+            <a class="bg-surface-container-lowest border border-surface-variant rounded-lg p-stack-md hover:flat-shadow transition-shadow group flex flex-col h-full cursor-pointer" href="#" x-on:click.prevent="$dispatch('open-coming-soon')">
                 <div class="mb-stack-sm flex items-center justify-center w-12 h-12 bg-primary-fixed rounded-full text-on-primary-fixed group-hover:bg-secondary group-hover:text-on-secondary transition-colors">
                     <span class="material-symbols-outlined text-[24px]">hourglass_bottom</span>
                 </div>
@@ -48,8 +49,9 @@
                     Use Tool <span class="material-symbols-outlined text-[20px]">arrow_forward</span>
                 </div>
             </a>
+            
             <!-- Tool Card 3 -->
-            <a class="bg-surface-container-lowest border border-surface-variant rounded-lg p-stack-md hover:flat-shadow transition-shadow group flex flex-col h-full cursor-pointer" href="#">
+            <a class="bg-surface-container-lowest border border-surface-variant rounded-lg p-stack-md hover:flat-shadow transition-shadow group flex flex-col h-full cursor-pointer" href="#" x-on:click.prevent="$dispatch('open-coming-soon')">
                 <div class="mb-stack-sm flex items-center justify-center w-12 h-12 bg-primary-fixed rounded-full text-on-primary-fixed group-hover:bg-secondary group-hover:text-on-secondary transition-colors">
                     <span class="material-symbols-outlined text-[24px]">calendar_month</span>
                 </div>
@@ -59,6 +61,7 @@
                     Use Tool <span class="material-symbols-outlined text-[20px]">arrow_forward</span>
                 </div>
             </a>
+           
         </div>
     </section>
 
@@ -68,6 +71,7 @@
         <span class="text-on-surface-variant opacity-50">300x250 Medium Rectangle</span>
     </div>
 
+    {{-- 
     <!-- Blog Section -->
     <section class="space-y-stack-md">
         <div class="flex justify-between items-end border-b border-surface-variant pb-stack-sm">
@@ -119,17 +123,85 @@
             </article>
         </div>
     </section>
+    --}}
 
     <!-- SEO Text Section -->
-    <section class="max-w-[800px] mx-auto space-y-stack-md py-stack-lg bg-surface-container-lowest p-stack-lg rounded-xl border border-surface-variant">
-        <h2 class="font-h1 text-h1 text-on-surface">Why Use Our Free Calculators?</h2>
-        <div class="space-y-4 font-body-md text-body-md text-on-surface-variant">
-            <p>
-                Navigating daily scheduling, project deadlines, or simply satisfying curiosity requires precision. Our suite of free online time and date calculators is engineered to provide instant, accurate results without unnecessary friction. Whether you are a professional calculating billable hours or planning an international conference call across multiple time zones, our tools are designed with clarity and speed in mind.
+    <section class="max-w-[900px] mx-auto space-y-stack-md py-stack-lg bg-surface-container-lowest p-stack-lg rounded-xl border border-surface-variant">
+        <h2 class="font-h1 text-h1 text-on-surface">Your Reliable Suite of Time and Date Utilities</h2>
+        <div class="space-y-6 font-body-md text-body-md text-on-surface-variant">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="space-y-3">
+                    <h3 class="font-h3 text-secondary">Precision You Can Trust</h3>
+                    <p>
+                        In a world where every second counts, our tools are built on robust mathematical algorithms that account for all time-related anomalies. From leap years in our <strong>Exact Age Calculator</strong> to daylight saving transitions, we ensure that the data you receive is accurate down to the smallest unit.
+                    </p>
+                </div>
+                <div class="space-y-3">
+                    <h3 class="font-h3 text-secondary">Privacy First</h3>
+                    <p>
+                        We believe your data belongs to you. All calculations performed on <strong>Time&Date Tools</strong> happen locally in your browser. This means your birth dates, event timings, and personal milestones are never stored on our servers, providing a secure and private experience.
+                    </p>
+                </div>
+                <div class="space-y-3">
+                    <h3 class="font-h3 text-secondary">Designed for Simplicity</h3>
+                    <p>
+                        No account creation, no subscriptions, and no hidden fees. Our mission is to provide high-utility tools with a premium design aesthetic that makes navigation effortless. Whether you're on a desktop or a mobile device, our responsive interface ensures a seamless experience.
+                    </p>
+                </div>
+                <div class="space-y-3">
+                    <h3 class="font-h3 text-secondary">More Than Just Numbers</h3>
+                    <p>
+                        We strive to make data meaningful. Our tools don't just provide raw results; they offer context. Discover historical facts associated with your milestones, visualize your life progress, and gain new perspectives on how you spend your most valuable asset: time.
+                    </p>
+                </div>
+            </div>
+            
+            <div class="pt-6 border-t border-surface-variant">
+                <h3 class="font-h3 text-on-surface mb-3">Comprehensive Coverage for Every Need</h3>
+                <p>
+                    From legal professionals determining statutory ages to parents tracking their child's growth, our tools serve a diverse range of purposes. We are constantly expanding our library of calculators—including <strong>Time Duration</strong>, <strong>Date Difference</strong>, and <strong>Business Day Calculators</strong>—to become your ultimate destination for everything time-related.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- SEO Content Section -->
+    <section class="max-w-[1200px] mx-auto px-gutter py-section-gap">
+        <div class="bg-surface-container-low rounded-2xl border border-outline-variant p-stack-lg space-y-stack-md">
+            <h2 class="font-h2 text-h2 text-on-surface">The Ultimate Hub for Free Online Time & Date Calculators</h2>
+            <p class="font-body-lg text-on-surface-variant leading-relaxed">
+                Whether you need to figure out the exact number of days between two events, manage your work hours, or find out your exact age, Time&Date Tools has you covered. We offer a comprehensive suite of highly accurate, instant, and 100% free online calculators designed to make your daily computations effortless.
             </p>
-            <p>
-                We prioritize user experience by offering a distraction-free, minimalist interface. All calculations are performed instantly in your browser, ensuring your data remains private. From chronological age determination to complex business day calculations, Time&amp;Date Tools is your reliable, go-to utility for all chronological computations.
-            </p>
+
+            <div class="grid md:grid-cols-2 gap-stack-lg pt-6">
+                <div class="space-y-4">
+                    <h3 class="font-h3 text-h3 text-secondary">The Most Accurate Age & Birth Date Calculator</h3>
+                    <p class="text-on-surface-variant">
+                        Have you ever wondered exactly how many days, weeks, or even heartbeats you have experienced since you were born? Our highly advanced age calculator goes far beyond basic math. Acting as a precise birth date calculator, it not only tells you your chronological age in years, months, and days but also unlocks your "Life Story." Find out your life's progress, what hit movie was released in your birth year, and exactly how many days are left until your next big milestone.
+                    </p>
+                </div>
+
+                <div class="space-y-4">
+                    <h3 class="font-h3 text-h3 text-secondary">Seamless Date to Date & Time Duration Calculators</h3>
+                    <p class="text-on-surface-variant">
+                        Planning a project deadline or counting down to a special event? Our date to date calculator makes it incredibly simple to add or subtract days from a specific date. If you need to track hours and minutes, our time duration calculator (often used as a reliable time calculator for scheduling) gives you the exact difference between two specific times. We've optimized our date and time calculator tools to handle leap years, differing month lengths, and complex time values so you don't have to.
+                    </p>
+                </div>
+
+                <div class="space-y-4">
+                    <h3 class="font-h3 text-h3 text-secondary">Manage Your Work with Days & Time Calculators</h3>
+                    <p class="text-on-surface-variant">
+                        Professionals, HR managers, and freelancers love our platform for quick verifications. While our days calculator helps you count business days or total calendar days instantly, you can also use our specialized time card calculator and time clock calculator concepts to estimate hours worked.
+                    </p>
+                </div>
+
+                <div class="space-y-4">
+                    <h3 class="font-h3 text-h3 text-secondary">100% Private, Fast, and Secure</h3>
+                    <p class="text-on-surface-variant">
+                        Unlike other platforms, every date time calculator on our site runs entirely in your browser using modern web technologies. This means your data is never uploaded to external servers. Your calculations are lightning-fast, highly secure, and completely private.
+                    </p>
+                </div>
+            </div>
         </div>
     </section>
 @endsection

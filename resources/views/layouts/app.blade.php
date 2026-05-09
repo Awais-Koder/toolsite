@@ -4,6 +4,44 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>@yield('title', 'Time&Date Tools - Free Online Calculators & Tools')</title>
+    <meta name="description" content="@yield('meta_description', 'Free online age calculator, time duration tools, and date calculators. Get exact results with fun facts and life story statistics.')">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="{{ url()->current() }}">
+    <meta property="og:title" content="@yield('title', 'Time&Date Tools - Free Online Calculators & Tools')">
+    <meta property="og:description" content="@yield('meta_description', 'Free online age calculator, time duration tools, and date calculators. Get exact results with fun facts and life story statistics.')">
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="{{ url()->current() }}">
+    <meta property="twitter:title" content="@yield('title', 'Time&Date Tools - Free Online Calculators & Tools')">
+    <meta property="twitter:description" content="@yield('meta_description', 'Free online age calculator, time duration tools, and date calculators. Get exact results with fun facts and life story statistics.')">
+
+    <!-- Global Schema.org -->
+    <script type="application/ld+json">
+    {
+      "{{ '@' }}context": "https://schema.org",
+      "{{ '@' }}type": "WebSite",
+      "name": "Time&Date Tools",
+      "url": "{{ url('/') }}",
+      "potentialAction": {
+        "{{ '@' }}type": "SearchAction",
+        "target": "{{ url('/') }}/search?q={search_term_string}",
+        "query-input": "required name=search_term_string"
+      }
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "{{ '@' }}context": "https://schema.org",
+      "{{ '@' }}type": "Organization",
+      "name": "Time&Date Tools",
+      "url": "{{ url('/') }}",
+      "logo": "{{ asset('favicon.svg') }}"
+    }
+    </script>
+
 
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
@@ -13,7 +51,23 @@
 
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    
+    <!-- Alpine.js -->
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+
     <script>
+        document.addEventListener('alpine:init', () => {
+            Alpine.store('app', {
+                showComingSoon: false,
+                openComingSoon() {
+                    this.showComingSoon = true;
+                },
+                closeComingSoon() {
+                    this.showComingSoon = false;
+                }
+            })
+        })
+        
         tailwind.config = {
             darkMode: "class",
             theme: {
@@ -107,34 +161,64 @@
         }
     </script>
     <style>
+        [x-cloak] { display: none !important; }
         .flat-shadow {
             box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.05), 0 2px 4px -2px rgb(0 0 0 / 0.05);
         }
     </style>
+    <!-- favicon -->
+    <link rel="icon" type="image/svg+xml" href="{{ asset('favicon.svg') }}">
     @stack('styles')
 </head>
-<body class="bg-background text-on-surface font-body-md text-body-md pt-16">
+<body class="bg-background text-on-surface font-body-md text-body-md pt-16" x-data="{ showComingSoon: false }" x-on:open-coming-soon.window="showComingSoon = true">
     <!-- TopAppBar -->
     <header class="fixed top-0 w-full z-50 bg-surface dark:bg-surface-dim border-b border-outline-variant dark:border-outline shadow-sm h-16">
-        <div class="flex justify-between items-center max-w-[1200px] mx-auto px-gutter h-full">
+        <div class="flex justify-between items-center max-w-[1200px] mx-auto px-gutter h-full relative">
             <a href="{{ route('home') }}" class="font-h2 text-h2 font-bold text-primary dark:text-on-primary-fixed cursor-pointer">
                 Time&amp;Date <span class="text-secondary">Tools</span>
             </a>
-            <nav class="hidden md:flex items-center gap-stack-md h-full">
+            <nav class="hidden md:flex items-center gap-stack-md h-full absolute left-1/2 -translate-x-1/2">
                 <a class="h-full flex items-center {{ request()->routeIs('home') ? 'text-secondary dark:text-secondary-fixed border-b-2 border-secondary' : 'text-on-surface-variant dark:text-surface-variant hover:text-secondary dark:hover:text-secondary-fixed' }} pb-1 pt-1 font-h3 text-h3 cursor-pointer active:opacity-80" href="{{ route('home') }}">Calculators</a>
-                <a class="h-full flex items-center text-on-surface-variant dark:text-surface-variant hover:text-secondary dark:hover:text-secondary-fixed transition-colors font-h3 text-h3 cursor-pointer active:opacity-80" href="#">Converters</a>
+                
+{{-- <a class="h-full flex items-center text-on-surface-variant dark:text-surface-variant hover:text-secondary dark:hover:text-secondary-fixed transition-colors font-h3 text-h3 cursor-pointer active:opacity-80" href="#">Converters</a>
                 <a class="h-full flex items-center text-on-surface-variant dark:text-surface-variant hover:text-secondary dark:hover:text-secondary-fixed transition-colors font-h3 text-h3 cursor-pointer active:opacity-80" href="#">World Clock</a>
                 <a class="h-full flex items-center text-on-surface-variant dark:text-surface-variant hover:text-secondary dark:hover:text-secondary-fixed transition-colors font-h3 text-h3 cursor-pointer active:opacity-80" href="#">Calendar</a>
                 <a class="h-full flex items-center text-on-surface-variant dark:text-surface-variant hover:text-secondary dark:hover:text-secondary-fixed transition-colors font-h3 text-h3 cursor-pointer active:opacity-80" href="#">News</a>
+                --}}
             </nav>
-            <button class="hidden md:inline-flex bg-secondary text-on-secondary px-stack-md py-2 rounded font-h3 text-h3 hover:bg-secondary-container transition-colors">
+            <div class="hidden md:block">
+            {{-- 
+            <button class="bg-secondary text-on-secondary px-stack-md py-2 rounded font-h3 text-h3 hover:bg-secondary-container transition-colors">
                 Sign In
             </button>
+            --}}
+            </div>
             <button class="md:hidden text-on-surface">
                 <span class="material-symbols-outlined text-h1">menu</span>
             </button>
         </div>
     </header>
+    <!-- Global Coming Soon Modal -->
+    <div x-show="showComingSoon" 
+         x-transition:enter="transition ease-out duration-300"
+         x-transition:enter-start="opacity-0 scale-95"
+         x-transition:enter-end="opacity-100 scale-100"
+         x-transition:leave="transition ease-in duration-200"
+         x-transition:leave-start="opacity-100 scale-100"
+         x-transition:leave-end="opacity-0 scale-95"
+         class="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/50 backdrop-blur-sm"
+         x-cloak>
+        <div x-on:click.away="showComingSoon = false" class="bg-surface-container-lowest border border-outline-variant rounded-xl p-stack-lg max-w-sm w-full shadow-display text-center space-y-stack-sm">
+            <div class="w-16 h-16 bg-secondary-container text-on-secondary-container rounded-full flex items-center justify-center mx-auto mb-stack-md">
+                <span class="material-symbols-outlined text-[32px]">rocket_launch</span>
+            </div>
+            <h3 class="font-h2 text-h2 text-on-surface">Coming Soon!</h3>
+            <p class="font-body-md text-body-md text-on-surface-variant text-center">We're working hard to bring this tool to life. Stay tuned for updates!</p>
+            <button x-on:click="showComingSoon = false" class="w-full bg-secondary text-on-secondary py-3 rounded-lg font-h3 text-h3 hover:bg-secondary-container transition-colors mt-stack-md">
+                Got it!
+            </button>
+        </div>
+    </div>
 
     <main class="max-w-[1200px] mx-auto px-gutter py-section-gap space-y-section-gap">
         @yield('content')
@@ -152,12 +236,10 @@
                 </div>
             </div>
             <nav class="flex flex-wrap justify-center gap-x-stack-md gap-y-2 font-body-md text-body-md">
-                <a class="text-on-primary-container opacity-80 hover:opacity-100 hover:underline transition-all cursor-pointer" href="#">Privacy Policy</a>
-                <a class="text-on-primary-container opacity-80 hover:opacity-100 hover:underline transition-all cursor-pointer" href="#">Terms of Service</a>
-                <a class="text-on-primary-container opacity-80 hover:opacity-100 hover:underline transition-all cursor-pointer" href="#">Cookie Settings</a>
-                <a class="text-on-primary-container opacity-80 hover:opacity-100 hover:underline transition-all cursor-pointer" href="#">Contact Us</a>
-                <a class="text-on-primary-container opacity-80 hover:opacity-100 hover:underline transition-all cursor-pointer" href="#">About</a>
-                <a class="text-on-primary-container opacity-80 hover:opacity-100 hover:underline transition-all cursor-pointer" href="#">Sitemap</a>
+                <a class="text-on-primary-container opacity-80 hover:opacity-100 hover:underline transition-all cursor-pointer" href="{{ route('privacy') }}">Privacy Policy</a>
+                <a class="text-on-primary-container opacity-80 hover:opacity-100 hover:underline transition-all cursor-pointer" href="{{ route('terms') }}">Terms of Service</a>
+                <a class="text-on-primary-container opacity-80 hover:opacity-100 hover:underline transition-all cursor-pointer" href="{{ route('about') }}">About</a>
+                <a class="text-on-primary-container opacity-80 hover:opacity-100 hover:underline transition-all cursor-pointer" href="{{ route('contact') }}">Contact Us</a>
             </nav>
         </div>
     </footer>
