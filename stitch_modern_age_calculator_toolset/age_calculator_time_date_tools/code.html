@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Exact Age Calculator - Time&amp;Date Tools</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+  tailwind.config = {
+    darkMode: "class",
+    theme: {
+      extend: {
+        "colors": {
+                "surface-container-lowest": "#ffffff",
+                "surface-container-low": "#f2f4f6",
+                "on-secondary": "#ffffff",
+                "error-container": "#ffdad6",
+                "surface-container": "#eceef0",
+                "on-primary": "#ffffff",
+                "on-background": "#191c1e",
+                "on-error-container": "#93000a",
+                "tertiary-fixed": "#fcdeb5",
+                "primary-fixed": "#dae2fd",
+                "on-surface": "#191c1e",
+                "on-tertiary-fixed": "#271901",
+                "surface-tint": "#565e74",
+                "on-surface-variant": "#45464d",
+                "surface-dim": "#d8dadc",
+                "primary-container": "#131b2e",
+                "secondary-container": "#316bf3",
+                "on-tertiary-container": "#98805d",
+                "surface-container-high": "#e6e8ea",
+                "tertiary-fixed-dim": "#dec29a",
+                "tertiary-container": "#271901",
+                "surface-container-highest": "#e0e3e5",
+                "surface": "#f7f9fb",
+                "secondary": "#0051d5",
+                "on-tertiary-fixed-variant": "#574425",
+                "surface-bright": "#f7f9fb",
+                "on-primary-fixed": "#131b2e",
+                "on-error": "#ffffff",
+                "on-secondary-fixed-variant": "#003ea8",
+                "error": "#ba1a1a",
+                "outline": "#76777d",
+                "surface-variant": "#e0e3e5",
+                "inverse-surface": "#2d3133",
+                "on-primary-fixed-variant": "#3f465c",
+                "on-secondary-container": "#fefcff",
+                "primary-fixed-dim": "#bec6e0",
+                "on-secondary-fixed": "#00174b",
+                "secondary-fixed": "#dbe1ff",
+                "background": "#f7f9fb",
+                "on-primary-container": "#7c839b",
+                "outline-variant": "#c6c6cd",
+                "secondary-fixed-dim": "#b4c5ff",
+                "tertiary": "#000000",
+                "inverse-primary": "#bec6e0",
+                "inverse-on-surface": "#eff1f3",
+                "primary": "#000000",
+                "on-tertiary": "#ffffff"
+        },
+        "borderRadius": {
+                "DEFAULT": "0.125rem",
+                "lg": "0.25rem",
+                "xl": "0.5rem",
+                "full": "0.75rem"
+        },
+        "spacing": {
+                "stack-sm": "12px",
+                "stack-lg": "40px",
+                "stack-md": "24px",
+                "base": "8px",
+                "container-max": "1200px",
+                "gutter": "24px",
+                "section-gap": "64px"
+        },
+        "fontFamily": {
+                "body-md": [
+                        "Inter"
+                ],
+                "display": [
+                        "Inter"
+                ],
+                "h2": [
+                        "Inter"
+                ],
+                "h3": [
+                        "Inter"
+                ],
+                "label-caps": [
+                        "Inter"
+                ],
+                "body-lg": [
+                        "Inter"
+                ],
+                "mono-data": [
+                        "JetBrains Mono"
+                ],
+                "h1": [
+                        "Inter"
+                ]
+        },
+        "fontSize": {
+                "body-md": [
+                        "16px",
+                        {
+                                "lineHeight": "1.5",
+                                "fontWeight": "400"
+                        }
+                ],
+                "display": [
+                        "48px",
+                        {
+                                "lineHeight": "1.1",
+                                "letterSpacing": "-0.02em",
+                                "fontWeight": "700"
+                        }
+                ],
+                "h2": [
+                        "24px",
+                        {
+                                "lineHeight": "1.3",
+                                "fontWeight": "600"
+                        }
+                ],
+                "h3": [
+                        "20px",
+                        {
+                                "lineHeight": "1.4",
+                                "fontWeight": "600"
+                        }
+                ],
+                "label-caps": [
+                        "12px",
+                        {
+                                "lineHeight": "1.2",
+                                "letterSpacing": "0.05em",
+                                "fontWeight": "600"
+                        }
+                ],
+                "body-lg": [
+                        "18px",
+                        {
+                                "lineHeight": "1.6",
+                                "fontWeight": "400"
+                        }
+                ],
+                "mono-data": [
+                        "14px",
+                        {
+                                "lineHeight": "1.4",
+                                "fontWeight": "500"
+                        }
+                ],
+                "h1": [
+                        "32px",
+                        {
+                                "lineHeight": "1.2",
+                                "letterSpacing": "-0.01em",
+                                "fontWeight": "700"
+                        }
+                ]
+        }
+},
+    },
+  }
+</script>
+<style>
+    body { font-family: 'Inter', sans-serif; }
+  </style>
+</head>
+<body class="bg-surface text-on-surface min-h-screen flex flex-col font-body-md">
+<!-- TopNavBar Shared Component -->
+<header class="flex items-center justify-between whitespace-nowrap border-b border-solid border-outline-variant px-6 py-4 bg-surface-container-lowest h-16 w-full shrink-0">
+<div class="flex items-center gap-3 text-on-surface">
+<div class="size-6 text-[#ec5b13]">
+<svg fill="none" viewbox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+<path d="M39.5563 34.1455V13.8546C39.5563 15.708 36.8773 17.3437 32.7927 18.3189C30.2914 18.916 27.263 19.2655 24 19.2655C20.737 19.2655 17.7086 18.916 15.2073 18.3189C11.1227 17.3437 8.44365 15.708 8.44365 13.8546V34.1455C8.44365 35.9988 11.1227 37.6346 15.2073 38.6098C17.7086 39.2069 20.737 39.5564 24 39.5564C27.263 39.5564 30.2914 39.2069 32.7927 38.6098C36.8773 37.6346 39.5563 35.9988 39.5563 34.1455Z" fill="currentColor"></path>
+<path clip-rule="evenodd" d="M10.4485 13.8519C10.4749 13.9271 10.6203 14.246 11.379 14.7361C12.298 15.3298 13.7492 15.9145 15.6717 16.3735C18.0007 16.9296 20.8712 17.2655 24 17.2655C27.1288 17.2655 29.9993 16.9296 32.3283 16.3735C34.2508 15.9145 35.702 15.3298 36.621 14.7361C37.3796 14.246 37.5251 13.9271 37.5515 13.8519C37.5287 13.7876 37.4333 13.5973 37.0635 13.2931C36.5266 12.8516 35.6288 12.3647 34.343 11.9175C31.79 11.0295 28.1333 10.4437 24 10.4437C19.8667 10.4437 16.2099 11.0295 13.657 11.9175C12.3712 12.3647 11.4734 12.8516 10.9365 13.2931C10.5667 13.5973 10.4713 13.7876 10.4485 13.8519ZM37.5563 18.7877C36.3176 19.3925 34.8502 19.8839 33.2571 20.2642C30.5836 20.9025 27.3973 21.2655 24 21.2655C20.6027 21.2655 17.4164 20.9025 14.7429 20.2642C13.1498 19.8839 11.6824 19.3925 10.4436 18.7877V34.1275C10.4515 34.1545 10.5427 34.4867 11.379 35.027C12.298 35.6207 13.7492 36.2054 15.6717 36.6644C18.0007 37.2205 20.8712 37.5564 24 37.5564C27.1288 37.5564 29.9993 37.2205 32.3283 36.6644C34.2508 36.2054 35.702 35.6207 36.621 35.027C37.4573 34.4867 37.5485 34.1546 37.5563 34.1275V18.7877ZM41.5563 13.8546V34.1455C41.5563 36.1078 40.158 37.5042 38.7915 38.3869C37.3498 39.3182 35.4192 40.0389 33.2571 40.5551C30.5836 41.1934 27.3973 41.5564 24 41.5564C20.6027 41.5564 17.4164 41.1934 14.7429 40.5551C12.5808 40.0389 10.6502 39.3182 9.20848 38.3869C7.84205 37.5042 6.44365 36.1078 6.44365 34.1455L6.44365 13.8546C6.44365 12.2684 7.37223 11.0454 8.39581 10.2036C9.43325 9.3505 10.8137 8.67141 12.343 8.13948C15.4203 7.06909 19.5418 6.44366 24 6.44366C28.4582 6.44366 32.5797 7.06909 35.657 8.13948C37.1863 8.67141 38.5667 9.3505 39.6042 10.2036C40.6278 11.0454 41.5563 12.2684 41.5563 13.8546Z" fill="currentColor" fill-rule="evenodd"></path>
+</svg>
+</div>
+<h2 class="text-on-surface font-h3">Time&amp;Date Tools</h2>
+</div>
+<nav class="flex flex-1 justify-end gap-6 h-full items-center">
+<div class="flex items-center gap-6 h-full">
+<a class="text-on-surface hover:text-[#ec5b13] transition-colors font-mono-data h-full flex items-center px-2 border-b-2 border-transparent hover:border-[#ec5b13]" href="#">Calculators</a>
+<a class="text-on-surface hover:text-[#ec5b13] transition-colors font-mono-data h-full flex items-center px-2 border-b-2 border-transparent hover:border-[#ec5b13]" href="#">World Clock</a>
+<a class="text-on-surface hover:text-[#ec5b13] transition-colors font-mono-data h-full flex items-center px-2 border-b-2 border-transparent hover:border-[#ec5b13]" href="#">Time Zones</a>
+<a class="text-on-surface hover:text-[#ec5b13] transition-colors font-mono-data h-full flex items-center px-2 border-b-2 border-transparent hover:border-[#ec5b13]" href="#">Calendar</a>
+</div>
+</nav>
+</header>
+<!-- Leaderboard Ad Placeholder -->
+<div class="w-full flex justify-center py-4 bg-surface-container border-b border-outline-variant">
+<div class="w-[728px] h-[90px] bg-surface-dim flex items-center justify-center text-outline text-sm border border-dashed border-outline-variant font-mono-data">
+      Advertisement (728x90)
+    </div>
+</div>
+<!-- Main Content Area -->
+<main class="max-w-[1200px] mx-auto px-6 py-section-gap w-full flex-grow">
+<div class="flex flex-col lg:flex-row gap-gutter">
+<!-- Left Column (2/3) -->
+<div class="w-full lg:w-[752px] flex flex-col gap-stack-lg">
+<!-- Tool Interface -->
+<section class="bg-surface-container-lowest rounded-xl shadow-sm border border-outline-variant p-6 sm:p-8">
+<h1 class="font-h1 text-on-surface mb-2">Exact Age Calculator</h1>
+<p class="text-on-surface-variant mb-6 font-body-md">Calculate your exact age in years, months, and days down to the specific date.</p>
+<div class="flex flex-col sm:flex-row gap-stack-md mb-6">
+<div class="flex-1">
+<label class="block font-label-caps text-on-surface mb-2 uppercase" for="dob">Date of Birth</label>
+<div class="relative">
+<input class="form-input w-full rounded-lg border-outline focus:border-secondary focus:ring-secondary h-12 px-4 text-on-surface bg-surface-container-lowest font-body-md" id="dob" type="date"/>
+</div>
+</div>
+<div class="flex-1">
+<label class="block font-label-caps text-on-surface mb-2 uppercase" for="calc-date">Calculate Age At</label>
+<div class="relative">
+<input class="form-input w-full rounded-lg border-outline focus:border-secondary focus:ring-secondary h-12 px-4 text-on-surface bg-surface-container-lowest font-body-md" id="calc-date" type="date" value="2023-10-27"/>
+</div>
+</div>
+</div>
+<button class="w-full sm:w-auto bg-[#ec5b13] hover:bg-[#d94d0c] text-white font-mono-data py-3 px-8 rounded-lg transition-colors shadow-sm flex items-center justify-center gap-2">
+<span class="material-symbols-outlined" data-icon="calculate">calculate</span>
+            Calculate Age
+          </button>
+<!-- Results Area (Hidden by default, fixed min-height for CLS) -->
+<div class="mt-8 min-h-[120px] bg-surface-container rounded-lg border border-outline-variant p-6 hidden">
+<!-- Placeholder for results to maintain layout structure even when hidden -->
+<div class="text-center text-outline font-body-md">Results will appear here</div>
+</div>
+</section>
+<!-- SEO Article -->
+<article class="bg-surface-container-lowest rounded-xl shadow-sm border border-outline-variant p-6 sm:p-8">
+<h2 class="font-h2 text-on-surface mt-0 mb-stack-md">How to Use the Age Calculator</h2>
+<section class="mb-stack-md">
+<h3 class="font-h3 text-on-surface mb-3">Introduction</h3>
+<p class="text-on-surface-variant font-body-md">
+              Determining someone's exact age can sometimes be confusing, especially when accounting for leap years and months with varying lengths. Our Exact Age Calculator simplifies this process, providing you with an accurate breakdown of your age in years, months, and days. Whether you need it for filling out official documents, planning events, or simple curiosity, this tool offers precise results instantly.
+            </p>
+</section>
+<section class="mb-stack-md">
+<h3 class="font-h3 text-on-surface mb-3">Step-by-Step Guide</h3>
+<ol class="list-decimal pl-5 text-on-surface-variant font-body-md space-y-2">
+<li>Enter your precise Date of Birth in the first field using the calendar picker.</li>
+<li>Select the target date in the "Calculate Age At" field. It defaults to today's date, but you can change it to find your age on a future or past date.</li>
+<li>Click the "Calculate Age" button to view your results instantly below the form.</li>
+</ol>
+</section>
+<section class="mb-stack-md">
+<h3 class="font-h3 text-on-surface mb-3">Age Calculation Formula</h3>
+<p class="text-on-surface-variant font-body-md">
+              The calculator works by subtracting the birth date from the target date. If the current day is less than the birth day, it borrows a month. If the current month is less than the birth month, it borrows a year. This ensures accurate calculation regardless of leap years or month lengths.
+            </p>
+</section>
+<section>
+<h3 class="font-h3 text-on-surface mb-4">Frequently Asked Questions</h3>
+<div class="space-y-4">
+<!-- Accordion Item 1 -->
+<div class="border border-outline-variant rounded-lg overflow-hidden">
+<div class="bg-surface-container-low px-4 py-3 flex justify-between items-center cursor-pointer hover:bg-surface-container transition-colors">
+<h4 class="font-body-md font-medium text-on-surface m-0">How is age calculated exactly?</h4>
+<span class="material-symbols-outlined text-outline" data-icon="expand_more">expand_more</span>
+</div>
+<!-- Content hidden for mockup -->
+</div>
+<!-- Accordion Item 2 -->
+<div class="border border-outline-variant rounded-lg overflow-hidden">
+<div class="bg-surface-container-low px-4 py-3 flex justify-between items-center cursor-pointer hover:bg-surface-container transition-colors">
+<h4 class="font-body-md font-medium text-on-surface m-0">Does this account for leap years?</h4>
+<span class="material-symbols-outlined text-outline" data-icon="expand_more">expand_more</span>
+</div>
+</div>
+</div>
+</section>
+</article>
+</div>
+<!-- Right Column (1/3) -->
+<aside class="w-full lg:w-[400px] flex flex-col gap-stack-lg">
+<!-- Sticky Container -->
+<div class="sticky top-8 flex flex-col gap-stack-lg">
+<!-- AdSense Placeholder 300x250 -->
+<div class="w-full flex justify-center bg-surface-container-lowest rounded-xl shadow-sm border border-outline-variant p-4">
+<div class="w-[300px] h-[250px] bg-surface-dim flex items-center justify-center text-outline text-sm border border-dashed border-outline-variant font-mono-data">
+              Advertisement (300x250)
+            </div>
+</div>
+<!-- Related Tools Widget -->
+<div class="bg-surface-container-lowest rounded-xl shadow-sm border border-outline-variant p-6">
+<h3 class="font-h3 text-on-surface mb-4 pb-2 border-b border-outline-variant">Related Tools</h3>
+<ul class="space-y-3">
+<li>
+<a class="flex items-center gap-3 text-on-surface-variant hover:text-[#ec5b13] transition-colors group" href="#">
+<div class="bg-surface-container-low text-on-surface p-2 rounded-lg group-hover:bg-[#ec5b13] group-hover:text-white transition-colors border border-outline-variant group-hover:border-[#ec5b13]">
+<span class="material-symbols-outlined text-xl block" data-icon="timer">timer</span>
+</div>
+<span class="font-body-md font-medium">Time Duration Calculator</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-3 text-on-surface-variant hover:text-[#ec5b13] transition-colors group" href="#">
+<div class="bg-surface-container-low text-on-surface p-2 rounded-lg group-hover:bg-[#ec5b13] group-hover:text-white transition-colors border border-outline-variant group-hover:border-[#ec5b13]">
+<span class="material-symbols-outlined text-xl block" data-icon="event">event</span>
+</div>
+<span class="font-body-md font-medium">Date Calculator</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-3 text-on-surface-variant hover:text-[#ec5b13] transition-colors group" href="#">
+<div class="bg-surface-container-low text-on-surface p-2 rounded-lg group-hover:bg-[#ec5b13] group-hover:text-white transition-colors border border-outline-variant group-hover:border-[#ec5b13]">
+<span class="material-symbols-outlined text-xl block" data-icon="schedule">schedule</span>
+</div>
+<span class="font-body-md font-medium">Hours Calculator</span>
+</a>
+</li>
+</ul>
+</div>
+</div>
+</aside>
+</div>
+</main>
+<!-- Footer Component -->
+<footer class="bg-[#191c1e] py-12 mt-auto w-full shrink-0">
+<div class="max-w-[1200px] mx-auto px-6">
+<div class="flex flex-col md:flex-row justify-between items-center gap-6">
+<div class="flex items-center gap-2 text-surface-container-lowest">
+<span class="material-symbols-outlined">schedule</span>
+<span class="font-h3">Time&amp;Date Tools</span>
+</div>
+<nav class="flex gap-6">
+<a class="text-[#c6c6cd] hover:text-white transition-colors font-mono-data text-sm" href="#">Privacy Policy</a>
+<a class="text-[#c6c6cd] hover:text-white transition-colors font-mono-data text-sm" href="#">Terms of Service</a>
+<a class="text-[#c6c6cd] hover:text-white transition-colors font-mono-data text-sm" href="#">Cookie Policy</a>
+</nav>
+</div>
+<div class="mt-8 text-center text-[#76777d] font-body-md text-sm border-t border-[#45464d] pt-8">
+        © 2023 Time&amp;Date Tools. All rights reserved.
+      </div>
+</div>
+</footer>
+</body></html>
