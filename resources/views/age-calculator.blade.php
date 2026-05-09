@@ -451,10 +451,8 @@
 
             <!-- SEO Article -->
             <article class="bg-surface-container-lowest rounded-xl shadow-sm border border-outline-variant p-6 sm:p-8">
-                <h2 class="font-h2 text-on-surface mt-0 mb-stack-md">The Ultimate Guide to Age Calculation</h2>
                 
                 <section class="mb-stack-md">
-                    <h3 class="font-h3 text-on-surface mb-3">Understanding Exact Age Calculation</h3>
                     <p class="text-on-surface-variant font-body-md mb-4">
                         Age calculation might seem straightforward at first glance, but it involves several mathematical complexities. Our <strong>Exact Age Calculator</strong> is designed to handle these nuances, providing you with a high-precision breakdown of your journey through time. But how exactly does it work, and why is this level of detail important?
                     </p>
