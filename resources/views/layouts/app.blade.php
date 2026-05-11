@@ -115,9 +115,9 @@
     </style>
 
     <!-- TopAppBar -->
-    <header data-header class="fixed top-0 w-full z-50 bg-surface/85 backdrop-blur-xl border-b border-outline-variant/50 h-16 transition-all mt-2">
+    <header data-header class="fixed top-0 w-full z-50 bg-surface/85 backdrop-blur-xl border-b border-outline-variant/50 h-16 transition-all">
         <div x-data="{ open: false }" @keydown.escape.window="open = false; toggleBodyScroll(false)">
-            <div class="flex justify-between items-center max-w-[1200px] mx-auto px-gutter h-full relative">
+            <div class="flex justify-between items-center max-w-[1200px] mx-auto px-gutter h-full relative mt-2">
                 <a href="{{ route('home') }}" class="font-h2 text-h2 font-bold text-primary dark:text-on-primary-fixed cursor-pointer transition-transform duration-300 hover:scale-[1.02]">
                     Time&amp;Date <span class="text-secondary">Tools</span>
                 </a>
@@ -220,9 +220,8 @@
                         <h4 class="text-on-primary dark:text-on-surface font-semibold text-sm uppercase tracking-wider mb-4">Tools</h4>
                         <ul class="space-y-3">
                             <li><a href="{{ route('age-calculator') }}" class="text-on-primary-container/80 dark:text-on-surface/70 hover:text-secondary dark:hover:text-secondary transition-colors text-sm">Age Calculator</a></li>
-                            <li><span class="text-on-primary-container/40 dark:text-on-surface/40 text-sm cursor-default">Date Duration <span class="text-[10px] uppercase tracking-wider bg-on-primary-container/10 dark:bg-on-surface/10 px-1.5 py-0.5 rounded ml-1">Soon</span></span></li>
-                            <li><span class="text-on-primary-container/40 dark:text-on-surface/40 text-sm cursor-default">Time Converter <span class="text-[10px] uppercase tracking-wider bg-on-primary-container/10 dark:bg-on-surface/10 px-1.5 py-0.5 rounded ml-1">Soon</span></span></li>
-                            <li><span class="text-on-primary-container/40 dark:text-on-surface/40 text-sm cursor-default">World Clock <span class="text-[10px] uppercase tracking-wider bg-on-primary-container/10 dark:bg-on-surface/10 px-1.5 py-0.5 rounded ml-1">Soon</span></span></li>
+                            <li><span class="text-on-primary-container/40 dark:text-on-surface/40 text-sm cursor-default">Time Duration Calculator <span class="text-[10px] uppercase tracking-wider bg-on-primary-container/10 dark:bg-on-surface/10 px-1.5 py-0.5 rounded ml-1">Soon</span></span></li>
+                            <li><span class="text-on-primary-container/40 dark:text-on-surface/40 text-sm cursor-default">Date Calculator <span class="text-[10px] uppercase tracking-wider bg-on-primary-container/10 dark:bg-on-surface/10 px-1.5 py-0.5 rounded ml-1">Soon</span></span></li>
                         </ul>
                     </div>
 
