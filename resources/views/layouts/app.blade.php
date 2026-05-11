@@ -120,7 +120,7 @@
                     Time&amp;Date <span class="text-secondary">Tools</span>
                 </a>
                 <nav class="hidden md:flex items-center gap-stack-md h-full absolute left-1/2 -translate-x-1/2">
-                    <a class="nav-link h-full flex items-center {{ request()->routeIs('home') ? 'is-active text-secondary' : 'text-on-surface-variant hover:text-primary' }} pb-1 pt-1 font-h3 text-h3 cursor-pointer transition-colors" href="{{ route('home') }}">Calculators</a>
+                    <a class="nav-link h-full flex items-center {{ request()->routeIs('home') ? 'is-active text-secondary' : 'text-on-surface-variant hover:text-primary' }} pb-1 pt-1 font-h3 text-h3 cursor-pointer transition-colors" href="{{ route('home') }}">Home</a>
                     <a class="nav-link h-full flex items-center {{ request()->routeIs('age-calculator') ? 'is-active text-secondary' : 'text-on-surface-variant hover:text-primary' }} pb-1 pt-1 font-h3 text-h3 cursor-pointer transition-colors" href="{{ route('age-calculator') }}">Age Calculator</a>
                     <a class="nav-link h-full flex items-center {{ request()->routeIs('about') ? 'is-active text-secondary' : 'text-on-surface-variant hover:text-primary' }} pb-1 pt-1 font-h3 text-h3 cursor-pointer transition-colors" href="{{ route('about') }}">About</a>
                     <a class="nav-link h-full flex items-center {{ request()->routeIs('contact') ? 'is-active text-secondary' : 'text-on-surface-variant hover:text-primary' }} pb-1 pt-1 font-h3 text-h3 cursor-pointer transition-colors" href="{{ route('contact') }}">Contact</a>
