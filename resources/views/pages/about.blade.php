@@ -4,11 +4,7 @@
 
 @section('content')
     <!-- Hero Banner -->
-    <section class="-mx-gutter -mt-section-gap pt-24 pb-12 md:pt-32 md:pb-16 bg-gradient-to-br from-primary-container/30 via-background to-secondary-fixed/20 relative overflow-hidden">
-        <div class="absolute inset-0 -z-10">
-            <div class="absolute top-0 left-1/4 w-[500px] h-[500px] rounded-full bg-secondary/[0.06] blur-[100px]"></div>
-            <div class="absolute bottom-0 right-1/4 w-[400px] h-[400px] rounded-full bg-primary-fixed/[0.07] blur-[80px]"></div>
-        </div>
+    <section class="-mx-gutter -mt-section-gap pt-24 pb-12 md:pt-32 md:pb-16 bg-surface">
         <div class="max-w-[1200px] mx-auto px-gutter text-center" data-reveal="fade-up">
             <span class="inline-block text-secondary font-label-caps text-label-caps tracking-widest uppercase mb-3">Our Story</span>
             <h1 class="font-display text-display text-on-surface mb-4">About Time&Date Tools</h1>

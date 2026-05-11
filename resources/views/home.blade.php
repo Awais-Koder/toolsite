@@ -22,22 +22,18 @@
 
 @section('content')
     <!-- Hero Section -->
-    <section class="relative -mx-gutter -mt-section-gap pt-24 pb-20 md:pt-32 md:pb-28 overflow-hidden">
-        <!-- Animated mesh gradient background -->
-        <div class="absolute inset-0 -z-10">
-            <div class="absolute inset-0 bg-gradient-to-br from-primary-container/30 via-background to-secondary-fixed/20"></div>
-            <div class="absolute top-0 left-1/4 w-[800px] h-[800px] rounded-full bg-secondary/[0.07] blur-[120px] animate-[heroFloat_18s_ease-in-out_infinite]"></div>
-            <div class="absolute bottom-0 right-1/4 w-[600px] h-[600px] rounded-full bg-primary-fixed/[0.08] blur-[100px] animate-[heroFloat_22s_ease-in-out_infinite_reverse]"></div>
-        </div>
-        <style>
-            @keyframes heroFloat {
-                0%, 100% { transform: translate(0, 0) scale(1); }
-                33% { transform: translate(40px, -30px) scale(1.05); }
-                66% { transform: translate(-20px, 20px) scale(0.95); }
-            }
-        </style>
+    <section class="-mx-gutter -mt-section-gap pt-24 pb-20 md:pt-32 md:pb-28">
+        <div class="max-w-[1200px] mx-auto px-gutter md:px-10 relative">
+            <!-- Solid background matching site -->
+            <div class="absolute inset-0 -mx-0 -my-0 bg-surface -z-10 rounded-3xl"></div>
+            <style>
+                @keyframes heroFloat {
+                    0%, 100% { transform: translate(0, 0) scale(1); }
+                    33% { transform: translate(20px, -20px) scale(1.02); }
+                    66% { transform: translate(-20px, 20px) scale(0.98); }
+                }
+            </style>
 
-        <div class="max-w-[1200px] mx-auto px-gutter relative">
             <div class="max-w-3xl">
                 <div data-reveal="fade-up" data-reveal-duration="700">
                     <span class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-secondary/10 text-secondary font-label-caps text-label-caps border border-secondary/20 shadow-xs mb-6">
@@ -65,7 +61,7 @@
             </div>
 
             <!-- Floating decorative element -->
-            <div class="hidden lg:block absolute right-0 top-1/2 -translate-y-1/2 w-[340px] h-[340px]" data-reveal="scale-in" data-reveal-delay="400" data-reveal-duration="900">
+            <div class="hidden lg:block absolute right-[2.5rem] top-1/2 -translate-y-1/2 w-[340px] h-[340px]" data-reveal="scale-in" data-reveal-delay="400" data-reveal-duration="900">
                 <div class="relative w-full h-full">
                     <div class="absolute inset-0 rounded-3xl bg-gradient-to-br from-secondary/10 to-primary-fixed/10 border border-outline-variant/20 shadow-card backdrop-blur-sm animate-[heroFloat_20s_ease-in-out_infinite]"></div>
                     <div class="absolute inset-0 flex items-center justify-center">

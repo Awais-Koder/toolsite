@@ -4,10 +4,7 @@
 
 @section('content')
     <!-- Hero Banner -->
-    <section class="-mx-gutter -mt-section-gap pt-24 pb-12 md:pt-32 md:pb-16 bg-gradient-to-br from-primary-container/30 via-background to-secondary-fixed/20 relative overflow-hidden">
-        <div class="absolute inset-0 -z-10">
-            <div class="absolute top-0 right-1/4 w-[500px] h-[500px] rounded-full bg-secondary/[0.06] blur-[100px]"></div>
-        </div>
+    <section class="-mx-gutter -mt-section-gap pt-24 pb-12 md:pt-32 md:pb-16 bg-surface">
         <div class="max-w-[1200px] mx-auto px-gutter text-center" data-reveal="fade-up">
             <span class="inline-block text-secondary font-label-caps text-label-caps tracking-widest uppercase mb-3">Get in Touch</span>
             <h1 class="font-display text-display text-on-surface mb-4">Contact Us</h1>
@@ -70,21 +67,35 @@
                     <h2 class="font-h2 text-h2 text-on-surface mb-2">Send a Message</h2>
                     <p class="text-on-surface-variant mb-8">Fill out the form below and we'll get back to you as soon as possible.</p>
 
-                    <form class="space-y-5" onsubmit="event.preventDefault(); alert('Thank you for your message! This is a demo form.');">
+                    @if(session('success'))
+                        <div class="mb-6 p-4 bg-green-50 border border-green-200 text-green-700 rounded-xl flex items-center gap-3">
+                            <span class="material-symbols-outlined text-green-500">check_circle</span>
+                            <p class="text-sm font-medium">{{ session('success') }}</p>
+                        </div>
+                    @endif
+
+                    <form action="{{ route('contact.store') }}" method="POST" class="space-y-5">
+                        @csrf
                         <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
                             <div class="group">
                                 <label class="block font-label-caps text-on-surface mb-2 text-xs uppercase tracking-wider">Your Name</label>
                                 <div class="relative">
                                     <span class="absolute left-4 top-1/2 -translate-y-1/2 material-symbols-outlined text-on-surface-variant/50 text-lg">person</span>
-                                    <input type="text" placeholder="John Doe" class="w-full rounded-xl border-outline-variant/50 focus:border-secondary focus:ring-2 focus:ring-secondary/20 h-13 pl-11 pr-4 text-on-surface bg-surface-container-low font-body-md border transition-all duration-200 hover:border-outline-variant" required>
+                                    <input type="text" name="name" value="{{ old('name') }}" placeholder="John Doe" class="w-full rounded-xl border-outline-variant/50 focus:border-secondary focus:ring-2 focus:ring-secondary/20 h-13 pl-11 pr-4 text-on-surface bg-surface-container-low font-body-md border transition-all duration-200 hover:border-outline-variant @error('name') border-red-500 @enderror" required>
                                 </div>
+                                @error('name')
+                                    <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
+                                @enderror
                             </div>
                             <div class="group">
                                 <label class="block font-label-caps text-on-surface mb-2 text-xs uppercase tracking-wider">Email Address</label>
                                 <div class="relative">
                                     <span class="absolute left-4 top-1/2 -translate-y-1/2 material-symbols-outlined text-on-surface-variant/50 text-lg">mail</span>
-                                    <input type="email" placeholder="john@example.com" class="w-full rounded-xl border-outline-variant/50 focus:border-secondary focus:ring-2 focus:ring-secondary/20 h-13 pl-11 pr-4 text-on-surface bg-surface-container-low font-body-md border transition-all duration-200 hover:border-outline-variant" required>
+                                    <input type="email" name="email" value="{{ old('email') }}" placeholder="john@example.com" class="w-full rounded-xl border-outline-variant/50 focus:border-secondary focus:ring-2 focus:ring-secondary/20 h-13 pl-11 pr-4 text-on-surface bg-surface-container-low font-body-md border transition-all duration-200 hover:border-outline-variant @error('email') border-red-500 @enderror" required>
                                 </div>
+                                @error('email')
+                                    <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
+                                @enderror
                             </div>
                         </div>
 
@@ -92,20 +103,26 @@
                             <label class="block font-label-caps text-on-surface mb-2 text-xs uppercase tracking-wider">Subject</label>
                             <div class="relative">
                                 <span class="absolute left-4 top-1/2 -translate-y-1/2 material-symbols-outlined text-on-surface-variant/50 text-lg">subject</span>
-                                <select class="w-full rounded-xl border-outline-variant/50 focus:border-secondary focus:ring-2 focus:ring-secondary/20 h-13 pl-11 pr-4 text-on-surface bg-surface-container-low font-body-md border transition-all duration-200 hover:border-outline-variant appearance-none cursor-pointer">
-                                    <option>General Inquiry</option>
-                                    <option>Bug Report</option>
-                                    <option>Feature Request</option>
-                                    <option>Business Inquiry</option>
-                                    <option>Other</option>
+                                <select name="subject" class="w-full rounded-xl border-outline-variant/50 focus:border-secondary focus:ring-2 focus:ring-secondary/20 h-13 pl-11 pr-4 text-on-surface bg-surface-container-low font-body-md border transition-all duration-200 hover:border-outline-variant appearance-none cursor-pointer @error('subject') border-red-500 @enderror">
+                                    <option value="General Inquiry" {{ old('subject') == 'General Inquiry' ? 'selected' : '' }}>General Inquiry</option>
+                                    <option value="Bug Report" {{ old('subject') == 'Bug Report' ? 'selected' : '' }}>Bug Report</option>
+                                    <option value="Feature Request" {{ old('subject') == 'Feature Request' ? 'selected' : '' }}>Feature Request</option>
+                                    <option value="Business Inquiry" {{ old('subject') == 'Business Inquiry' ? 'selected' : '' }}>Business Inquiry</option>
+                                    <option value="Other" {{ old('subject') == 'Other' ? 'selected' : '' }}>Other</option>
                                 </select>
                                 <span class="absolute right-4 top-1/2 -translate-y-1/2 material-symbols-outlined text-on-surface-variant pointer-events-none">expand_more</span>
                             </div>
+                            @error('subject')
+                                <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
+                            @enderror
                         </div>
 
                         <div>
                             <label class="block font-label-caps text-on-surface mb-2 text-xs uppercase tracking-wider">Message</label>
-                            <textarea rows="5" placeholder="Tell us what's on your mind..." class="w-full rounded-xl border-outline-variant/50 focus:border-secondary focus:ring-2 focus:ring-secondary/20 px-4 py-3 text-on-surface bg-surface-container-low font-body-md border transition-all duration-200 hover:border-outline-variant resize-none" required></textarea>
+                            <textarea name="message" rows="5" placeholder="Tell us what's on your mind..." class="w-full rounded-xl border-outline-variant/50 focus:border-secondary focus:ring-2 focus:ring-secondary/20 px-4 py-3 text-on-surface bg-surface-container-low font-body-md border transition-all duration-200 hover:border-outline-variant resize-none @error('message') border-red-500 @enderror" required>{{ old('message') }}</textarea>
+                            @error('message')
+                                <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
+                            @enderror
                         </div>
 
                         <button type="submit" class="group w-full sm:w-auto bg-secondary hover:bg-secondary-container text-on-secondary font-semibold py-3.5 px-10 rounded-xl transition-all duration-300 shadow-md hover:shadow-glow hover:-translate-y-0.5 flex items-center justify-center gap-2.5">

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ContactController;
 use App\Http\Controllers\SitemapController;
 use Illuminate\Support\Facades\Route;
 
@@ -26,6 +27,8 @@ Route::get('/about-us', function () {
 Route::get('/contact-us', function () {
     return view('pages.contact');
 })->name('contact');
+
+Route::post('/contact-us', [ContactController::class, 'store'])->name('contact.store');
 
 Route::get('/api/history/{month}/{day}', function ($month, $day) {
     try {

@@ -115,7 +115,7 @@
     </style>
 
     <!-- TopAppBar -->
-    <header data-header class="fixed top-0 w-full z-50 bg-surface/85 backdrop-blur-xl border-b border-outline-variant/50 h-16 transition-all">
+    <header data-header class="fixed top-0 w-full z-50 bg-surface/85 backdrop-blur-xl border-b border-outline-variant/50 h-16 transition-all mt-2">
         <div x-data="{ open: false }" @keydown.escape.window="open = false; toggleBodyScroll(false)">
             <div class="flex justify-between items-center max-w-[1200px] mx-auto px-gutter h-full relative">
                 <a href="{{ route('home') }}" class="font-h2 text-h2 font-bold text-primary dark:text-on-primary-fixed cursor-pointer transition-transform duration-300 hover:scale-[1.02]">
