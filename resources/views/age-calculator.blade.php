@@ -22,10 +22,10 @@
 
                 <!-- Mode Toggle -->
                 <div class="inline-flex bg-surface-container-low p-1.5 rounded-2xl border border-outline-variant/40 mb-8">
-                    <button x-on:click="mode = 'age'; resetData();" :class="mode === 'age' ? 'bg-secondary text-on-secondary shadow-md' : 'text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface'" class="px-7 py-2.5 rounded-xl font-label-caps transition-all duration-300">
+                    <button x-on:click="mode = 'age'; resetData();" :class="mode === 'age' ? 'bg-secondary text-on-secondary shadow-md' : 'text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface'" class="px-7 py-2.5 rounded-xl font-label-caps transition-all duration-300 cursor-pointer">
                         Age Calculator
                     </button>
-                    <button x-on:click="mode = 'diff'; resetData();" :class="mode === 'diff' ? 'bg-secondary text-on-secondary shadow-md' : 'text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface'" class="px-7 py-2.5 rounded-xl font-label-caps transition-all duration-300">
+                    <button x-on:click="mode = 'diff'; resetData();" :class="mode === 'diff' ? 'bg-secondary text-on-secondary shadow-md' : 'text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface'" class="px-7 py-2.5 rounded-xl font-label-caps transition-all duration-300 cursor-pointer">
                         Age Difference
                     </button>
                 </div>
@@ -61,7 +61,7 @@
                     </div>
                 </div>
 
-                <button x-on:click="calculate()" class="group w-full sm:w-auto bg-secondary hover:bg-secondary-container text-on-secondary font-semibold py-3.5 px-10 rounded-xl transition-all duration-300 shadow-md hover:shadow-glow hover:-translate-y-0.5 flex items-center justify-center gap-2.5">
+                <button x-on:click="calculate()" class="group w-full sm:w-auto bg-secondary hover:bg-secondary-container text-on-secondary font-semibold py-3.5 px-10 rounded-xl transition-all duration-300 shadow-md hover:shadow-glow hover:-translate-y-0.5 flex items-center justify-center gap-2.5 cursor-pointer">
                     <span class="material-symbols-outlined transition-transform duration-300 group-hover:rotate-12">calculate</span>
                     <span x-text="mode === 'age' ? 'Calculate Age' : 'Calculate Difference'"></span>
                 </button>
@@ -70,15 +70,15 @@
                 <div x-show="showResults" x-transition:enter="transition ease-out duration-500" x-transition:enter-start="opacity-0 translate-y-4" x-transition:enter-end="opacity-100 translate-y-0" x-transition:leave="transition ease-in duration-300" x-transition:leave-start="opacity-100 translate-y-0" x-transition:leave-end="opacity-0 translate-y-4" class="mt-10 bg-surface-container-low rounded-2xl border border-outline-variant/40 p-6 sm:p-8" x-cloak>
                     <!-- Tab Navigation -->
                     <div class="flex bg-surface-container-lowest p-1.5 rounded-2xl border border-outline-variant/40 mb-8 overflow-x-auto">
-                        <button x-on:click="activeTab = 'results'" :class="activeTab === 'results' ? 'bg-secondary text-on-secondary shadow-md' : 'text-on-surface-variant hover:bg-surface-container-high'" class="flex-1 min-w-0 px-5 py-3 rounded-xl font-label-caps transition-all duration-300 flex items-center justify-center gap-2 whitespace-nowrap">
+                        <button x-on:click="activeTab = 'results'" :class="activeTab === 'results' ? 'bg-secondary text-on-secondary shadow-md' : 'text-on-surface-variant hover:bg-surface-container-high'" class="flex-1 min-w-0 px-5 py-3 rounded-xl font-label-caps transition-all duration-300 flex items-center justify-center gap-2 whitespace-nowrap cursor-pointer">
                             <span class="material-symbols-outlined text-base">analytics</span>
                             <span>Results</span>
                         </button>
-                        <button x-on:click="activeTab = 'facts'" :class="activeTab === 'facts' ? 'bg-secondary text-on-secondary shadow-md' : 'text-on-surface-variant hover:bg-surface-container-high'" class="flex-1 min-w-0 px-5 py-3 rounded-xl font-label-caps transition-all duration-300 flex items-center justify-center gap-2 whitespace-nowrap">
+                        <button x-on:click="activeTab = 'facts'" :class="activeTab === 'facts' ? 'bg-secondary text-on-secondary shadow-md' : 'text-on-surface-variant hover:bg-surface-container-high'" class="flex-1 min-w-0 px-5 py-3 rounded-xl font-label-caps transition-all duration-300 flex items-center justify-center gap-2 whitespace-nowrap cursor-pointer">
                             <span class="material-symbols-outlined text-base">celebration</span>
                             <span>Fun Facts</span>
                         </button>
-                        <button x-on:click="activeTab = 'story'" :class="activeTab === 'story' ? 'bg-secondary text-on-secondary shadow-md' : 'text-on-surface-variant hover:bg-surface-container-high'" class="flex-1 min-w-0 px-5 py-3 rounded-xl font-label-caps transition-all duration-300 flex items-center justify-center gap-2 whitespace-nowrap">
+                        <button x-on:click="activeTab = 'story'" :class="activeTab === 'story' ? 'bg-secondary text-on-secondary shadow-md' : 'text-on-surface-variant hover:bg-surface-container-high'" class="flex-1 min-w-0 px-5 py-3 rounded-xl font-label-caps transition-all duration-300 flex items-center justify-center gap-2 whitespace-nowrap cursor-pointer">
                             <span class="material-symbols-outlined text-base">auto_stories</span>
                             <span>Life Story</span>
                         </button>

@@ -288,7 +288,7 @@
                 </div>
             </a>
 
-            <div class="group bg-surface-container-lowest border border-outline-variant/40 rounded-2xl p-7 hover:shadow-card-hover hover:-translate-y-1 transition-all duration-500 flex flex-col h-full cursor-default" data-reveal="fade-up" data-reveal-delay="80">
+            <div class="group bg-surface-container-lowest border border-outline-variant/40 rounded-2xl p-7 hover:shadow-card-hover hover:-translate-y-1 transition-all duration-500 flex flex-col h-full cursor-pointer" data-reveal="fade-up" data-reveal-delay="80">
                 <div class="mb-5 w-14 h-14 bg-secondary/10 rounded-2xl flex items-center justify-center text-secondary">
                     <span class="material-symbols-outlined text-2xl">auto_awesome</span>
                 </div>
@@ -297,7 +297,7 @@
                 <span class="inline-flex items-center gap-2 text-xs font-label-caps text-secondary bg-secondary/5 px-3 py-1.5 rounded-full w-fit">Included in Age Calc</span>
             </div>
 
-            <div class="group bg-surface-container-lowest border border-outline-variant/40 rounded-2xl p-7 hover:shadow-card-hover hover:-translate-y-1 transition-all duration-500 flex flex-col h-full cursor-default" data-reveal="fade-up" data-reveal-delay="160">
+            <div class="group bg-surface-container-lowest border border-outline-variant/40 rounded-2xl p-7 hover:shadow-card-hover hover:-translate-y-1 transition-all duration-500 flex flex-col h-full cursor-pointer" data-reveal="fade-up" data-reveal-delay="160">
                 <div class="mb-5 w-14 h-14 bg-secondary/10 rounded-2xl flex items-center justify-center text-secondary">
                     <span class="material-symbols-outlined text-2xl">timeline</span>
                 </div>
@@ -306,7 +306,7 @@
                 <span class="inline-flex items-center gap-2 text-xs font-label-caps text-secondary bg-secondary/5 px-3 py-1.5 rounded-full w-fit">Included in Age Calc</span>
             </div>
 
-            <div class="group bg-surface-container-lowest border border-outline-variant/40 rounded-2xl p-7 hover:shadow-card-hover hover:-translate-y-1 transition-all duration-500 flex flex-col h-full cursor-default" data-reveal="fade-up" data-reveal-delay="240">
+            <div class="group bg-surface-container-lowest border border-outline-variant/40 rounded-2xl p-7 hover:shadow-card-hover hover:-translate-y-1 transition-all duration-500 flex flex-col h-full cursor-pointer" data-reveal="fade-up" data-reveal-delay="240">
                 <div class="mb-5 w-14 h-14 bg-secondary/10 rounded-2xl flex items-center justify-center text-secondary">
                     <span class="material-symbols-outlined text-2xl">rocket_launch</span>
                 </div>

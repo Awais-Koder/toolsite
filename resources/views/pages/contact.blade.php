@@ -125,7 +125,7 @@
                             @enderror
                         </div>
 
-                        <button type="submit" class="group w-full sm:w-auto bg-secondary hover:bg-secondary-container text-on-secondary font-semibold py-3.5 px-10 rounded-xl transition-all duration-300 shadow-md hover:shadow-glow hover:-translate-y-0.5 flex items-center justify-center gap-2.5">
+                        <button type="submit" class="group w-full sm:w-auto bg-secondary hover:bg-secondary-container text-on-secondary font-semibold py-3.5 px-10 rounded-xl transition-all duration-300 shadow-md hover:shadow-glow hover:-translate-y-0.5 flex items-center justify-center gap-2.5 cursor-pointer">
                             <span class="material-symbols-outlined transition-transform duration-300 group-hover:rotate-12">send</span>
                             Send Message
                         </button>
