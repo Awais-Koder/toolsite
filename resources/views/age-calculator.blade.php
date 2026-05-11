@@ -7,77 +7,92 @@
     <div class="flex flex-col lg:flex-row gap-gutter" x-data="ageCalculator()" x-init="init()">
         <!-- Left Column (2/3) -->
         <div class="lg:w-2/3 flex flex-col gap-stack-lg order-2 lg:order-1">
-            
+
             <!-- AdSense Top Placeholder -->
-            <div class="adsense-slot mx-auto my-base" style="display:none;">
-                <!-- AdSense Slot (Top) -->
-            </div>
-            
+            <div class="adsense-slot mx-auto my-base" style="display:none;"></div>
+
             <!-- Tool Interface -->
-            <section class="bg-surface-container-lowest rounded-xl shadow-sm border border-outline-variant p-6 sm:p-8">
-                <h1 class="font-h1 text-on-surface mb-2" x-text="mode === 'age' ? 'Exact Age Calculator' : 'Age Difference Calculator'">Exact Age Calculator</h1>
-                <p class="text-on-surface-variant mb-6 font-body-md" x-text="mode === 'age' ? 'Calculate your exact age in years, months, days, hours, minutes, and seconds.' : 'Calculate the exact time difference between two different birth dates.'"></p>
-                
+            <section class="relative overflow-hidden bg-surface-container-lowest rounded-3xl shadow-card border border-outline-variant/40 p-6 sm:p-10" data-reveal="fade-up">
+                <div class="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-secondary via-primary-fixed to-secondary"></div>
+
+                <div class="mb-8">
+                    <h1 class="font-h1 text-on-surface mb-2" x-text="mode === 'age' ? 'Exact Age Calculator' : 'Age Difference Calculator'">Exact Age Calculator</h1>
+                    <p class="text-on-surface-variant font-body-md" x-text="mode === 'age' ? 'Calculate your exact age in years, months, days, hours, minutes, and seconds.' : 'Calculate the exact time difference between two different birth dates.'"></p>
+                </div>
+
                 <!-- Mode Toggle -->
-                <div class="flex bg-surface-container-low p-1 rounded-xl border border-outline-variant mb-6 w-fit">
-                    <button x-on:click="mode = 'age'; resetData();" :class="mode === 'age' ? 'bg-secondary text-on-secondary shadow-sm' : 'text-on-surface-variant hover:bg-surface-container-high'" class="px-6 py-2 rounded-lg font-label-caps transition-all duration-200">
+                <div class="inline-flex bg-surface-container-low p-1.5 rounded-2xl border border-outline-variant/40 mb-8">
+                    <button x-on:click="mode = 'age'; resetData();" :class="mode === 'age' ? 'bg-secondary text-on-secondary shadow-md' : 'text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface'" class="px-7 py-2.5 rounded-xl font-label-caps transition-all duration-300">
                         Age Calculator
                     </button>
-                    <button x-on:click="mode = 'diff'; resetData();" :class="mode === 'diff' ? 'bg-secondary text-on-secondary shadow-sm' : 'text-on-surface-variant hover:bg-surface-container-high'" class="px-6 py-2 rounded-lg font-label-caps transition-all duration-200">
+                    <button x-on:click="mode = 'diff'; resetData();" :class="mode === 'diff' ? 'bg-secondary text-on-secondary shadow-md' : 'text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface'" class="px-7 py-2.5 rounded-xl font-label-caps transition-all duration-300">
                         Age Difference
                     </button>
                 </div>
 
-                <div class="grid grid-cols-1 sm:grid-cols-2 gap-stack-md mb-6">
-                    <div class="flex-1">
-                        <label class="block font-label-caps text-on-surface mb-2 uppercase" x-text="mode === 'age' ? 'Your Name (Optional)' : 'Person 1 Name'"></label>
-                        <input x-model="p1Name" placeholder="Enter name" class="form-input w-full rounded-lg border-outline focus:border-secondary focus:ring-secondary h-12 px-4 text-on-surface bg-surface-container-lowest font-body-md border" type="text"/>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-stack-md mb-8">
+                    <div class="flex-1 group">
+                        <label class="block font-label-caps text-on-surface mb-2.5 uppercase tracking-wider text-xs" x-text="mode === 'age' ? 'Your Name (Optional)' : 'Person 1 Name'"></label>
+                        <div class="relative">
+                            <span class="absolute left-4 top-1/2 -translate-y-1/2 material-symbols-outlined text-on-surface-variant/50 text-lg">person</span>
+                            <input x-model="p1Name" placeholder="Enter name" class="w-full rounded-xl border-outline-variant/50 focus:border-secondary focus:ring-2 focus:ring-secondary/20 h-13 pl-11 pr-4 text-on-surface bg-surface-container-low font-body-md border transition-all duration-200 hover:border-outline-variant" type="text"/>
+                        </div>
                     </div>
-                    <div class="flex-1" x-show="mode === 'diff'">
-                        <label class="block font-label-caps text-on-surface mb-2 uppercase">Person 2 Name</label>
-                        <input x-model="p2Name" placeholder="Enter name" class="form-input w-full rounded-lg border-outline focus:border-secondary focus:ring-secondary h-12 px-4 text-on-surface bg-surface-container-lowest font-body-md border" type="text"/>
+                    <div class="flex-1 group" x-show="mode === 'diff'">
+                        <label class="block font-label-caps text-on-surface mb-2.5 uppercase tracking-wider text-xs">Person 2 Name</label>
+                        <div class="relative">
+                            <span class="absolute left-4 top-1/2 -translate-y-1/2 material-symbols-outlined text-on-surface-variant/50 text-lg">person</span>
+                            <input x-model="p2Name" placeholder="Enter name" class="w-full rounded-xl border-outline-variant/50 focus:border-secondary focus:ring-2 focus:ring-secondary/20 h-13 pl-11 pr-4 text-on-surface bg-surface-container-low font-body-md border transition-all duration-200 hover:border-outline-variant" type="text"/>
+                        </div>
                     </div>
-                    <div class="flex-1">
-                        <label class="block font-label-caps text-on-surface mb-2 uppercase" for="dob" x-text="mode === 'age' ? 'Date of Birth' : (p1Name || 'Person 1') + '\'s Birth Date'"></label>
-                        <input x-model="dob" class="form-input w-full rounded-lg border-outline focus:border-secondary focus:ring-secondary h-12 px-4 text-on-surface bg-surface-container-lowest font-body-md border" id="dob" type="date"/>
+                    <div class="flex-1 group">
+                        <label class="block font-label-caps text-on-surface mb-2.5 uppercase tracking-wider text-xs" for="dob" x-text="mode === 'age' ? 'Date of Birth' : (p1Name || 'Person 1') + '\'s Birth Date'"></label>
+                        <div class="relative">
+                            <span class="absolute left-4 top-1/2 -translate-y-1/2 material-symbols-outlined text-on-surface-variant/50 text-lg">event</span>
+                            <input x-model="dob" class="w-full rounded-xl border-outline-variant/50 focus:border-secondary focus:ring-2 focus:ring-secondary/20 h-13 pl-11 pr-4 text-on-surface bg-surface-container-low font-body-md border transition-all duration-200 hover:border-outline-variant" id="dob" type="date"/>
+                        </div>
                     </div>
-                    <div class="flex-1">
-                        <label class="block font-label-caps text-on-surface mb-2 uppercase" for="calc-date" x-text="mode === 'age' ? 'Calculate Age At' : (p2Name || 'Person 2') + '\'s Birth Date'"></label>
-                        <input x-model="targetDate" class="form-input w-full rounded-lg border-outline focus:border-secondary focus:ring-secondary h-12 px-4 text-on-surface bg-surface-container-lowest font-body-md border" id="calc-date" type="date"/>
+                    <div class="flex-1 group">
+                        <label class="block font-label-caps text-on-surface mb-2.5 uppercase tracking-wider text-xs" for="calc-date" x-text="mode === 'age' ? 'Calculate Age At' : (p2Name || 'Person 2') + '\'s Birth Date'"></label>
+                        <div class="relative">
+                            <span class="absolute left-4 top-1/2 -translate-y-1/2 material-symbols-outlined text-on-surface-variant/50 text-lg">today</span>
+                            <input x-model="targetDate" class="w-full rounded-xl border-outline-variant/50 focus:border-secondary focus:ring-2 focus:ring-secondary/20 h-13 pl-11 pr-4 text-on-surface bg-surface-container-low font-body-md border transition-all duration-200 hover:border-outline-variant" id="calc-date" type="date"/>
+                        </div>
                     </div>
                 </div>
 
-                <button x-on:click="calculate()" class="w-full sm:w-auto bg-secondary hover:bg-secondary-container text-on-secondary font-mono-data py-3 px-8 rounded-lg transition-colors shadow-sm flex items-center justify-center gap-2">
-                    <span class="material-symbols-outlined">calculate</span>
+                <button x-on:click="calculate()" class="group w-full sm:w-auto bg-secondary hover:bg-secondary-container text-on-secondary font-semibold py-3.5 px-10 rounded-xl transition-all duration-300 shadow-md hover:shadow-glow hover:-translate-y-0.5 flex items-center justify-center gap-2.5">
+                    <span class="material-symbols-outlined transition-transform duration-300 group-hover:rotate-12">calculate</span>
                     <span x-text="mode === 'age' ? 'Calculate Age' : 'Calculate Difference'"></span>
                 </button>
 
                 <!-- Results Area -->
-                <div x-show="showResults" x-transition class="mt-8 bg-surface-container-low rounded-lg border border-outline-variant p-6" x-cloak>
+                <div x-show="showResults" x-transition:enter="transition ease-out duration-500" x-transition:enter-start="opacity-0 translate-y-4" x-transition:enter-end="opacity-100 translate-y-0" x-transition:leave="transition ease-in duration-300" x-transition:leave-start="opacity-100 translate-y-0" x-transition:leave-end="opacity-0 translate-y-4" class="mt-10 bg-surface-container-low rounded-2xl border border-outline-variant/40 p-6 sm:p-8" x-cloak>
                     <!-- Tab Navigation -->
-                    <div class="flex bg-surface-container-lowest p-1 rounded-xl border border-outline-variant mb-6 overflow-x-auto">
-                        <button x-on:click="activeTab = 'results'" :class="activeTab === 'results' ? 'bg-secondary text-on-secondary shadow-sm' : 'text-on-surface-variant hover:bg-surface-container-high'" class="flex-1 min-w-0 px-4 py-2.5 rounded-lg font-label-caps transition-all duration-200 flex items-center justify-center gap-2 whitespace-nowrap">
+                    <div class="flex bg-surface-container-lowest p-1.5 rounded-2xl border border-outline-variant/40 mb-8 overflow-x-auto">
+                        <button x-on:click="activeTab = 'results'" :class="activeTab === 'results' ? 'bg-secondary text-on-secondary shadow-md' : 'text-on-surface-variant hover:bg-surface-container-high'" class="flex-1 min-w-0 px-5 py-3 rounded-xl font-label-caps transition-all duration-300 flex items-center justify-center gap-2 whitespace-nowrap">
                             <span class="material-symbols-outlined text-base">analytics</span>
                             <span>Results</span>
                         </button>
-                        <button x-on:click="activeTab = 'facts'" :class="activeTab === 'facts' ? 'bg-secondary text-on-secondary shadow-sm' : 'text-on-surface-variant hover:bg-surface-container-high'" class="flex-1 min-w-0 px-4 py-2.5 rounded-lg font-label-caps transition-all duration-200 flex items-center justify-center gap-2 whitespace-nowrap">
+                        <button x-on:click="activeTab = 'facts'" :class="activeTab === 'facts' ? 'bg-secondary text-on-secondary shadow-md' : 'text-on-surface-variant hover:bg-surface-container-high'" class="flex-1 min-w-0 px-5 py-3 rounded-xl font-label-caps transition-all duration-300 flex items-center justify-center gap-2 whitespace-nowrap">
                             <span class="material-symbols-outlined text-base">celebration</span>
                             <span>Fun Facts</span>
                         </button>
-                        <button x-on:click="activeTab = 'story'" :class="activeTab === 'story' ? 'bg-secondary text-on-secondary shadow-sm' : 'text-on-surface-variant hover:bg-surface-container-high'" class="flex-1 min-w-0 px-4 py-2.5 rounded-lg font-label-caps transition-all duration-200 flex items-center justify-center gap-2 whitespace-nowrap">
+                        <button x-on:click="activeTab = 'story'" :class="activeTab === 'story' ? 'bg-secondary text-on-secondary shadow-md' : 'text-on-surface-variant hover:bg-surface-container-high'" class="flex-1 min-w-0 px-5 py-3 rounded-xl font-label-caps transition-all duration-300 flex items-center justify-center gap-2 whitespace-nowrap">
                             <span class="material-symbols-outlined text-base">auto_stories</span>
                             <span>Life Story</span>
                         </button>
                     </div>
+
                     <!-- TAB: Results -->
                     <div x-show="activeTab === 'results'" class="w-full">
                         <div class="text-center mb-8">
-                            <div class="text-on-surface-variant font-label-caps uppercase mb-4 tracking-widest text-sm" x-text="mode === 'age' ? 'Exact Age Result' : 'Age Difference Result'">Exact Age Result</div>
-                            
+                            <div class="text-on-surface-variant font-label-caps uppercase mb-5 tracking-[0.15em] text-xs" x-text="mode === 'age' ? 'Exact Age Result' : 'Age Difference Result'">Exact Age Result</div>
+
                             <template x-if="mode === 'diff'">
-                                <div class="mb-6 p-4 bg-primary-fixed/10 border border-primary-fixed/20 rounded-lg">
-                                    <div class="text-lg font-bold text-primary flex items-center justify-center gap-2">
-                                        <span class="material-symbols-outlined">info</span>
+                                <div class="mb-6 p-5 bg-primary-fixed/10 border-l-4 border-secondary rounded-r-xl text-left">
+                                    <div class="text-lg font-bold text-primary flex items-center gap-2">
+                                        <span class="material-symbols-outlined text-secondary">info</span>
                                         <span x-text="result.comparisonText"></span>
                                     </div>
                                 </div>
@@ -85,33 +100,33 @@
 
                             <!-- Y-M-D Grid -->
                             <div class="grid grid-cols-3 gap-4 mb-4">
-                                <div class="bg-surface-container-lowest p-4 rounded-lg border border-outline-variant shadow-sm">
-                                    <div class="text-h1 text-secondary leading-none mb-1" x-text="result.years">0</div>
-                                    <div class="text-label-caps text-on-surface-variant font-semibold">YEARS</div>
+                                <div class="bg-gradient-to-b from-white to-surface-container-low p-5 rounded-2xl border border-outline-variant/40 shadow-xs">
+                                    <div class="font-display text-4xl md:text-5xl text-secondary leading-none mb-2" x-text="result.years" data-count-up="" x-init="$el.dataset.countUp = result.years">0</div>
+                                    <div class="text-label-caps text-on-surface-variant font-semibold tracking-wider text-xs">YEARS</div>
                                 </div>
-                                <div class="bg-surface-container-lowest p-4 rounded-lg border border-outline-variant shadow-sm">
-                                    <div class="text-h1 text-secondary leading-none mb-1" x-text="result.months">0</div>
-                                    <div class="text-label-caps text-on-surface-variant font-semibold">MONTHS</div>
+                                <div class="bg-gradient-to-b from-white to-surface-container-low p-5 rounded-2xl border border-outline-variant/40 shadow-xs">
+                                    <div class="font-display text-4xl md:text-5xl text-secondary leading-none mb-2" x-text="result.months">0</div>
+                                    <div class="text-label-caps text-on-surface-variant font-semibold tracking-wider text-xs">MONTHS</div>
                                 </div>
-                                <div class="bg-surface-container-lowest p-4 rounded-lg border border-outline-variant shadow-sm">
-                                    <div class="text-h1 text-secondary leading-none mb-1" x-text="result.days">0</div>
-                                    <div class="text-label-caps text-on-surface-variant font-semibold">DAYS</div>
+                                <div class="bg-gradient-to-b from-white to-surface-container-low p-5 rounded-2xl border border-outline-variant/40 shadow-xs">
+                                    <div class="font-display text-4xl md:text-5xl text-secondary leading-none mb-2" x-text="result.days">0</div>
+                                    <div class="text-label-caps text-on-surface-variant font-semibold tracking-wider text-xs">DAYS</div>
                                 </div>
                             </div>
 
                             <!-- H-M-S Grid -->
                             <div class="grid grid-cols-3 gap-4">
-                                <div class="bg-surface-container-lowest p-4 rounded-lg border border-outline-variant shadow-sm">
-                                    <div class="text-h2 text-secondary leading-none mb-1" x-text="result.hours">0</div>
-                                    <div class="text-label-caps text-on-surface-variant font-semibold">HOURS</div>
+                                <div class="bg-gradient-to-b from-white to-surface-container-low p-5 rounded-2xl border border-outline-variant/40 shadow-xs">
+                                    <div class="font-display text-3xl md:text-4xl text-secondary leading-none mb-2" x-text="result.hours">0</div>
+                                    <div class="text-label-caps text-on-surface-variant font-semibold tracking-wider text-xs">HOURS</div>
                                 </div>
-                                <div class="bg-surface-container-lowest p-4 rounded-lg border border-outline-variant shadow-sm">
-                                    <div class="text-h2 text-secondary leading-none mb-1" x-text="result.minutes">0</div>
-                                    <div class="text-label-caps text-on-surface-variant font-semibold">MINUTES</div>
+                                <div class="bg-gradient-to-b from-white to-surface-container-low p-5 rounded-2xl border border-outline-variant/40 shadow-xs">
+                                    <div class="font-display text-3xl md:text-4xl text-secondary leading-none mb-2" x-text="result.minutes">0</div>
+                                    <div class="text-label-caps text-on-surface-variant font-semibold tracking-wider text-xs">MINUTES</div>
                                 </div>
-                                <div class="bg-surface-container-lowest p-4 rounded-lg border border-outline-variant shadow-sm">
-                                    <div class="text-h2 text-secondary leading-none mb-1" x-text="result.seconds">0</div>
-                                    <div class="text-label-caps text-on-surface-variant font-semibold">SECONDS</div>
+                                <div class="bg-gradient-to-b from-white to-surface-container-low p-5 rounded-2xl border border-outline-variant/40 shadow-xs">
+                                    <div class="font-display text-3xl md:text-4xl text-secondary leading-none mb-2" x-text="result.seconds">0</div>
+                                    <div class="text-label-caps text-on-surface-variant font-semibold tracking-wider text-xs">SECONDS</div>
                                 </div>
                             </div>
                         </div>
@@ -119,52 +134,52 @@
                         <!-- Individual Summaries (Difference Mode) -->
                         <template x-if="mode === 'diff'">
                             <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8">
-                                <div class="p-4 bg-surface-container-lowest border border-outline-variant rounded-lg">
-                                    <div class="font-label-caps text-on-surface-variant mb-2" x-text="(p1Name || 'PERSON 1') + ' AGE (TODAY)'"></div>
-                                    <div class="text-on-surface font-bold text-lg" x-text="result.p1AgeSummary"></div>
+                                <div class="p-5 bg-white border border-outline-variant/30 rounded-xl shadow-xs">
+                                    <div class="font-label-caps text-on-surface-variant mb-2 text-xs tracking-wider" x-text="(p1Name || 'PERSON 1') + ' AGE (TODAY)'"></div>
+                                    <div class="text-on-surface font-bold text-xl" x-text="result.p1AgeSummary"></div>
                                 </div>
-                                <div class="p-4 bg-surface-container-lowest border border-outline-variant rounded-lg">
-                                    <div class="font-label-caps text-on-surface-variant mb-2" x-text="(p2Name || 'PERSON 2') + ' AGE (TODAY)'"></div>
-                                    <div class="text-on-surface font-bold text-lg" x-text="result.p2AgeSummary"></div>
+                                <div class="p-5 bg-white border border-outline-variant/30 rounded-xl shadow-xs">
+                                    <div class="font-label-caps text-on-surface-variant mb-2 text-xs tracking-wider" x-text="(p2Name || 'PERSON 2') + ' AGE (TODAY)'"></div>
+                                    <div class="text-on-surface font-bold text-xl" x-text="result.p2AgeSummary"></div>
                                 </div>
                             </div>
                         </template>
 
                         <!-- Granular Breakdown -->
-                        <div class="mt-8 pt-8 border-t border-outline-variant">
-                            <h3 class="font-h3 text-on-surface mb-6 flex items-center gap-2">
+                        <div class="mt-8 pt-8 border-t border-outline-variant/30">
+                            <h3 class="font-h3 text-on-surface mb-6 flex items-center gap-2.5">
                                 <span class="material-symbols-outlined text-secondary">analytics</span>
                                 <span x-text="mode === 'age' ? 'Granular Breakdown' : 'Difference Breakdown'">Granular Breakdown</span>
                             </h3>
-                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-y-4 gap-x-8">
-                                <div class="flex justify-between items-center py-2 border-b border-outline-variant/50">
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-y-3 gap-x-8">
+                                <div class="flex justify-between items-center py-3 border-b border-outline-variant/30 group hover:bg-white/50 px-3 -mx-3 rounded-lg transition-colors">
                                     <span class="text-on-surface-variant">Total Months</span>
                                     <span class="font-mono-data text-on-surface font-bold text-lg" x-text="result.totalMonths.toLocaleString()"></span>
                                 </div>
-                                <div class="flex justify-between items-center py-2 border-b border-outline-variant/50">
+                                <div class="flex justify-between items-center py-3 border-b border-outline-variant/30 group hover:bg-white/50 px-3 -mx-3 rounded-lg transition-colors">
                                     <span class="text-on-surface-variant">Total Weeks</span>
                                     <span class="font-mono-data text-on-surface font-bold text-lg" x-text="result.totalWeeks.toLocaleString()"></span>
                                 </div>
-                                <div class="flex justify-between items-center py-2 border-b border-outline-variant/50">
+                                <div class="flex justify-between items-center py-3 border-b border-outline-variant/30 group hover:bg-white/50 px-3 -mx-3 rounded-lg transition-colors">
                                     <span class="text-on-surface-variant">Total Days</span>
                                     <span class="font-mono-data text-on-surface font-bold text-lg" x-text="result.totalDays.toLocaleString()"></span>
                                 </div>
-                                <div class="flex justify-between items-center py-2 border-b border-outline-variant/50">
+                                <div class="flex justify-between items-center py-3 border-b border-outline-variant/30 group hover:bg-white/50 px-3 -mx-3 rounded-lg transition-colors">
                                     <span class="text-on-surface-variant">Total Hours</span>
                                     <span class="font-mono-data text-on-surface font-bold text-lg" x-text="result.totalHours.toLocaleString()"></span>
                                 </div>
-                                <div class="flex justify-between items-center py-2 border-b border-outline-variant/50">
+                                <div class="flex justify-between items-center py-3 border-b border-outline-variant/30 group hover:bg-white/50 px-3 -mx-3 rounded-lg transition-colors">
                                     <span class="text-on-surface-variant">Total Minutes</span>
                                     <span class="font-mono-data text-on-surface font-bold text-lg" x-text="result.totalMinutes.toLocaleString()"></span>
                                 </div>
-                                <div class="flex justify-between items-center py-2 border-b border-outline-variant/50">
+                                <div class="flex justify-between items-center py-3 border-b border-outline-variant/30 group hover:bg-white/50 px-3 -mx-3 rounded-lg transition-colors">
                                     <span class="text-on-surface-variant">Total Seconds</span>
                                     <span class="font-mono-data text-secondary font-bold text-lg" x-text="result.totalSeconds.toLocaleString()"></span>
                                 </div>
                             </div>
                         </div>
 
-                        <div class="mt-8 p-4 bg-surface-container-lowest rounded border border-secondary/20 text-center">
+                        <div class="mt-8 p-5 bg-white rounded-xl border border-secondary/20 text-center shadow-xs">
                             <p class="text-on-surface-variant font-body-md" x-text="'Result: ' + summaryText"></p>
                         </div>
                     </div>
@@ -172,78 +187,82 @@
                     <!-- TAB: Fun Facts & Milestones -->
                     <div x-show="activeTab === 'facts'" class="w-full">
                         <div class="text-left">
-                            <h3 class="font-h3 text-on-surface mb-6 flex items-center gap-2">
+                            <h3 class="font-h3 text-on-surface mb-8 flex items-center gap-2.5">
                                 <span class="material-symbols-outlined text-secondary">celebration</span>
                                 Fun Facts & Milestones
                             </h3>
-                            <div class="grid gap-8" :class="mode === 'age' ? 'grid-cols-1' : 'grid-cols-1 sm:grid-cols-2'">
+                            <div class="grid gap-10" :class="mode === 'age' ? 'grid-cols-1' : 'grid-cols-1 sm:grid-cols-2'">
                                 <!-- Profile 1 -->
                                 <div class="space-y-4">
-                                    <div class="font-label-caps text-secondary font-bold border-b border-outline-variant pb-2" x-text="mode === 'age' ? 'Your Profile' : (p1Name || 'Person 1') + '\'s Profile'"></div>
+                                    <div class="font-label-caps text-secondary font-bold border-b border-outline-variant/40 pb-3 tracking-wider text-xs uppercase" x-text="mode === 'age' ? 'Your Profile' : (p1Name || 'Person 1') + '\'s Profile'"></div>
                                     <div class="grid gap-4" :class="mode === 'age' ? 'grid-cols-1 sm:grid-cols-2' : 'grid-cols-1'">
-                                        <div class="bg-surface-container-lowest p-4 rounded-lg border border-outline-variant shadow-sm flex items-center gap-4">
-                                            <div class="bg-primary-fixed p-3 rounded-full text-on-primary-fixed shrink-0">
+                                        <div class="group bg-white p-5 rounded-2xl border border-outline-variant/30 shadow-xs hover:shadow-md hover:-translate-y-0.5 transition-all duration-300 flex items-center gap-4">
+                                            <div class="bg-gradient-to-br from-primary-fixed to-secondary-fixed/50 p-3.5 rounded-xl text-on-primary-fixed shrink-0 group-hover:scale-110 transition-transform duration-300">
                                                 <span class="material-symbols-outlined block text-xl">event_repeat</span>
                                             </div>
                                             <div>
-                                                <div class="text-label-caps text-on-surface-variant text-xs">Day of Birth</div>
+                                                <div class="text-label-caps text-on-surface-variant text-[10px] uppercase tracking-wider">Day of Birth</div>
                                                 <div class="font-h3 text-on-surface" x-text="result.birthDay">Friday</div>
                                             </div>
                                         </div>
-                                        <div class="bg-surface-container-lowest p-4 rounded-lg border border-outline-variant shadow-sm flex items-center gap-4">
-                                            <div class="bg-primary-fixed p-3 rounded-full text-on-primary-fixed shrink-0">
+                                        <div class="group bg-white p-5 rounded-2xl border border-outline-variant/30 shadow-xs hover:shadow-md hover:-translate-y-0.5 transition-all duration-300 flex items-center gap-4">
+                                            <div class="bg-gradient-to-br from-primary-fixed to-secondary-fixed/50 p-3.5 rounded-xl text-on-primary-fixed shrink-0 group-hover:scale-110 transition-transform duration-300">
                                                 <span class="material-symbols-outlined block text-xl">star_half</span>
                                             </div>
                                             <div>
-                                                <div class="text-label-caps text-on-surface-variant text-xs">Zodiac Sign</div>
+                                                <div class="text-label-caps text-on-surface-variant text-[10px] uppercase tracking-wider">Zodiac Sign</div>
                                                 <div class="font-h3 text-on-surface" x-text="result.zodiac">Aries</div>
                                             </div>
                                         </div>
-                                        <div class="bg-surface-container-lowest p-4 rounded-lg border border-outline-variant shadow-sm flex items-center gap-4">
-                                            <div class="bg-primary-fixed p-3 rounded-full text-on-primary-fixed shrink-0">
+                                        <div class="group bg-white p-5 rounded-2xl border border-outline-variant/30 shadow-xs hover:shadow-md hover:-translate-y-0.5 transition-all duration-300 flex items-center gap-4">
+                                            <div class="bg-gradient-to-br from-primary-fixed to-secondary-fixed/50 p-3.5 rounded-xl text-on-primary-fixed shrink-0 group-hover:scale-110 transition-transform duration-300">
                                                 <span class="material-symbols-outlined block text-xl">calendar_today</span>
                                             </div>
                                             <div>
-                                                <div class="text-label-caps text-on-surface-variant text-xs">Leap Years</div>
+                                                <div class="text-label-caps text-on-surface-variant text-[10px] uppercase tracking-wider">Leap Years</div>
                                                 <div class="font-h3 text-on-surface" x-text="result.leapYears + ' Lived'">0 Lived</div>
                                             </div>
                                         </div>
-                                        <div class="bg-surface-container-lowest p-4 rounded-lg border border-outline-variant shadow-sm flex items-center gap-4">
-                                            <div class="bg-primary-fixed p-3 rounded-full text-on-primary-fixed shrink-0">
+                                        <div class="group bg-white p-5 rounded-2xl border border-outline-variant/30 shadow-xs hover:shadow-md hover:-translate-y-0.5 transition-all duration-300 flex items-center gap-4">
+                                            <div class="bg-gradient-to-br from-primary-fixed to-secondary-fixed/50 p-3.5 rounded-xl text-on-primary-fixed shrink-0 group-hover:scale-110 transition-transform duration-300">
                                                 <span class="material-symbols-outlined block text-xl">event_upcoming</span>
                                             </div>
                                             <div>
-                                                <div class="text-label-caps text-on-surface-variant text-xs">Half-Birthday</div>
+                                                <div class="text-label-caps text-on-surface-variant text-[10px] uppercase tracking-wider">Half-Birthday</div>
                                                 <div class="font-h3 text-on-surface" x-text="result.halfBirthday">Date</div>
                                             </div>
                                         </div>
                                         <!-- History -->
-                                        <div class="bg-surface-container-lowest p-4 rounded-lg border border-outline-variant shadow-sm flex items-start gap-4 col-span-full">
-                                            <div class="bg-secondary-fixed p-3 rounded-full text-on-secondary-fixed shrink-0">
-                                                <span class="material-symbols-outlined block text-xl">history_edu</span>
-                                            </div>
-                                            <div>
-                                                <div class="text-label-caps text-on-surface-variant text-xs">A Glimpse Into The Past</div>
-                                                <div class="font-body-md text-on-surface italic leading-relaxed min-h-[3rem] transition-all duration-500"
-                                                     :class="historyLoading ? 'opacity-50' : 'opacity-100'">
+                                        <div class="bg-white p-5 rounded-2xl border border-outline-variant/30 shadow-xs col-span-full">
+                                            <div class="flex items-start gap-4">
+                                                <div class="bg-gradient-to-br from-secondary-fixed to-primary-fixed p-3.5 rounded-xl text-on-secondary-fixed shrink-0">
+                                                    <span class="material-symbols-outlined block text-xl">history_edu</span>
+                                                </div>
+                                                <div class="flex-1 min-w-0">
+                                                    <div class="text-label-caps text-on-surface-variant text-[10px] uppercase tracking-wider mb-2">A Glimpse Into The Past</div>
+                                                    <!-- Skeleton shimmer when loading -->
                                                     <template x-if="historyLoading">
-                                                        <div class="flex items-center gap-2 text-secondary animate-pulse">
-                                                            <span class="material-symbols-outlined text-sm">auto_awesome</span>
-                                                            <span x-text="loadingQuote"></span>
+                                                        <div class="space-y-2 animate-pulse">
+                                                            <div class="h-3 bg-surface-container-high rounded w-3/4"></div>
+                                                            <div class="h-3 bg-surface-container-high rounded w-1/2"></div>
+                                                            <div class="flex items-center gap-2 mt-2">
+                                                                <span class="material-symbols-outlined text-sm text-secondary">auto_awesome</span>
+                                                                <span x-text="loadingQuote" class="text-sm text-secondary italic"></span>
+                                                            </div>
                                                         </div>
                                                     </template>
-                                                    <div x-show="!historyLoading" x-text="result.p1History" class="transition-all duration-300"></div>
+                                                    <div x-show="!historyLoading" x-text="result.p1History" class="font-body-md text-on-surface italic leading-relaxed transition-opacity duration-500" :class="historyLoading ? 'opacity-0' : 'opacity-100'"></div>
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="bg-surface-container-lowest p-4 rounded-lg border border-outline-variant shadow-sm flex items-center gap-4" x-show="mode === 'age'">
-                                            <div class="bg-primary-fixed p-3 rounded-full text-on-primary-fixed shrink-0">
+                                        <div class="group bg-white p-5 rounded-2xl border border-outline-variant/30 shadow-xs hover:shadow-md hover:-translate-y-0.5 transition-all duration-300 flex items-center gap-4" x-show="mode === 'age'">
+                                            <div class="bg-gradient-to-br from-primary-fixed to-secondary-fixed/50 p-3.5 rounded-xl text-on-primary-fixed shrink-0 group-hover:scale-110 transition-transform duration-300">
                                                 <span class="material-symbols-outlined block text-xl">cake</span>
                                             </div>
                                             <div>
-                                                <div class="text-label-caps text-on-surface-variant text-xs">Next Birthday</div>
+                                                <div class="text-label-caps text-on-surface-variant text-[10px] uppercase tracking-wider">Next Birthday</div>
                                                 <div class="font-body-md text-on-surface font-bold" x-text="result.nextBirthdayCountdown"></div>
-                                                <div class="text-xs text-on-surface-variant" x-text="'Falls on ' + result.nextBirthdayDay"></div>
+                                                <div class="text-xs text-on-surface-variant mt-0.5" x-text="'Falls on ' + result.nextBirthdayDay"></div>
                                             </div>
                                         </div>
                                     </div>
@@ -251,60 +270,63 @@
 
                                 <!-- Profile 2 (Difference Mode Only) -->
                                 <div class="space-y-4" x-show="mode === 'diff'">
-                                    <div class="font-label-caps text-secondary font-bold border-b border-outline-variant pb-2" x-text="(p2Name || 'Person 2') + '\'s Profile'"></div>
+                                    <div class="font-label-caps text-secondary font-bold border-b border-outline-variant/40 pb-3 tracking-wider text-xs uppercase" x-text="(p2Name || 'Person 2') + '\'s Profile'"></div>
                                     <div class="grid grid-cols-1 gap-4">
-                                        <div class="bg-surface-container-lowest p-4 rounded-lg border border-outline-variant shadow-sm flex items-center gap-4">
-                                            <div class="bg-primary-fixed p-3 rounded-full text-on-primary-fixed shrink-0">
+                                        <div class="group bg-white p-5 rounded-2xl border border-outline-variant/30 shadow-xs hover:shadow-md hover:-translate-y-0.5 transition-all duration-300 flex items-center gap-4">
+                                            <div class="bg-gradient-to-br from-primary-fixed to-secondary-fixed/50 p-3.5 rounded-xl text-on-primary-fixed shrink-0 group-hover:scale-110 transition-transform duration-300">
                                                 <span class="material-symbols-outlined block text-xl">event_repeat</span>
                                             </div>
                                             <div>
-                                                <div class="text-label-caps text-on-surface-variant text-xs">Day of Birth</div>
+                                                <div class="text-label-caps text-on-surface-variant text-[10px] uppercase tracking-wider">Day of Birth</div>
                                                 <div class="font-h3 text-on-surface" x-text="result.p2BirthDay">Friday</div>
                                             </div>
                                         </div>
-                                        <div class="bg-surface-container-lowest p-4 rounded-lg border border-outline-variant shadow-sm flex items-center gap-4">
-                                            <div class="bg-primary-fixed p-3 rounded-full text-on-primary-fixed shrink-0">
+                                        <div class="group bg-white p-5 rounded-2xl border border-outline-variant/30 shadow-xs hover:shadow-md hover:-translate-y-0.5 transition-all duration-300 flex items-center gap-4">
+                                            <div class="bg-gradient-to-br from-primary-fixed to-secondary-fixed/50 p-3.5 rounded-xl text-on-primary-fixed shrink-0 group-hover:scale-110 transition-transform duration-300">
                                                 <span class="material-symbols-outlined block text-xl">star_half</span>
                                             </div>
                                             <div>
-                                                <div class="text-label-caps text-on-surface-variant text-xs">Zodiac Sign</div>
+                                                <div class="text-label-caps text-on-surface-variant text-[10px] uppercase tracking-wider">Zodiac Sign</div>
                                                 <div class="font-h3 text-on-surface" x-text="result.p2Zodiac">Aries</div>
                                             </div>
                                         </div>
-                                        <div class="bg-surface-container-lowest p-4 rounded-lg border border-outline-variant shadow-sm flex items-center gap-4">
-                                            <div class="bg-primary-fixed p-3 rounded-full text-on-primary-fixed shrink-0">
+                                        <div class="group bg-white p-5 rounded-2xl border border-outline-variant/30 shadow-xs hover:shadow-md hover:-translate-y-0.5 transition-all duration-300 flex items-center gap-4">
+                                            <div class="bg-gradient-to-br from-primary-fixed to-secondary-fixed/50 p-3.5 rounded-xl text-on-primary-fixed shrink-0 group-hover:scale-110 transition-transform duration-300">
                                                 <span class="material-symbols-outlined block text-xl">calendar_today</span>
                                             </div>
                                             <div>
-                                                <div class="text-label-caps text-on-surface-variant text-xs">Leap Years</div>
+                                                <div class="text-label-caps text-on-surface-variant text-[10px] uppercase tracking-wider">Leap Years</div>
                                                 <div class="font-h3 text-on-surface" x-text="result.p2LeapYears + ' Lived'">0 Lived</div>
                                             </div>
                                         </div>
-                                        <div class="bg-surface-container-lowest p-4 rounded-lg border border-outline-variant shadow-sm flex items-center gap-4">
-                                            <div class="bg-primary-fixed p-3 rounded-full text-on-primary-fixed shrink-0">
+                                        <div class="group bg-white p-5 rounded-2xl border border-outline-variant/30 shadow-xs hover:shadow-md hover:-translate-y-0.5 transition-all duration-300 flex items-center gap-4">
+                                            <div class="bg-gradient-to-br from-primary-fixed to-secondary-fixed/50 p-3.5 rounded-xl text-on-primary-fixed shrink-0 group-hover:scale-110 transition-transform duration-300">
                                                 <span class="material-symbols-outlined block text-xl">event_upcoming</span>
                                             </div>
                                             <div>
-                                                <div class="text-label-caps text-on-surface-variant text-xs">Half-Birthday</div>
+                                                <div class="text-label-caps text-on-surface-variant text-[10px] uppercase tracking-wider">Half-Birthday</div>
                                                 <div class="font-h3 text-on-surface" x-text="result.p2HalfBirthday">Date</div>
                                             </div>
                                         </div>
                                         <!-- History P2 -->
-                                        <div class="bg-surface-container-lowest p-4 rounded-lg border border-outline-variant shadow-sm flex items-start gap-4">
-                                            <div class="bg-secondary-fixed p-3 rounded-full text-on-secondary-fixed shrink-0">
-                                                <span class="material-symbols-outlined block text-xl">history_edu</span>
-                                            </div>
-                                            <div>
-                                                <div class="text-label-caps text-on-surface-variant text-xs">A Glimpse Into The Past</div>
-                                                <div class="font-body-md text-on-surface italic leading-relaxed min-h-[3rem] transition-all duration-500"
-                                                     :class="historyLoading ? 'opacity-50' : 'opacity-100'">
+                                        <div class="bg-white p-5 rounded-2xl border border-outline-variant/30 shadow-xs">
+                                            <div class="flex items-start gap-4">
+                                                <div class="bg-gradient-to-br from-secondary-fixed to-primary-fixed p-3.5 rounded-xl text-on-secondary-fixed shrink-0">
+                                                    <span class="material-symbols-outlined block text-xl">history_edu</span>
+                                                </div>
+                                                <div class="flex-1 min-w-0">
+                                                    <div class="text-label-caps text-on-surface-variant text-[10px] uppercase tracking-wider mb-2">A Glimpse Into The Past</div>
                                                     <template x-if="historyLoading">
-                                                        <div class="flex items-center gap-2 text-secondary animate-pulse">
-                                                            <span class="material-symbols-outlined text-sm">auto_awesome</span>
-                                                            <span x-text="loadingQuote"></span>
+                                                        <div class="space-y-2 animate-pulse">
+                                                            <div class="h-3 bg-surface-container-high rounded w-3/4"></div>
+                                                            <div class="h-3 bg-surface-container-high rounded w-1/2"></div>
+                                                            <div class="flex items-center gap-2 mt-2">
+                                                                <span class="material-symbols-outlined text-sm text-secondary">auto_awesome</span>
+                                                                <span x-text="loadingQuote" class="text-sm text-secondary italic"></span>
+                                                            </div>
                                                         </div>
                                                     </template>
-                                                    <div x-show="!historyLoading" x-text="result.p2History" class="transition-all duration-300"></div>
+                                                    <div x-show="!historyLoading" x-text="result.p2History" class="font-body-md text-on-surface italic leading-relaxed transition-opacity duration-500" :class="historyLoading ? 'opacity-0' : 'opacity-100'"></div>
                                                 </div>
                                             </div>
                                         </div>
@@ -317,130 +339,134 @@
                     <!-- TAB: Life Story -->
                     <div x-show="activeTab === 'story'" class="w-full text-left">
                         <!-- Person 1 Story -->
-                        <div class="mb-8">
-                            <h3 class="font-h3 text-on-surface mb-6 flex items-center gap-3">
-                                <span class="p-2 bg-secondary/10 rounded-xl">
+                        <div class="mb-10">
+                            <h3 class="font-h3 text-on-surface mb-8 flex items-center gap-3">
+                                <span class="p-2.5 bg-secondary/10 rounded-xl">
                                     <span class="material-symbols-outlined text-secondary block">auto_stories</span>
                                 </span>
                                 The Story of <span class="text-secondary ml-1" x-text="p1Name || 'Your Life'"></span>
                             </h3>
 
                             <!-- Life Battery -->
-                            <div class="bg-surface-container-lowest p-5 rounded-lg border border-outline-variant shadow-sm mb-4">
-                                <div class="flex justify-between items-end mb-3">
+                            <div class="bg-white p-6 rounded-2xl border border-outline-variant/30 shadow-xs mb-6">
+                                <div class="flex justify-between items-end mb-4">
                                     <div>
-                                        <div class="text-label-caps text-on-surface-variant text-xs">Life Progress</div>
-                                        <div class="text-2xl font-black text-secondary" x-text="result.story.battery + '%'"></div>
+                                        <div class="text-label-caps text-on-surface-variant text-[10px] uppercase tracking-wider mb-1">Life Progress</div>
+                                        <div class="text-3xl font-black text-secondary" x-text="result.story.battery + '%'"></div>
                                     </div>
                                     <div class="text-on-surface-variant text-xs italic">Based on 80-year lifespan</div>
                                 </div>
-                                <div class="h-3 bg-surface-container-low border border-outline-variant rounded-full overflow-hidden mb-3">
-                                    <div class="h-full bg-gradient-to-r from-secondary to-primary-fixed transition-all duration-1000"
-                                         :style="`width: ${result.story.battery}%`"></div>
+                                <div class="h-4 bg-surface-container-low border border-outline-variant/30 rounded-full overflow-hidden mb-4 relative">
+                                    <div class="h-full bg-gradient-to-r from-secondary via-secondary-container to-primary-fixed transition-all duration-1000 ease-out relative"
+                                         :style="`width: ${result.story.battery}%`">
+                                         <div class="absolute inset-0 bg-white/20 animate-[shimmer_2s_linear_infinite]" style="background-image: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);"></div>
+                                    </div>
                                 </div>
-                                <p class="text-on-surface-variant font-body-md" x-text="storyText.battery"></p>
+                                <p class="text-on-surface-variant font-body-md leading-relaxed" x-text="storyText.battery"></p>
                             </div>
 
                             <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                                <div class="bg-surface-container-lowest p-4 rounded-lg border border-outline-variant shadow-sm flex items-start gap-4">
-                                    <div class="bg-primary-fixed p-3 rounded-full text-on-primary-fixed shrink-0">
+                                <div class="group bg-white p-5 rounded-2xl border border-outline-variant/30 shadow-xs hover:shadow-md hover:-translate-y-0.5 transition-all duration-300 flex items-start gap-4">
+                                    <div class="bg-gradient-to-br from-primary-fixed to-secondary-fixed/50 p-3.5 rounded-xl text-on-primary-fixed shrink-0 group-hover:scale-110 transition-transform duration-300">
                                         <span class="material-symbols-outlined block text-xl">hourglass_empty</span>
                                     </div>
                                     <div>
-                                        <div class="text-label-caps text-on-surface-variant text-xs">The 4,000 Weeks</div>
-                                        <p class="text-on-surface-variant font-body-md mt-1" x-text="storyText.weeks"></p>
+                                        <div class="text-label-caps text-on-surface-variant text-[10px] uppercase tracking-wider mb-1">The 4,000 Weeks</div>
+                                        <p class="text-on-surface-variant font-body-md leading-relaxed" x-text="storyText.weeks"></p>
                                     </div>
                                 </div>
-                                <div class="bg-surface-container-lowest p-4 rounded-lg border border-outline-variant shadow-sm flex items-start gap-4">
-                                    <div class="bg-error/10 p-3 rounded-full text-error shrink-0">
+                                <div class="group bg-white p-5 rounded-2xl border border-outline-variant/30 shadow-xs hover:shadow-md hover:-translate-y-0.5 transition-all duration-300 flex items-start gap-4">
+                                    <div class="bg-gradient-to-br from-error/20 to-error/5 p-3.5 rounded-xl text-error shrink-0 group-hover:scale-110 transition-transform duration-300">
                                         <span class="material-symbols-outlined block text-xl">favorite</span>
                                     </div>
                                     <div>
-                                        <div class="text-label-caps text-on-surface-variant text-xs">Biological Engine</div>
-                                        <p class="text-on-surface-variant font-body-md mt-1" x-text="storyText.engine"></p>
+                                        <div class="text-label-caps text-on-surface-variant text-[10px] uppercase tracking-wider mb-1">Biological Engine</div>
+                                        <p class="text-on-surface-variant font-body-md leading-relaxed" x-text="storyText.engine"></p>
                                     </div>
                                 </div>
-                                <div class="bg-surface-container-lowest p-4 rounded-lg border border-outline-variant shadow-sm flex items-start gap-4">
-                                    <div class="bg-primary-fixed p-3 rounded-full text-on-primary-fixed shrink-0">
+                                <div class="group bg-white p-5 rounded-2xl border border-outline-variant/30 shadow-xs hover:shadow-md hover:-translate-y-0.5 transition-all duration-300 flex items-start gap-4">
+                                    <div class="bg-gradient-to-br from-primary-fixed to-secondary-fixed/50 p-3.5 rounded-xl text-on-primary-fixed shrink-0 group-hover:scale-110 transition-transform duration-300">
                                         <span class="material-symbols-outlined block text-xl">bedtime</span>
                                     </div>
                                     <div>
-                                        <div class="text-label-caps text-on-surface-variant text-xs">Time Spent Sleeping</div>
-                                        <p class="text-on-surface-variant font-body-md mt-1" x-text="storyText.sleep"></p>
+                                        <div class="text-label-caps text-on-surface-variant text-[10px] uppercase tracking-wider mb-1">Time Spent Sleeping</div>
+                                        <p class="text-on-surface-variant font-body-md leading-relaxed" x-text="storyText.sleep"></p>
                                     </div>
                                 </div>
-                                <div class="bg-surface-container-lowest p-4 rounded-lg border border-outline-variant shadow-sm flex items-start gap-4">
-                                    <div class="bg-primary-fixed p-3 rounded-full text-on-primary-fixed shrink-0">
+                                <div class="group bg-white p-5 rounded-2xl border border-outline-variant/30 shadow-xs hover:shadow-md hover:-translate-y-0.5 transition-all duration-300 flex items-start gap-4">
+                                    <div class="bg-gradient-to-br from-primary-fixed to-secondary-fixed/50 p-3.5 rounded-xl text-on-primary-fixed shrink-0 group-hover:scale-110 transition-transform duration-300">
                                         <span class="material-symbols-outlined block text-xl">rocket_launch</span>
                                     </div>
                                     <div>
-                                        <div class="text-label-caps text-on-surface-variant text-xs">Cosmic Journey</div>
-                                        <p class="text-on-surface-variant font-body-md mt-1" x-text="storyText.cosmic"></p>
+                                        <div class="text-label-caps text-on-surface-variant text-[10px] uppercase tracking-wider mb-1">Cosmic Journey</div>
+                                        <p class="text-on-surface-variant font-body-md leading-relaxed" x-text="storyText.cosmic"></p>
                                     </div>
                                 </div>
                             </div>
                         </div>
 
                         <!-- Person 2 Story (Difference Mode) -->
-                        <div x-show="mode === 'diff'" class="pt-8 border-t border-outline-variant">
-                            <h3 class="font-h3 text-on-surface mb-6 flex items-center gap-3">
-                                <span class="p-2 bg-secondary/10 rounded-xl">
+                        <div x-show="mode === 'diff'" class="pt-10 border-t border-outline-variant/30">
+                            <h3 class="font-h3 text-on-surface mb-8 flex items-center gap-3">
+                                <span class="p-2.5 bg-secondary/10 rounded-xl">
                                     <span class="material-symbols-outlined text-secondary block">auto_stories</span>
                                 </span>
                                 The Story of <span class="text-secondary ml-1" x-text="p2Name || 'Person 2'"></span>
                             </h3>
 
                             <!-- Life Battery P2 -->
-                            <div class="bg-surface-container-lowest p-5 rounded-lg border border-outline-variant shadow-sm mb-4">
-                                <div class="flex justify-between items-end mb-3">
+                            <div class="bg-white p-6 rounded-2xl border border-outline-variant/30 shadow-xs mb-6">
+                                <div class="flex justify-between items-end mb-4">
                                     <div>
-                                        <div class="text-label-caps text-on-surface-variant text-xs">Life Progress</div>
-                                        <div class="text-2xl font-black text-secondary" x-text="result.p2Story?.battery + '%'"></div>
+                                        <div class="text-label-caps text-on-surface-variant text-[10px] uppercase tracking-wider mb-1">Life Progress</div>
+                                        <div class="text-3xl font-black text-secondary" x-text="result.p2Story?.battery + '%'"></div>
                                     </div>
                                     <div class="text-on-surface-variant text-xs italic">Based on 80-year lifespan</div>
                                 </div>
-                                <div class="h-3 bg-surface-container-low border border-outline-variant rounded-full overflow-hidden mb-3">
-                                    <div class="h-full bg-gradient-to-r from-secondary to-primary-fixed transition-all duration-1000"
-                                         :style="`width: ${result.p2Story?.battery || 0}%`"></div>
+                                <div class="h-4 bg-surface-container-low border border-outline-variant/30 rounded-full overflow-hidden mb-4 relative">
+                                    <div class="h-full bg-gradient-to-r from-secondary via-secondary-container to-primary-fixed transition-all duration-1000 ease-out relative"
+                                         :style="`width: ${result.p2Story?.battery || 0}%`">
+                                         <div class="absolute inset-0 bg-white/20 animate-[shimmer_2s_linear_infinite]" style="background-image: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);"></div>
+                                    </div>
                                 </div>
-                                <p class="text-on-surface-variant font-body-md" x-text="p2StoryText.battery"></p>
+                                <p class="text-on-surface-variant font-body-md leading-relaxed" x-text="p2StoryText.battery"></p>
                             </div>
 
                             <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                                <div class="bg-surface-container-lowest p-4 rounded-lg border border-outline-variant shadow-sm flex items-start gap-4">
-                                    <div class="bg-primary-fixed p-3 rounded-full text-on-primary-fixed shrink-0">
+                                <div class="group bg-white p-5 rounded-2xl border border-outline-variant/30 shadow-xs hover:shadow-md hover:-translate-y-0.5 transition-all duration-300 flex items-start gap-4">
+                                    <div class="bg-gradient-to-br from-primary-fixed to-secondary-fixed/50 p-3.5 rounded-xl text-on-primary-fixed shrink-0 group-hover:scale-110 transition-transform duration-300">
                                         <span class="material-symbols-outlined block text-xl">hourglass_empty</span>
                                     </div>
                                     <div>
-                                        <div class="text-label-caps text-on-surface-variant text-xs">The 4,000 Weeks</div>
-                                        <p class="text-on-surface-variant font-body-md mt-1" x-text="p2StoryText.weeks"></p>
+                                        <div class="text-label-caps text-on-surface-variant text-[10px] uppercase tracking-wider mb-1">The 4,000 Weeks</div>
+                                        <p class="text-on-surface-variant font-body-md leading-relaxed" x-text="p2StoryText.weeks"></p>
                                     </div>
                                 </div>
-                                <div class="bg-surface-container-lowest p-4 rounded-lg border border-outline-variant shadow-sm flex items-start gap-4">
-                                    <div class="bg-error/10 p-3 rounded-full text-error shrink-0">
+                                <div class="group bg-white p-5 rounded-2xl border border-outline-variant/30 shadow-xs hover:shadow-md hover:-translate-y-0.5 transition-all duration-300 flex items-start gap-4">
+                                    <div class="bg-gradient-to-br from-error/20 to-error/5 p-3.5 rounded-xl text-error shrink-0 group-hover:scale-110 transition-transform duration-300">
                                         <span class="material-symbols-outlined block text-xl">favorite</span>
                                     </div>
                                     <div>
-                                        <div class="text-label-caps text-on-surface-variant text-xs">Biological Engine</div>
-                                        <p class="text-on-surface-variant font-body-md mt-1" x-text="p2StoryText.engine"></p>
+                                        <div class="text-label-caps text-on-surface-variant text-[10px] uppercase tracking-wider mb-1">Biological Engine</div>
+                                        <p class="text-on-surface-variant font-body-md leading-relaxed" x-text="p2StoryText.engine"></p>
                                     </div>
                                 </div>
-                                <div class="bg-surface-container-lowest p-4 rounded-lg border border-outline-variant shadow-sm flex items-start gap-4">
-                                    <div class="bg-primary-fixed p-3 rounded-full text-on-primary-fixed shrink-0">
+                                <div class="group bg-white p-5 rounded-2xl border border-outline-variant/30 shadow-xs hover:shadow-md hover:-translate-y-0.5 transition-all duration-300 flex items-start gap-4">
+                                    <div class="bg-gradient-to-br from-primary-fixed to-secondary-fixed/50 p-3.5 rounded-xl text-on-primary-fixed shrink-0 group-hover:scale-110 transition-transform duration-300">
                                         <span class="material-symbols-outlined block text-xl">bedtime</span>
                                     </div>
                                     <div>
-                                        <div class="text-label-caps text-on-surface-variant text-xs">Time Spent Sleeping</div>
-                                        <p class="text-on-surface-variant font-body-md mt-1" x-text="p2StoryText.sleep"></p>
+                                        <div class="text-label-caps text-on-surface-variant text-[10px] uppercase tracking-wider mb-1">Time Spent Sleeping</div>
+                                        <p class="text-on-surface-variant font-body-md leading-relaxed" x-text="p2StoryText.sleep"></p>
                                     </div>
                                 </div>
-                                <div class="bg-surface-container-lowest p-4 rounded-lg border border-outline-variant shadow-sm flex items-start gap-4">
-                                    <div class="bg-primary-fixed p-3 rounded-full text-on-primary-fixed shrink-0">
+                                <div class="group bg-white p-5 rounded-2xl border border-outline-variant/30 shadow-xs hover:shadow-md hover:-translate-y-0.5 transition-all duration-300 flex items-start gap-4">
+                                    <div class="bg-gradient-to-br from-primary-fixed to-secondary-fixed/50 p-3.5 rounded-xl text-on-primary-fixed shrink-0 group-hover:scale-110 transition-transform duration-300">
                                         <span class="material-symbols-outlined block text-xl">rocket_launch</span>
                                     </div>
                                     <div>
-                                        <div class="text-label-caps text-on-surface-variant text-xs">Cosmic Journey</div>
-                                        <p class="text-on-surface-variant font-body-md mt-1" x-text="p2StoryText.cosmic"></p>
+                                        <div class="text-label-caps text-on-surface-variant text-[10px] uppercase tracking-wider mb-1">Cosmic Journey</div>
+                                        <p class="text-on-surface-variant font-body-md leading-relaxed" x-text="p2StoryText.cosmic"></p>
                                     </div>
                                 </div>
                             </div>
@@ -450,84 +476,57 @@
             </section>
 
             <!-- SEO Article -->
-            <article class="bg-surface-container-lowest rounded-xl shadow-sm border border-outline-variant p-6 sm:p-8">
-                
-                <section class="mb-stack-md">
-                    <p class="text-on-surface-variant font-body-md mb-4">
-                        Age calculation might seem straightforward at first glance, but it involves several mathematical complexities. Our <strong>Exact Age Calculator</strong> is designed to handle these nuances, providing you with a high-precision breakdown of your journey through time. But how exactly does it work, and why is this level of detail important?
+            <article class="bg-surface-container-lowest rounded-3xl shadow-card border border-outline-variant/40 p-6 sm:p-10">
+                <section class="mb-10">
+                    <p class="text-on-surface-variant font-body-md mb-4 leading-relaxed">
+                        Age calculation might seem straightforward at first glance, but it involves several mathematical complexities. Our <strong>Exact Age Calculator</strong> is designed to handle these nuances, providing you with a high-precision breakdown of your journey through time.
                     </p>
-                    <p class="text-on-surface-variant font-body-md mb-4">
-                        The most common method used globally is the Western system, where a person's age increases on their birthday. However, calculating the time between two dates requires accounting for <strong>leap years</strong> (which add an extra day every four years) and the varying lengths of months (ranging from 28 to 31 days). Our tool uses a precise algorithm that calculates the difference between your date of birth and the target date, normalizing these variables to give you an accurate count of years, months, and days.
+                    <p class="text-on-surface-variant font-body-md leading-relaxed">
+                        The most common method used globally is the Western system, where a person's age increases on their birthday. However, calculating the time between two dates requires accounting for <strong>leap years</strong> and the varying lengths of months. Our tool uses a precise algorithm that normalizes these variables.
                     </p>
                 </section>
 
-                <section class="mb-stack-md">
-                    <h3 class="font-h3 text-on-surface mb-3">How Our Age Calculator Works</h3>
-                    <p class="text-on-surface-variant font-body-md mb-4">
+                <section class="mb-10">
+                    <h3 class="font-h3 text-on-surface mb-4">How Our Age Calculator Works</h3>
+                    <p class="text-on-surface-variant font-body-md mb-4 leading-relaxed">
                         When you enter your birth date, our system first determines the total number of days lived. From there, it works backward to extract the years, then the remaining months, and finally the days. Unlike simple subtraction, which might lead to errors in leap years, our system verifies each month's boundary.
                     </p>
-                    <p class="text-on-surface-variant font-body-md">
-                        For example, if you were born on February 29th during a leap year, the calculator understands that in non-leap years, your "legal" birthday may fall on March 1st or February 28th, depending on your local jurisdiction. We provide the raw data so you can see exactly where you stand in the chronological timeline.
-                    </p>
                 </section>
 
-                <section class="mb-stack-md">
-                    <h3 class="font-h3 text-on-surface mb-3">Legal and Cultural Significance of Age</h3>
-                    <p class="text-on-surface-variant font-body-md mb-4">
-                        Age is more than just a number; it is a critical legal marker. Around the world, reaching certain "milestone ages" grants individuals specific rights and responsibilities.
-                    </p>
-                    <ul class="list-disc pl-5 text-on-surface-variant font-body-md space-y-3 mb-4">
-                        <li><strong>Age of Majority:</strong> In most countries, this is 18 years old, the point at which a person is legally considered an adult, capable of voting, signing contracts, and making independent decisions.</li>
-                        <li><strong>Retirement Eligibility:</strong> Pension systems and social security benefits are strictly tied to reaching a specific age, often between 60 and 67.</li>
-                        <li><strong>Driving Privileges:</strong> Most jurisdictions require a minimum age of 16 or 17 to obtain a learner's permit or driver's license.</li>
-                        <li><strong>Educational Milestones:</strong> School enrollment and graduation requirements often depend on being a certain age by a specific cutoff date.</li>
+                <section class="mb-10">
+                    <h3 class="font-h3 text-on-surface mb-4">Legal and Cultural Significance of Age</h3>
+                    <ul class="list-disc pl-6 text-on-surface-variant font-body-md space-y-3 mb-4">
+                        <li><strong>Age of Majority:</strong> In most countries, this is 18 years old, the point at which a person is legally considered an adult.</li>
+                        <li><strong>Retirement Eligibility:</strong> Pension systems are strictly tied to reaching a specific age, often between 60 and 67.</li>
+                        <li><strong>Driving Privileges:</strong> Most jurisdictions require a minimum age of 16 or 17 to obtain a driver's license.</li>
+                        <li><strong>Educational Milestones:</strong> School enrollment often depends on being a certain age by a specific cutoff date.</li>
                     </ul>
-                    <p class="text-on-surface-variant font-body-md">
-                        Cultural differences also exist. In some East Asian cultures, a person is considered one year old at birth (the "Korean Age" system), and their age increases on New Year's Day rather than their actual birthday. While our tool uses the international standard, understanding your exact chronological age is vital for global communication and documentation.
+                </section>
+
+                <section class="mb-10">
+                    <h3 class="font-h3 text-on-surface mb-4">Beyond Years: The "Life Story" Statistics</h3>
+                    <p class="text-on-surface-variant font-body-md mb-4 leading-relaxed">
+                        We wanted to go beyond just numbers. Our "Life Story" tab translates your age into biological and cosmic terms. Did you know that by age 30, your heart has beaten over 1.1 billion times?
                     </p>
                 </section>
 
-                <section class="mb-stack-md">
-                    <h3 class="font-h3 text-on-surface mb-3">Beyond Years: The "Life Story" Statistics</h3>
-                    <p class="text-on-surface-variant font-body-md mb-4">
-                        We wanted to go beyond just numbers. Our "Life Story" tab translates your age into biological and cosmic terms. Did you know that by age 30, your heart has beaten over 1.1 billion times? Or that you've traveled billions of miles through space as the Earth orbits the Sun?
-                    </p>
-                    <p class="text-on-surface-variant font-body-md">
-                        These statistics serve as a reminder of the incredible biological machine that is the human body and our place in the universe. By visualizing your "Life Battery" (based on an average 80-year lifespan), we hope to provide a perspective that encourages you to make the most of your time.
-                    </p>
-                </section>
-
-                <section class="mb-stack-md">
-                    <h3 class="font-h3 text-on-surface mb-3">Frequently Asked Questions</h3>
-                    <div class="space-y-4">
-                        <details class="group border border-outline-variant rounded-lg">
-                            <summary class="flex items-center justify-between cursor-pointer p-4 font-medium text-on-surface">
-                                How accurate is this age calculator?
-                                <span class="material-symbols-outlined text-secondary transition-transform group-open:rotate-180">expand_more</span>
+                <section>
+                    <h3 class="font-h3 text-on-surface mb-5">Frequently Asked Questions</h3>
+                    <div class="space-y-3">
+                        @foreach([
+                            ['q' => 'How accurate is this age calculator?', 'a' => 'Our calculator accounts for leap years, varying month lengths, and provides real-time precision down to the second.'],
+                            ['q' => 'Can I calculate the age difference between two people?', 'a' => 'Yes! Switch to "Age Difference" mode using the toggle at the top of the calculator.'],
+                            ['q' => 'What is the 4,000 weeks concept?', 'a' => 'The 4,000 weeks concept suggests that a typical human life lasts about 4,000 weeks. We use this as a benchmark in our "Life Story" tab.'],
+                            ['q' => 'Why is my zodiac sign different on other sites?', 'a' => 'We use the tropical zodiac dates, which are the most common in Western astrology.'],
+                        ] as $faq)
+                        <details class="group bg-white border border-outline-variant/30 rounded-xl overflow-hidden">
+                            <summary class="flex items-center justify-between cursor-pointer p-5 font-medium text-on-surface hover:bg-surface-container-low/50 transition-colors">
+                                {{ $faq['q'] }}
+                                <span class="material-symbols-outlined text-secondary transition-transform duration-300 group-open:rotate-180">expand_more</span>
                             </summary>
-                            <p class="px-4 pb-4 text-on-surface-variant font-body-md">Our calculator accounts for leap years, varying month lengths, and provides real-time precision down to the second. It is one of the most accurate age calculators available online, utilizing modern JavaScript date objects and high-precision math.</p>
+                            <p class="px-5 pb-5 text-on-surface-variant font-body-md leading-relaxed">{{ $faq['a'] }}</p>
                         </details>
-                        <details class="group border border-outline-variant rounded-lg">
-                            <summary class="flex items-center justify-between cursor-pointer p-4 font-medium text-on-surface">
-                                Can I calculate the age difference between two people?
-                                <span class="material-symbols-outlined text-secondary transition-transform group-open:rotate-180">expand_more</span>
-                            </summary>
-                            <p class="px-4 pb-4 text-on-surface-variant font-body-md">Yes! Switch to "Age Difference" mode using the toggle at the top of the calculator. This is perfect for comparing siblings, friends, or even historical figures to see exactly how much older one is than the other.</p>
-                        </details>
-                        <details class="group border border-outline-variant rounded-lg">
-                            <summary class="flex items-center justify-between cursor-pointer p-4 font-medium text-on-surface">
-                                What is the 4,000 weeks concept?
-                                <span class="material-symbols-outlined text-secondary transition-transform group-open:rotate-180">expand_more</span>
-                            </summary>
-                            <p class="px-4 pb-4 text-on-surface-variant font-body-md">The 4,000 weeks concept, popularized by Oliver Burkeman, suggests that a typical human life lasts about 4,000 weeks. We use this as a benchmark in our "Life Story" tab to show you how many weeks you've lived and how many remain, emphasizing the value of time management.</p>
-                        </details>
-                        <details class="group border border-outline-variant rounded-lg">
-                            <summary class="flex items-center justify-between cursor-pointer p-4 font-medium text-on-surface">
-                                Why is my zodiac sign different on other sites?
-                                <span class="material-symbols-outlined text-secondary transition-transform group-open:rotate-180">expand_more</span>
-                            </summary>
-                            <p class="px-4 pb-4 text-on-surface-variant font-body-md">We use the tropical zodiac dates, which are the most common in Western astrology. However, some systems use sidereal dates or have different cut-offs for "cusp" birthdays. We provide the most widely accepted standard sign.</p>
-                        </details>
+                        @endforeach
                     </div>
                 </section>
             </article>
@@ -554,27 +553,73 @@
               }]
             }
             </script>
+
             <!-- Bottom Ad Placeholder -->
-            <div class="adsense-slot mx-auto my-base" style="display:none;">
-                <!-- AdSense Slot (Bottom) -->
-            </div>
+            <div class="adsense-slot mx-auto my-base" style="display:none;"></div>
         </div>
 
         <!-- Right Column (1/3) -->
         <div class="lg:w-1/3 flex flex-col gap-stack-lg order-1 lg:order-2">
-            
             <!-- Sidebar Ad Placeholder -->
-            <div class="adsense-slot mx-auto my-base" style="display:none;">
-                <!-- AdSense Slot (Sidebar) -->
-            </div>
+            <div class="adsense-slot mx-auto my-base" style="display:none;"></div>
+
             <div class="sticky top-24 flex flex-col gap-stack-lg">
-                <div class="bg-surface-container-lowest rounded-xl shadow-sm border border-outline-variant p-6">
-                    <h3 class="font-h3 text-on-surface mb-4 pb-2 border-b border-outline-variant">Navigation</h3>
-                    <ul class="space-y-3">
-                        <li><a class="text-on-surface-variant hover:text-secondary hover:underline transition-all" href="{{ route('home') }}">Home</a></li>
-                        <li><a class="text-on-surface-variant hover:text-secondary hover:underline transition-all" href="{{ route('about') }}">About Us</a></li>
-                        <li><a class="text-on-surface-variant hover:text-secondary hover:underline transition-all" href="{{ route('contact') }}">Contact</a></li>
+                <!-- Navigation Card -->
+                <div class="bg-surface-container-lowest rounded-2xl shadow-card border border-outline-variant/40 p-6" data-reveal="fade-up">
+                    <h3 class="font-h3 text-on-surface mb-4 pb-3 border-b border-outline-variant/30 flex items-center gap-2">
+                        <span class="material-symbols-outlined text-secondary text-lg">explore</span>
+                        Explore
+                    </h3>
+                    <ul class="space-y-1">
+                        <li><a href="{{ route('home') }}" class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-on-surface-variant hover:bg-surface-container-low hover:text-secondary transition-all duration-200">
+                            <span class="material-symbols-outlined text-lg">home</span> Home
+                        </a></li>
+                        <li><a href="{{ route('about') }}" class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-on-surface-variant hover:bg-surface-container-low hover:text-secondary transition-all duration-200">
+                            <span class="material-symbols-outlined text-lg">info</span> About Us
+                        </a></li>
+                        <li><a href="{{ route('contact') }}" class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-on-surface-variant hover:bg-surface-container-low hover:text-secondary transition-all duration-200">
+                            <span class="material-symbols-outlined text-lg">mail</span> Contact
+                        </a></li>
                     </ul>
+                </div>
+
+                <!-- Did You Know Card -->
+                <div class="bg-gradient-to-br from-secondary/5 to-primary-fixed/10 rounded-2xl border border-secondary/10 p-6 relative overflow-hidden" data-reveal="fade-up" data-reveal-delay="100">
+                    <div class="absolute -top-6 -right-6 w-24 h-24 rounded-full bg-secondary/5 blur-2xl"></div>
+                    <div class="relative">
+                        <div class="flex items-center gap-2 mb-4">
+                            <span class="material-symbols-outlined text-secondary">lightbulb</span>
+                            <h4 class="font-h3 text-on-surface">Did You Know?</h4>
+                        </div>
+                        <p class="text-on-surface-variant text-sm leading-relaxed mb-4">
+                            The average human heart beats approximately 100,000 times per day. Over a lifetime of 80 years, that's nearly 3 billion beats!
+                        </p>
+                        <div class="text-xs text-on-surface-variant/60">Updated daily with new facts.</div>
+                    </div>
+                </div>
+
+                <!-- Related Tool Teaser -->
+                <div class="bg-surface-container-lowest rounded-2xl shadow-card border border-outline-variant/40 p-6" data-reveal="fade-up" data-reveal-delay="200">
+                    <h3 class="font-h3 text-on-surface mb-4 flex items-center gap-2">
+                        <span class="material-symbols-outlined text-secondary text-lg">category</span>
+                        Coming Soon
+                    </h3>
+                    <div class="space-y-3">
+                        <div class="flex items-center gap-3 p-3 rounded-xl bg-surface-container-low/50 border border-outline-variant/20">
+                            <span class="material-symbols-outlined text-on-surface-variant/40">schedule</span>
+                            <div>
+                                <div class="text-sm font-medium text-on-surface">Date Duration Calculator</div>
+                                <div class="text-xs text-on-surface-variant">Find days between any two dates</div>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-3 p-3 rounded-xl bg-surface-container-low/50 border border-outline-variant/20">
+                            <span class="material-symbols-outlined text-on-surface-variant/40">timelapse</span>
+                            <div>
+                                <div class="text-sm font-medium text-on-surface">Time Zone Converter</div>
+                                <div class="text-xs text-on-surface-variant">Compare times across the globe</div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -585,7 +630,7 @@
 <script>
     function ageCalculator() {
         return {
-            mode: 'age', // 'age' or 'diff'
+            mode: 'age',
             p1Name: '',
             p2Name: '',
             dob: '',
@@ -594,42 +639,15 @@
             showStory: false,
             activeTab: 'results',
             result: {
-                years: 0,
-                months: 0,
-                days: 0,
-                hours: 0,
-                minutes: 0,
-                seconds: 0,
-                totalMonths: 0,
-                totalWeeks: 0,
-                totalDays: 0,
-                totalHours: 0,
-                totalMinutes: 0,
-                totalSeconds: 0,
-                birthDay: '',
-                nextBirthdayCountdown: '',
-                nextBirthdayDay: '',
-                halfBirthday: '',
-                p2HalfBirthday: '',
-                p1History: 'Loading...',
-                p2History: 'Loading...',
-                zodiac: '',
-                p2Zodiac: '',
-                leapYears: 0,
-                comparisonText: '',
-                p1AgeSummary: '',
-                p2AgeSummary: '',
-                p2BirthDay: '',
-                p2LeapYears: 0,
-                story: {
-                    battery: 0,
-                    weeksLived: 0,
-                    weeksLeft: 0,
-                    heartbeats: 0,
-                    breaths: 0,
-                    yearsSleeping: 0,
-                    cosmicMiles: 0
-                }
+                years: 0, months: 0, days: 0, hours: 0, minutes: 0, seconds: 0,
+                totalMonths: 0, totalWeeks: 0, totalDays: 0, totalHours: 0, totalMinutes: 0, totalSeconds: 0,
+                birthDay: '', nextBirthdayCountdown: '', nextBirthdayDay: '', halfBirthday: '', p2HalfBirthday: '',
+                p1History: 'Loading...', p2History: 'Loading...',
+                zodiac: '', p2Zodiac: '', leapYears: 0,
+                comparisonText: '', p1AgeSummary: '', p2AgeSummary: '',
+                p2BirthDay: '', p2LeapYears: 0,
+                story: { battery: 0, weeksLived: 0, weeksLeft: 0, heartbeats: 0, breaths: 0, yearsSleeping: 0, cosmicMiles: 0 },
+                p2Story: { battery: 0, weeksLived: 0, weeksLeft: 0, heartbeats: 0, breaths: 0, yearsSleeping: 0, cosmicMiles: 0 }
             },
             summaryText: '',
             timer: null,
@@ -643,7 +661,7 @@
                 "Whispers of history are being gathered...",
                 "Retrieving forgotten moments from the archives..."
             ],
-            
+
             resetData() {
                 this.showResults = false;
                 this.p1Name = '';
@@ -656,33 +674,15 @@
                     birthDay: '', nextBirthdayCountdown: '', nextBirthdayDay: '', halfBirthday: '', p2HalfBirthday: '',
                     p1History: '', p2History: '', zodiac: '', p2Zodiac: '', leapYears: 0,
                     comparisonText: '', p1AgeSummary: '', p2AgeSummary: '', p2BirthDay: '', p2LeapYears: 0,
-                    story: {
-                        battery: 0, weeksLived: 0, weeksLeft: 0, heartbeats: 0, breaths: 0,
-                        yearsSleeping: 0, cosmicMiles: 0
-                    },
-                    p2Story: {
-                        battery: 0, weeksLived: 0, weeksLeft: 0, heartbeats: 0, breaths: 0,
-                        yearsSleeping: 0, cosmicMiles: 0
-                    }
+                    story: { battery: 0, weeksLived: 0, weeksLeft: 0, heartbeats: 0, breaths: 0, yearsSleeping: 0, cosmicMiles: 0 },
+                    p2Story: { battery: 0, weeksLived: 0, weeksLeft: 0, heartbeats: 0, breaths: 0, yearsSleeping: 0, cosmicMiles: 0 }
                 };
                 this.storyText = { battery: '', weeks: '', engine: '', sleep: '', cosmic: '' };
                 this.p2StoryText = { battery: '', weeks: '', engine: '', sleep: '', cosmic: '' };
                 if (this.timer) clearInterval(this.timer);
             },
-            storyText: {
-                battery: '',
-                weeks: '',
-                engine: '',
-                sleep: '',
-                cosmic: ''
-            },
-            p2StoryText: {
-                battery: '',
-                weeks: '',
-                engine: '',
-                sleep: '',
-                cosmic: ''
-            },
+            storyText: { battery: '', weeks: '', engine: '', sleep: '', cosmic: '' },
+            p2StoryText: { battery: '', weeks: '', engine: '', sleep: '', cosmic: '' },
             narratives: {
                 battery: [
                     "Your life battery is at {val}%. The best chapters are yet to be written.",
@@ -692,7 +692,7 @@
                     "At {val}% capacity, you've already experienced more than most explorers in history.",
                     "Your internal clock shows {val}% progress. Every percent is a collection of triumphs.",
                     "The battery of your life is at {val}%. Don't just count the percent, make the percent count.",
-                    "You've used {val}% of your available time. It’s been an incredible journey so far.",
+                    "You've used {val}% of your available time. It's been an incredible journey so far.",
                     "With {val}% of your battery used, you are now entering your high-performance era.",
                     "Your life progress stands at {val}%. The architecture of your future is still in your hands.",
                     "At {val}%, you are a seasoned traveler in the landscape of time.",
@@ -826,46 +826,33 @@
                     alert("Please provide both dates.");
                     return;
                 }
-
                 this.showResults = true;
                 this.fetchHistory(this.dob, 1);
                 if (this.mode === 'diff') this.fetchHistory(this.targetDate, 2);
-                
                 this.updateCalculation();
                 this.generateStory();
-
-                // Keep timer running for real-time updates
                 if (this.timer) clearInterval(this.timer);
-                this.timer = setInterval(() => {
-                    this.updateCalculation();
-                }, 1000);
+                this.timer = setInterval(() => this.updateCalculation(), 1000);
             },
 
             async fetchHistory(date, person) {
                 if (!date) return;
-                
                 this.historyLoading = true;
                 this.loadingQuote = this.historyQuotes[Math.floor(Math.random() * this.historyQuotes.length)];
-                
                 if (person === 1) this.result.p1History = '';
                 else this.result.p2History = '';
-                
-                // 2 second dramatic delay
                 await new Promise(resolve => setTimeout(resolve, 2000));
-                
                 const d = new Date(date);
                 const month = d.getMonth() + 1;
                 const day = d.getDate();
                 try {
                     const response = await fetch(`/api/history/${month}/${day}`);
                     const data = await response.json();
-                    
                     this.historyLoading = false;
                     this.typeText(person === 1 ? 'p1History' : 'p2History', data.text);
                 } catch (e) {
                     this.historyLoading = false;
-                    const fallback = "On this day, something remarkable happened in history!";
-                    this.typeText(person === 1 ? 'p1History' : 'p2History', fallback);
+                    this.typeText(person === 1 ? 'p1History' : 'p2History', "On this day, something remarkable happened in history!");
                 }
             },
 
@@ -879,49 +866,33 @@
                 }, 20);
             },
 
-            // Helper to count leap years between two dates
             countLeapYears(start, end) {
                 let count = 0;
                 const startYear = start.getFullYear();
                 const endYear = end.getFullYear();
                 for (let y = startYear; y <= endYear; y++) {
                     if ((y % 4 === 0 && y % 100 !== 0) || (y % 400 === 0)) {
-                        // Check if the leap day actually happened in the range
                         const leapDay = new Date(y, 1, 29);
-                        if (leapDay >= start && leapDay <= end) {
-                            count++;
-                        }
+                        if (leapDay >= start && leapDay <= end) count++;
                     }
                 }
                 return count;
             },
 
-            // Helper to get Y-M-D-H-M-S breakdown between two dates
             getDiff(d1, d2) {
                 let start = d1 < d2 ? d1 : d2;
                 let end = d1 < d2 ? d2 : d1;
-
                 let years = end.getFullYear() - start.getFullYear();
                 let months = end.getMonth() - start.getMonth();
                 let days = end.getDate() - start.getDate();
-
-                if (days < 0) {
-                    months--;
-                    const prevMonth = new Date(end.getFullYear(), end.getMonth(), 0);
-                    days += prevMonth.getDate();
-                }
-                if (months < 0) {
-                    years--;
-                    months += 12;
-                }
-
+                if (days < 0) { months--; const prevMonth = new Date(end.getFullYear(), end.getMonth(), 0); days += prevMonth.getDate(); }
+                if (months < 0) { years--; months += 12; }
                 const diffMs = end - start;
                 const totalSeconds = Math.floor(diffMs / 1000);
                 const totalMinutes = Math.floor(totalSeconds / 60);
                 const totalHours = Math.floor(totalMinutes / 60);
                 const totalDays = Math.floor(totalHours / 24);
                 const totalWeeks = Math.floor(totalDays / 7);
-
                 return {
                     years, months, days,
                     hours: end.getHours() - start.getHours() < 0 ? 24 + (end.getHours() - start.getHours()) : end.getHours() - start.getHours(),
@@ -936,90 +907,29 @@
                 const now = new Date();
                 const d1 = new Date(this.dob + 'T00:00:00');
                 const d2 = this.mode === 'age' ? new Date(this.targetDate + (this.targetDate === now.toISOString().split('T')[0] ? 'T' + now.toTimeString().split(' ')[0] : 'T23:59:59')) : new Date(this.targetDate + 'T00:00:00');
-
                 if (this.mode === 'age') {
                     const diff = this.getDiff(d1, d2);
                     const birthDay = d1.toLocaleDateString('en-US', { weekday: 'long' });
                     const leapYears = this.countLeapYears(d1, d2);
-                    
-                    // Next Birthday
                     let nextBday = new Date(now.getFullYear(), d1.getMonth(), d1.getDate());
                     if (nextBday < now) nextBday.setFullYear(now.getFullYear() + 1);
                     const nextBirthdayDay = nextBday.toLocaleDateString('en-US', { weekday: 'long' });
                     const nbDiff = this.getDiff(now, nextBday);
                     let nextBirthdayCountdown = `${nbDiff.months} months and ${nbDiff.days} days left`;
                     if (nbDiff.totalDays === 0) nextBirthdayCountdown = "Today is your Birthday! 🎉";
-
                     let halfBday = new Date(d1);
                     halfBday.setMonth(halfBday.getMonth() + 6);
-
-                    this.result = {
-                        ...this.result,
-                        ...diff,
-                        birthDay,
-                        leapYears,
-                        nextBirthdayCountdown,
-                        nextBirthdayDay,
-                        halfBirthday: halfBday.toLocaleDateString('en-US', { month: 'long', day: 'numeric' }),
-                        zodiac: this.getZodiac(d1.getDate(), d1.getMonth()),
-                        story: {
-                            battery: ((diff.totalDays / (80 * 365.25)) * 100).toFixed(1),
-                            weeksLived: Math.floor(diff.totalWeeks).toLocaleString(),
-                            weeksLeft: Math.max(0, Math.floor((80 * 52.17) - diff.totalWeeks)).toLocaleString(),
-                            heartbeats: (diff.totalMinutes * 80).toLocaleString(),
-                            breaths: (diff.totalMinutes * 16).toLocaleString(),
-                            yearsSleeping: (diff.years * 0.33).toFixed(1),
-                            cosmicMiles: (diff.years * 584000000).toLocaleString()
-                        }
-                    };
+                    this.result = { ...this.result, ...diff, birthDay, leapYears, nextBirthdayCountdown, nextBirthdayDay, halfBirthday: halfBday.toLocaleDateString('en-US', { month: 'long', day: 'numeric' }), zodiac: this.getZodiac(d1.getDate(), d1.getMonth()), story: { battery: ((diff.totalDays / (80 * 365.25)) * 100).toFixed(1), weeksLived: Math.floor(diff.totalWeeks).toLocaleString(), weeksLeft: Math.max(0, Math.floor((80 * 52.17) - diff.totalWeeks)).toLocaleString(), heartbeats: (diff.totalMinutes * 80).toLocaleString(), breaths: (diff.totalMinutes * 16).toLocaleString(), yearsSleeping: (diff.years * 0.33).toFixed(1), cosmicMiles: (diff.years * 584000000).toLocaleString() } };
                     this.summaryText = `${diff.years} years, ${diff.months} months, ${diff.days} days, ${diff.hours} hours, ${diff.minutes} minutes, and ${diff.seconds} seconds`;
                 } else {
-                    // Difference Mode
                     const diff = this.getDiff(d1, d2);
                     const age1 = this.getDiff(d1, now);
                     const age2 = this.getDiff(d2, now);
-
                     const name1 = this.p1Name || 'Person 1';
                     const name2 = this.p2Name || 'Person 2';
-
-                    let halfBday1 = new Date(d1);
-                    halfBday1.setMonth(halfBday1.getMonth() + 6);
-                    let halfBday2 = new Date(d2);
-                    halfBday2.setMonth(halfBday2.getMonth() + 6);
-
-                    this.result = {
-                        ...this.result,
-                        ...diff,
-                        comparisonText: d1 < d2 ? `${name1} is older than ${name2}` : (d1 > d2 ? `${name2} is older than ${name1}` : "Both are the same age"),
-                        p1AgeSummary: `${age1.years}y ${age1.months}m ${age1.days}d`,
-                        p2AgeSummary: `${age2.years}y ${age2.months}m ${age2.days}d`,
-                        birthDay: d1.toLocaleDateString('en-US', { weekday: 'long' }),
-                        p2BirthDay: d2.toLocaleDateString('en-US', { weekday: 'long' }),
-                        leapYears: this.countLeapYears(d1, now),
-                        p2LeapYears: this.countLeapYears(d2, now),
-                        halfBirthday: halfBday1.toLocaleDateString('en-US', { month: 'long', day: 'numeric' }),
-                        p2HalfBirthday: halfBday2.toLocaleDateString('en-US', { month: 'long', day: 'numeric' }),
-                        zodiac: this.getZodiac(d1.getDate(), d1.getMonth()),
-                        p2Zodiac: this.getZodiac(d2.getDate(), d2.getMonth()),
-                        story: {
-                            battery: ((age1.totalDays / (80 * 365.25)) * 100).toFixed(1),
-                            weeksLived: Math.floor(age1.totalWeeks).toLocaleString(),
-                            weeksLeft: Math.max(0, Math.floor((80 * 52.17) - age1.totalWeeks)).toLocaleString(),
-                            heartbeats: (age1.totalMinutes * 80).toLocaleString(),
-                            breaths: (age1.totalMinutes * 16).toLocaleString(),
-                            yearsSleeping: (age1.years * 0.33).toFixed(1),
-                            cosmicMiles: (age1.years * 584000000).toLocaleString()
-                        },
-                        p2Story: {
-                            battery: ((age2.totalDays / (80 * 365.25)) * 100).toFixed(1),
-                            weeksLived: Math.floor(age2.totalWeeks).toLocaleString(),
-                            weeksLeft: Math.max(0, Math.floor((80 * 52.17) - age2.totalWeeks)).toLocaleString(),
-                            heartbeats: (age2.totalMinutes * 80).toLocaleString(),
-                            breaths: (age2.totalMinutes * 16).toLocaleString(),
-                            yearsSleeping: (age2.years * 0.33).toFixed(1),
-                            cosmicMiles: (age2.years * 584000000).toLocaleString()
-                        }
-                    };
+                    let halfBday1 = new Date(d1); halfBday1.setMonth(halfBday1.getMonth() + 6);
+                    let halfBday2 = new Date(d2); halfBday2.setMonth(halfBday2.getMonth() + 6);
+                    this.result = { ...this.result, ...diff, comparisonText: d1 < d2 ? `${name1} is older than ${name2}` : (d1 > d2 ? `${name2} is older than ${name1}` : "Both are the same age"), p1AgeSummary: `${age1.years}y ${age1.months}m ${age1.days}d`, p2AgeSummary: `${age2.years}y ${age2.months}m ${age2.days}d`, birthDay: d1.toLocaleDateString('en-US', { weekday: 'long' }), p2BirthDay: d2.toLocaleDateString('en-US', { weekday: 'long' }), leapYears: this.countLeapYears(d1, now), p2LeapYears: this.countLeapYears(d2, now), halfBirthday: halfBday1.toLocaleDateString('en-US', { month: 'long', day: 'numeric' }), p2HalfBirthday: halfBday2.toLocaleDateString('en-US', { month: 'long', day: 'numeric' }), zodiac: this.getZodiac(d1.getDate(), d1.getMonth()), p2Zodiac: this.getZodiac(d2.getDate(), d2.getMonth()), story: { battery: ((age1.totalDays / (80 * 365.25)) * 100).toFixed(1), weeksLived: Math.floor(age1.totalWeeks).toLocaleString(), weeksLeft: Math.max(0, Math.floor((80 * 52.17) - age1.totalWeeks)).toLocaleString(), heartbeats: (age1.totalMinutes * 80).toLocaleString(), breaths: (age1.totalMinutes * 16).toLocaleString(), yearsSleeping: (age1.years * 0.33).toFixed(1), cosmicMiles: (age1.years * 584000000).toLocaleString() }, p2Story: { battery: ((age2.totalDays / (80 * 365.25)) * 100).toFixed(1), weeksLived: Math.floor(age2.totalWeeks).toLocaleString(), weeksLeft: Math.max(0, Math.floor((80 * 52.17) - age2.totalWeeks)).toLocaleString(), heartbeats: (age2.totalMinutes * 80).toLocaleString(), breaths: (age2.totalMinutes * 16).toLocaleString(), yearsSleeping: (age2.years * 0.33).toFixed(1), cosmicMiles: (age2.years * 584000000).toLocaleString() } };
                     this.summaryText = `${diff.years} years, ${diff.months} months, ${diff.days} days, ${diff.hours} hours, ${diff.minutes} minutes, and ${diff.seconds} seconds`;
                 }
             },
@@ -1037,14 +947,11 @@
             generateStory() {
                 const story = this.result.story;
                 const years = this.result.years;
-                
                 this.storyText.battery = this.getStoryNarrative('battery', { val: story.battery });
                 this.storyText.weeks = this.getStoryNarrative('weeks', { val: story.weeksLeft, lived: story.weeksLived });
                 this.storyText.engine = this.getStoryNarrative('engine', { val: story.heartbeats, breaths: story.breaths });
                 this.storyText.sleep = this.getStoryNarrative('sleep', { val: story.yearsSleeping });
                 this.storyText.cosmic = this.getStoryNarrative('cosmic', { val: story.cosmicMiles, years: years });
-
-                // Person 2 story (Difference Mode)
                 if (this.mode === 'diff' && this.result.p2Story) {
                     const p2 = this.result.p2Story;
                     this.p2StoryText.battery = this.getStoryNarrative('battery', { val: p2.battery });
@@ -1069,5 +976,9 @@
 </script>
 <style>
     [x-cloak] { display: none !important; }
+    @keyframes shimmer {
+        0% { transform: translateX(-100%); }
+        100% { transform: translateX(100%); }
+    }
 </style>
 @endpush

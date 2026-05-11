@@ -55,11 +55,17 @@
     --color-on-primary-fixed: #131b2e;
     --color-on-background: #191c1e;
 
+    /* Accent / Semantic */
+    --color-accent: #0f172a;
+    --color-accent-light: #e0e7ff;
+    --color-success: #059669;
+
     /* Border Radius */
-    --radius-default: 0.125rem;
-    --radius-lg: 0.25rem;
-    --radius-xl: 0.5rem;
-    --radius-full: 0.75rem;
+    --radius-default: 0.5rem;
+    --radius-lg: 0.75rem;
+    --radius-xl: 1rem;
+    --radius-2xl: 1.5rem;
+    --radius-full: 9999px;
 
     /* Spacing */
     --spacing-stack-md: 24px;
@@ -68,7 +74,7 @@
     --spacing-container-max: 1200px;
     --spacing-stack-sm: 12px;
     --spacing-stack-lg: 40px;
-    --spacing-section-gap: 64px;
+    --spacing-section-gap: 80px;
 
     /* Fonts */
     --font-mono-data: "JetBrains Mono";
@@ -90,35 +96,148 @@
     --text-h3--font-weight: 600;
 
     --text-body-md: 16px;
-    --text-body-md--line-height: 1.5;
+    --text-body-md--line-height: 1.6;
     --text-body-md--font-weight: 400;
 
-    --text-h1: 32px;
-    --text-h1--line-height: 1.2;
-    --text-h1--letter-spacing: -0.01em;
+    --text-h1: 36px;
+    --text-h1--line-height: 1.15;
+    --text-h1--letter-spacing: -0.02em;
     --text-h1--font-weight: 700;
 
     --text-label-caps: 12px;
     --text-label-caps--line-height: 1.2;
-    --text-label-caps--letter-spacing: 0.05em;
+    --text-label-caps--letter-spacing: 0.08em;
     --text-label-caps--font-weight: 600;
 
     --text-h2: 24px;
     --text-h2--line-height: 1.3;
     --text-h2--font-weight: 600;
 
-    --text-display: 48px;
-    --text-display--line-height: 1.1;
-    --text-display--letter-spacing: -0.02em;
-    --text-display--font-weight: 700;
+    --text-display: 56px;
+    --text-display--line-height: 1.05;
+    --text-display--letter-spacing: -0.03em;
+    --text-display--font-weight: 800;
 
     --text-body-lg: 18px;
-    --text-body-lg--line-height: 1.6;
+    --text-body-lg--line-height: 1.65;
     --text-body-lg--font-weight: 400;
+
+    /* Easing */
+    --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+    --ease-out-quart: cubic-bezier(0.25, 1, 0.5, 1);
+    --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
 @utility flat-shadow {
     box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.05), 0 2px 4px -2px rgb(0 0 0 / 0.05);
+}
+
+@utility shadow-xs {
+    box-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.03);
+}
+
+@utility shadow-sm {
+    box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.06), 0 1px 2px -1px rgb(0 0 0 / 0.04);
+}
+
+@utility shadow-md {
+    box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.06), 0 2px 4px -2px rgb(0 0 0 / 0.04);
+}
+
+@utility shadow-lg {
+    box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.07), 0 4px 6px -4px rgb(0 0 0 / 0.04);
+}
+
+@utility shadow-xl {
+    box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.08), 0 8px 10px -6px rgb(0 0 0 / 0.04);
+}
+
+@utility shadow-glow {
+    box-shadow: 0 0 40px -10px rgb(0 81 213 / 0.35);
+}
+
+@utility shadow-card {
+    box-shadow: 0 4px 24px -4px rgb(0 0 0 / 0.08);
+}
+
+@utility shadow-card-hover {
+    box-shadow: 0 12px 32px -8px rgb(0 0 0 / 0.14);
+}
+
+/* Reveal animations (initial states — toggled to visible by JS) */
+@utility reveal-base {
+    transition-property: opacity, transform, filter;
+    transition-duration: 600ms;
+    transition-timing-function: var(--ease-out-expo);
+    will-change: opacity, transform;
+}
+
+@utility reveal-fade-up {
+    opacity: 0;
+    transform: translateY(28px);
+    filter: blur(2px);
+}
+
+@utility reveal-fade-in {
+    opacity: 0;
+}
+
+@utility reveal-scale-in {
+    opacity: 0;
+    transform: scale(0.94);
+}
+
+@utility reveal-blur-in {
+    opacity: 0;
+    filter: blur(8px);
+}
+
+/* Final visible states (added by JS when element enters viewport) */
+.revealed .reveal-fade-up,
+.revealed.reveal-fade-up {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
+}
+
+.revealed .reveal-fade-in,
+.revealed.reveal-fade-in {
+    opacity: 1;
+}
+
+.revealed .reveal-scale-in,
+.revealed.reveal-scale-in {
+    opacity: 1;
+    transform: scale(1);
+}
+
+.revealed .reveal-blur-in,
+.revealed.reveal-blur-in {
+    opacity: 1;
+    filter: blur(0);
+}
+
+/* Smooth scrolling */
+html {
+    scroll-behavior: smooth;
+}
+
+/* Respect reduced motion */
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+    .reveal-fade-up,
+    .reveal-fade-in,
+    .reveal-scale-in,
+    .reveal-blur-in {
+        opacity: 1 !important;
+        transform: none !important;
+        filter: none !important;
+    }
 }
 
 [x-cloak] {
