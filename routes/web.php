@@ -13,6 +13,10 @@ Route::get('/age-calculator', function () {
     return view('age-calculator');
 })->name('age-calculator');
 
+Route::get('/time-duration-calculator', function () {
+    return view('time-duration-calculator');
+})->name('time-duration-calculator');
+
 Route::get('/privacy-policy', function () {
     return view('pages.privacy');
 })->name('privacy');

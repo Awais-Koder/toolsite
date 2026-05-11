@@ -265,33 +265,43 @@
                     </div>
                 </a>
 
-                <!-- Tool Card 2 — Coming Soon -->
-                <div class="group bg-white border border-outline-variant/30 rounded-2xl p-7 hover:shadow-card-hover hover:-translate-y-1 transition-all duration-500 flex flex-col cursor-default opacity-80">
-                    <div class="mb-5 w-14 h-14 bg-secondary/10 rounded-2xl flex items-center justify-center text-secondary">
+                <!-- Tool Card 2 — LIVE -->
+                <a href="{{ route('time-duration-calculator') }}" class="group bg-white border border-outline-variant/30 rounded-2xl p-7 hover:shadow-card-hover hover:-translate-y-1 transition-all duration-500 flex flex-col cursor-pointer">
+                    <div class="mb-5 w-14 h-14 bg-primary-fixed rounded-2xl flex items-center justify-center text-on-primary-fixed group-hover:bg-secondary group-hover:text-white transition-all duration-300">
                         <span class="material-symbols-outlined text-2xl">timer</span>
                     </div>
                     <div class="flex items-center gap-2 mb-3">
                         <h3 class="font-h2 text-h2 text-on-surface">Time Duration Calculator</h3>
-                        <span class="inline-flex items-center text-[10px] font-label-caps text-secondary bg-secondary/10 px-2 py-0.5 rounded-full">Coming Soon</span>
+                        <span class="inline-flex items-center gap-1 text-[10px] font-label-caps text-success bg-success/10 px-2 py-0.5 rounded-full">
+                            <span class="w-1.5 h-1.5 rounded-full bg-success animate-pulse"></span>Live
+                        </span>
                     </div>
                     <p class="font-body-md text-on-surface-variant mb-6 flex-grow leading-relaxed">
-                        Find the exact number of hours, minutes, and seconds between any two times. Perfect for payroll, project tracking, and scheduling. Works as a <strong>time calculator</strong> for any time difference you need.
+                        Find the exact number of hours, minutes, and seconds between any two times. Perfect for payroll, project tracking, and scheduling. Includes working days and Pakistani holiday logic.
                     </p>
-                </div>
+                    <div class="flex items-center gap-2 text-secondary font-h3 text-sm mt-auto">
+                        Use Time Calculator <span class="material-symbols-outlined text-[18px] transition-transform duration-300 group-hover:translate-x-1">arrow_forward</span>
+                    </div>
+                </a>
 
-                <!-- Tool Card 3 — Coming Soon -->
-                <div class="group bg-white border border-outline-variant/30 rounded-2xl p-7 hover:shadow-card-hover hover:-translate-y-1 transition-all duration-500 flex flex-col cursor-default opacity-80">
-                    <div class="mb-5 w-14 h-14 bg-secondary/10 rounded-2xl flex items-center justify-center text-secondary">
+                <!-- Tool Card 3 — LIVE -->
+                <a href="{{ route('time-duration-calculator') }}" class="group bg-white border border-outline-variant/30 rounded-2xl p-7 hover:shadow-card-hover hover:-translate-y-1 transition-all duration-500 flex flex-col cursor-pointer">
+                    <div class="mb-5 w-14 h-14 bg-primary-fixed rounded-2xl flex items-center justify-center text-on-primary-fixed group-hover:bg-secondary group-hover:text-white transition-all duration-300">
                         <span class="material-symbols-outlined text-2xl">date_range</span>
                     </div>
                     <div class="flex items-center gap-2 mb-3">
                         <h3 class="font-h2 text-h2 text-on-surface">Date to Date Calculator</h3>
-                        <span class="inline-flex items-center text-[10px] font-label-caps text-secondary bg-secondary/10 px-2 py-0.5 rounded-full">Coming Soon</span>
+                        <span class="inline-flex items-center gap-1 text-[10px] font-label-caps text-success bg-success/10 px-2 py-0.5 rounded-full">
+                            <span class="w-1.5 h-1.5 rounded-full bg-success animate-pulse"></span>Live
+                        </span>
                     </div>
                     <p class="font-body-md text-on-surface-variant mb-6 flex-grow leading-relaxed">
-                        Add or subtract days, weeks, months, or years from any date. Use it as a <strong>date calculator</strong> for deadlines, anniversaries, or any date-based planning you need.
+                        Add or subtract days, weeks, months, or years from any date. Use it for deadlines, anniversaries, or any date-based planning you need with precision.
                     </p>
-                </div>
+                    <div class="flex items-center gap-2 text-secondary font-h3 text-sm mt-auto">
+                        Use Date Calculator <span class="material-symbols-outlined text-[18px] transition-transform duration-300 group-hover:translate-x-1">arrow_forward</span>
+                    </div>
+                </a>
             </div>
         </div>
     </section>
@@ -310,7 +320,7 @@
                     ['id' => 1, 'q' => 'How do I calculate my exact age by date of birth?', 'a' => 'Enter your date of birth in our age calculator and it instantly shows your exact age in years, months, days, hours, minutes, and seconds. The tool accounts for leap years and the exact number of days in each month, so the result is mathematically precise — not an approximation.'],
                     ['id' => 2, 'q' => 'What is the difference between an age calculator and a date of birth calculator?', 'a' => 'They are the same thing. A date of birth calculator takes your birth date, compares it to today, and returns your age. We use both terms because people search for both — but the tool works the same way regardless of what you call it.'],
                     ['id' => 3, 'q' => 'How does the age difference calculator work?', 'a' => 'Switch to "Age Difference" mode at the top of the calculator. Enter two birth dates and the tool returns the exact gap in years, months, and days. It works as an age gap calculator for any two dates — people, events, or anything else.'],
-                    ['id' => 4, 'q' => 'Can I use this as a time calculator for work hours?', 'a' => 'Our time duration calculator (coming soon) will handle work hours, time differences, and scheduling calculations. The age calculator currently shows your total hours and minutes lived as part of its breakdown.'],
+                    ['id' => 4, 'q' => 'Can I use this as a time calculator for work hours?', 'a' => 'Yes! Our Advanced Time Duration Calculator is now live. It handles work hours, time differences, working days (excluding weekends), and even regional holidays. You can access it via the Calculators menu.'],
                     ['id' => 5, 'q' => 'Is my date of birth stored on your servers?', 'a' => 'No. Every calculation runs locally in your browser using JavaScript. Your birth date never leaves your device and is never stored anywhere on our servers. There are no accounts and no tracking.'],
                     ['id' => 6, 'q' => 'Can I use this for legal or official age verification?', 'a' => 'Yes. Our calculator uses the standard Western legal definition of age — it increases on your birthday, accounts for leap years, and calculates day-by-day rather than year-by-year. This makes it suitable for checking statutory age limits for employment, insurance, and legal documents.'],
                 ] as $faq)

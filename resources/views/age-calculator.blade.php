@@ -72,31 +72,31 @@
 
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-stack-md mb-8">
                     <div class="flex-1 group">
-                        <label class="block font-label-caps text-on-surface mb-2.5 uppercase tracking-wider text-xs" x-text="mode === 'age' ? 'Your Name (Optional)' : 'Person 1 Name'"></label>
+                        <label class="block font-label-caps text-on-surface mb-2.5 uppercase tracking-wider text-xs cursor-pointer" x-text="mode === 'age' ? 'Your Name (Optional)' : 'Person 1 Name'"></label>
                         <div class="relative">
                             <span class="absolute left-4 top-1/2 -translate-y-1/2 material-symbols-outlined text-on-surface-variant/50 text-lg">person</span>
-                            <input x-model="p1Name" placeholder="Enter name" class="w-full rounded-xl border-outline-variant/50 focus:border-secondary focus:ring-2 focus:ring-secondary/20 h-13 pl-11 pr-4 text-on-surface bg-surface-container-low font-body-md border transition-all duration-200 hover:border-outline-variant" type="text"/>
+                            <input x-model="p1Name" placeholder="Enter name" class="w-full rounded-xl border-outline-variant/50 focus:border-secondary focus:ring-2 focus:ring-secondary/20 h-13 pl-11 pr-4 text-on-surface bg-surface-container-low font-body-md border transition-all duration-200 hover:border-outline-variant cursor-pointer" type="text"/>
                         </div>
                     </div>
                     <div class="flex-1 group" x-show="mode === 'diff'">
-                        <label class="block font-label-caps text-on-surface mb-2.5 uppercase tracking-wider text-xs">Person 2 Name</label>
+                        <label class="block font-label-caps text-on-surface mb-2.5 uppercase tracking-wider text-xs cursor-pointer">Person 2 Name</label>
                         <div class="relative">
                             <span class="absolute left-4 top-1/2 -translate-y-1/2 material-symbols-outlined text-on-surface-variant/50 text-lg">person</span>
-                            <input x-model="p2Name" placeholder="Enter name" class="w-full rounded-xl border-outline-variant/50 focus:border-secondary focus:ring-2 focus:ring-secondary/20 h-13 pl-11 pr-4 text-on-surface bg-surface-container-low font-body-md border transition-all duration-200 hover:border-outline-variant" type="text"/>
+                            <input x-model="p2Name" placeholder="Enter name" class="w-full rounded-xl border-outline-variant/50 focus:border-secondary focus:ring-2 focus:ring-secondary/20 h-13 pl-11 pr-4 text-on-surface bg-surface-container-low font-body-md border transition-all duration-200 hover:border-outline-variant cursor-pointer" type="text"/>
                         </div>
                     </div>
                     <div class="flex-1 group">
-                        <label class="block font-label-caps text-on-surface mb-2.5 uppercase tracking-wider text-xs" for="dob" x-text="mode === 'age' ? 'Date of Birth' : (p1Name || 'Person 1') + '\'s Birth Date'"></label>
+                        <label class="block font-label-caps text-on-surface mb-2.5 uppercase tracking-wider text-xs cursor-pointer" for="dob" x-text="mode === 'age' ? 'Date of Birth' : (p1Name || 'Person 1') + '\'s Birth Date'"></label>
                         <div class="relative">
                             <span class="absolute left-4 top-1/2 -translate-y-1/2 material-symbols-outlined text-on-surface-variant/50 text-lg">event</span>
-                            <input x-model="dob" class="w-full rounded-xl border-outline-variant/50 focus:border-secondary focus:ring-2 focus:ring-secondary/20 h-13 pl-11 pr-4 text-on-surface bg-surface-container-low font-body-md border transition-all duration-200 hover:border-outline-variant" id="dob" type="date"/>
+                            <input x-model="dob" class="w-full rounded-xl border-outline-variant/50 focus:border-secondary focus:ring-2 focus:ring-secondary/20 h-13 pl-11 pr-4 text-on-surface bg-surface-container-low font-body-md border transition-all duration-200 hover:border-outline-variant cursor-pointer" id="dob" type="date"/>
                         </div>
                     </div>
                     <div class="flex-1 group">
-                        <label class="block font-label-caps text-on-surface mb-2.5 uppercase tracking-wider text-xs" for="calc-date" x-text="mode === 'age' ? 'Calculate Age At' : (p2Name || 'Person 2') + '\'s Birth Date'"></label>
+                        <label class="block font-label-caps text-on-surface mb-2.5 uppercase tracking-wider text-xs cursor-pointer" for="calc-date" x-text="mode === 'age' ? 'Calculate Age At' : (p2Name || 'Person 2') + '\'s Birth Date'"></label>
                         <div class="relative">
                             <span class="absolute left-4 top-1/2 -translate-y-1/2 material-symbols-outlined text-on-surface-variant/50 text-lg">today</span>
-                            <input x-model="targetDate" class="w-full rounded-xl border-outline-variant/50 focus:border-secondary focus:ring-2 focus:ring-secondary/20 h-13 pl-11 pr-4 text-on-surface bg-surface-container-low font-body-md border transition-all duration-200 hover:border-outline-variant" id="calc-date" type="date"/>
+                            <input x-model="targetDate" class="w-full rounded-xl border-outline-variant/50 focus:border-secondary focus:ring-2 focus:ring-secondary/20 h-13 pl-11 pr-4 text-on-surface bg-surface-container-low font-body-md border transition-all duration-200 hover:border-outline-variant cursor-pointer" id="calc-date" type="date"/>
                         </div>
                     </div>
                 </div>
@@ -107,7 +107,22 @@
                 </button>
 
                 <!-- Results Area -->
-                <div x-show="showResults" x-transition:enter="transition ease-out duration-500" x-transition:enter-start="opacity-0 translate-y-4" x-transition:enter-end="opacity-100 translate-y-0" x-transition:leave="transition ease-in duration-300" x-transition:leave-start="opacity-100 translate-y-0" x-transition:leave-end="opacity-0 translate-y-4" class="mt-10 bg-surface-container-low rounded-2xl border border-outline-variant/40 p-6 sm:p-8" x-cloak>
+                <div x-show="showResults" x-transition:enter="transition ease-out duration-500" x-transition:enter-start="opacity-0 translate-y-4" x-transition:enter-end="opacity-100 translate-y-0" x-transition:leave="transition ease-in duration-300" x-transition:leave-start="opacity-100 translate-y-0" x-transition:leave-end="opacity-0 translate-y-4" class="mt-10 bg-surface-container-low rounded-2xl border border-outline-variant/40 p-6 sm:p-8" id="results-capture" x-cloak>
+                    <div class="flex flex-col sm:flex-row items-center justify-between gap-4 mb-8">
+                        <h2 class="font-h2 text-on-surface">Age Analysis</h2>
+                        <div class="flex items-center gap-2">
+                            <button @click="updateUrl(); navigator.clipboard.writeText(window.location.href); alert('Age link copied to clipboard!')" 
+                                    class="text-[10px] font-bold text-secondary flex items-center gap-2 bg-secondary/5 px-4 py-2 rounded-xl hover:bg-secondary/10 transition-all cursor-pointer uppercase tracking-widest">
+                                <span class="material-symbols-outlined text-sm">share</span>
+                                Share
+                            </button>
+                            <button @click="downloadResults()" 
+                                    class="text-[10px] font-bold text-primary flex items-center gap-2 bg-primary/5 px-4 py-2 rounded-xl hover:bg-primary/10 transition-all cursor-pointer uppercase tracking-widest">
+                                <span class="material-symbols-outlined text-sm">download</span>
+                                Download PNG
+                            </button>
+                        </div>
+                    </div>
                     <!-- Tab Navigation -->
                     <div class="flex bg-surface-container-lowest p-1.5 rounded-2xl border border-outline-variant/40 mb-8 overflow-x-auto">
                         <button x-on:click="activeTab = 'results'" :class="activeTab === 'results' ? 'bg-secondary text-on-secondary shadow-md' : 'text-on-surface-variant hover:bg-surface-container-high'" class="flex-1 min-w-0 px-5 py-3 rounded-xl font-label-caps transition-all duration-300 flex items-center justify-center gap-2 whitespace-nowrap cursor-pointer">
@@ -642,16 +657,16 @@
                 <div class="bg-surface-container-lowest rounded-2xl shadow-card border border-outline-variant/40 p-6" data-reveal="fade-up" data-reveal-delay="200">
                     <h3 class="font-h3 text-on-surface mb-4 flex items-center gap-2">
                         <span class="material-symbols-outlined text-secondary text-lg">category</span>
-                        Coming Soon
+                        Explore More
                     </h3>
                     <div class="space-y-3">
-                        <div class="flex items-center gap-3 p-3 rounded-xl bg-surface-container-low/50 border border-outline-variant/20">
-                            <span class="material-symbols-outlined text-on-surface-variant/40">schedule</span>
+                        <a href="{{ route('time-duration-calculator') }}" class="flex items-center gap-3 p-3 rounded-xl bg-surface-container-low/50 border border-outline-variant/20 hover:bg-secondary/5 hover:border-secondary/20 transition-all group">
+                            <span class="material-symbols-outlined text-secondary">schedule</span>
                             <div>
-                                <div class="text-sm font-medium text-on-surface">Time Duration Calculator</div>
+                                <div class="text-sm font-medium text-on-surface group-hover:text-secondary transition-colors">Time Duration Calculator</div>
                                 <div class="text-xs text-on-surface-variant">Find exact hours, minutes, and seconds between times</div>
                             </div>
-                        </div>
+                        </a>
                         <div class="flex items-center gap-3 p-3 rounded-xl bg-surface-container-low/50 border border-outline-variant/20">
                             <span class="material-symbols-outlined text-on-surface-variant/40">timelapse</span>
                             <div>
@@ -667,6 +682,7 @@
 @endsection
 
 @push('scripts')
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 <script>
     function ageCalculator() {
         return {
@@ -871,6 +887,7 @@
                 if (this.mode === 'diff') this.fetchHistory(this.targetDate, 2);
                 this.updateCalculation();
                 this.generateStory();
+                this.updateUrl();
                 if (this.timer) clearInterval(this.timer);
                 this.timer = setInterval(() => this.updateCalculation(), 1000);
             },
@@ -1008,8 +1025,45 @@
                 return (day > last_day[month]) ? signs[(month + 1) % 12] : signs[month];
             },
 
+            loadFromUrl() {
+                const params = new URLSearchParams(window.location.search);
+                if (params.has('m')) this.mode = params.get('m');
+                if (params.has('p1')) this.p1Name = params.get('p1');
+                if (params.has('p2')) this.p2Name = params.get('p2');
+                if (params.has('dob')) this.dob = params.get('dob');
+                if (params.has('td')) this.targetDate = params.get('td');
+                if (this.dob) this.calculate();
+            },
+
+            updateUrl() {
+                const params = new URLSearchParams();
+                params.set('m', this.mode);
+                if (this.p1Name) params.set('p1', this.p1Name);
+                if (this.p2Name) params.set('p2', this.p2Name);
+                if (this.dob) params.set('dob', this.dob);
+                if (this.targetDate) params.set('td', this.targetDate);
+                
+                const newUrl = window.location.pathname + '?' + params.toString();
+                window.history.pushState({ path: newUrl }, '', newUrl);
+            },
+
+            async downloadResults() {
+                const element = document.getElementById('results-capture');
+                const canvas = await html2canvas(element, {
+                    backgroundColor: '#F8F9FF',
+                    scale: 2,
+                    logging: false,
+                    useCORS: true
+                });
+                
+                const link = document.createElement('a');
+                link.download = `age-result-${this.p1Name || 'me'}.png`;
+                link.href = canvas.toDataURL('image/png');
+                link.click();
+            },
+
             init() {
-                // Initialize
+                this.loadFromUrl();
             }
         }
     }

@@ -121,15 +121,48 @@
                 </a>
                 <nav class="hidden md:flex items-center gap-stack-md h-full absolute left-1/2 -translate-x-1/2">
                     <a class="nav-link h-full flex items-center {{ request()->routeIs('home') ? 'is-active text-secondary' : 'text-on-surface-variant hover:text-primary' }} pb-1 pt-1 font-h3 text-h3 cursor-pointer transition-colors" href="{{ route('home') }}">Home</a>
-                    <a class="nav-link h-full flex items-center {{ request()->routeIs('age-calculator') ? 'is-active text-secondary' : 'text-on-surface-variant hover:text-primary' }} pb-1 pt-1 font-h3 text-h3 cursor-pointer transition-colors" href="{{ route('age-calculator') }}">Age Calculator</a>
+                    
+                    <!-- Calculators Dropdown -->
+                    <div class="h-full group relative" x-data="{ open: false }" @mouseenter="open = true" @mouseleave="open = false">
+                        <button class="nav-link h-full flex items-center gap-1.5 {{ (request()->routeIs('age-calculator') || request()->routeIs('time-duration-calculator')) ? 'is-active text-secondary' : 'text-on-surface-variant hover:text-primary' }} pb-1 pt-1 font-h3 text-h3 cursor-pointer transition-colors">
+                            Calculators
+                            <span class="material-symbols-outlined text-sm transition-transform duration-300 group-hover:rotate-180">expand_more</span>
+                        </button>
+                        
+                        <div x-show="open" 
+                             x-transition:enter="transition ease-out duration-200"
+                             x-transition:enter-start="opacity-0 translate-y-1"
+                             x-transition:enter-end="opacity-100 translate-y-0"
+                             x-transition:leave="transition ease-in duration-150"
+                             x-transition:leave-start="opacity-100 translate-y-0"
+                             x-transition:leave-end="opacity-0 translate-y-1"
+                             class="absolute top-full left-1/2 -translate-x-1/2 w-64 bg-surface/95 backdrop-blur-xl border border-outline-variant/50 rounded-2xl shadow-card overflow-hidden p-2"
+                             x-cloak>
+                            <a href="{{ route('age-calculator') }}" class="flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-surface-container-low transition-colors group/item {{ request()->routeIs('age-calculator') ? 'bg-secondary/5' : '' }}">
+                                <span class="material-symbols-outlined text-secondary group-hover/item:scale-110 transition-transform">cake</span>
+                                <div class="flex flex-col">
+                                    <span class="text-on-surface font-semibold text-sm">Age Calculator</span>
+                                    <span class="text-on-surface-variant text-[10px]">Calculate exact age & story</span>
+                                </div>
+                            </a>
+                            <a href="{{ route('time-duration-calculator') }}" class="flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-surface-container-low transition-colors group/item {{ request()->routeIs('time-duration-calculator') ? 'bg-secondary/5' : '' }}">
+                                <span class="material-symbols-outlined text-secondary group-hover/item:scale-110 transition-transform">schedule</span>
+                                <div class="flex flex-col">
+                                    <span class="text-on-surface font-semibold text-sm">Time Calculator</span>
+                                    <span class="text-on-surface-variant text-[10px]">Duration, working days & more</span>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+
                     <a class="nav-link h-full flex items-center {{ request()->routeIs('blog.*') ? 'is-active text-secondary' : 'text-on-surface-variant hover:text-primary' }} pb-1 pt-1 font-h3 text-h3 cursor-pointer transition-colors" href="{{ route('blog.index') }}">Blog</a>
                     <a class="nav-link h-full flex items-center {{ request()->routeIs('about') ? 'is-active text-secondary' : 'text-on-surface-variant hover:text-primary' }} pb-1 pt-1 font-h3 text-h3 cursor-pointer transition-colors" href="{{ route('about') }}">About</a>
                     <a class="nav-link h-full flex items-center {{ request()->routeIs('contact') ? 'is-active text-secondary' : 'text-on-surface-variant hover:text-primary' }} pb-1 pt-1 font-h3 text-h3 cursor-pointer transition-colors" href="{{ route('contact') }}">Contact</a>
                 </nav>
                 <div class="hidden md:block">
-                    <a href="{{ route('age-calculator') }}" class="inline-flex items-center gap-2 bg-secondary text-on-secondary px-5 py-2.5 rounded-xl font-h3 text-h3 hover:bg-secondary-container transition-all duration-300 shadow-sm hover:shadow-glow hover:-translate-y-0.5 mt-2">
-                        <span class="material-symbols-outlined text-lg">calculate</span>
-                        Try Now
+                    <a href="{{ route('time-duration-calculator') }}" class="inline-flex items-center gap-2 bg-secondary text-on-secondary px-5 py-2.5 rounded-xl font-h3 text-h3 hover:bg-secondary-container transition-all duration-300 shadow-sm hover:shadow-glow hover:-translate-y-0.5 mt-2">
+                        <span class="material-symbols-outlined text-lg">bolt</span>
+                        Explore Tools
                     </a>
                 </div>
                 <button @click="open = !open; toggleBodyScroll(open)" class="md:hidden text-on-surface relative z-50 w-10 h-10 flex items-center justify-center rounded-xl hover:bg-surface-container-low transition-colors" :aria-expanded="open" aria-label="Toggle menu">
@@ -165,19 +198,31 @@
                 </div>
                 <nav class="flex-1 flex flex-col p-6 gap-2">
                     <a href="{{ route('home') }}" @click="open = false; toggleBodyScroll(false)" class="drawer-link flex items-center gap-3 px-4 py-3 rounded-xl text-on-surface hover:bg-surface-container-low transition-colors {{ request()->routeIs('home') ? 'bg-secondary/5 text-secondary font-semibold' : '' }}">
-                        <span class="material-symbols-outlined">calculate</span> Calculators
+                        <span class="material-symbols-outlined text-xl">home</span> Home
                     </a>
-                    <a href="{{ route('age-calculator') }}" @click="open = false; toggleBodyScroll(false)" class="drawer-link flex items-center gap-3 px-4 py-3 rounded-xl text-on-surface hover:bg-surface-container-low transition-colors {{ request()->routeIs('age-calculator') ? 'bg-secondary/5 text-secondary font-semibold' : '' }}">
-                        <span class="material-symbols-outlined">cake</span> Age Calculator
-                    </a>
+                    
+                    <!-- Mobile Calculators Group -->
+                    <div x-data="{ expanded: {{ (request()->routeIs('age-calculator') || request()->routeIs('time-duration-calculator')) ? 'true' : 'false' }} }">
+                        <button @click="expanded = !expanded" class="w-full flex items-center justify-between px-4 py-3 rounded-xl text-on-surface hover:bg-surface-container-low transition-colors {{ (request()->routeIs('age-calculator') || request()->routeIs('time-duration-calculator')) ? 'bg-secondary/5 text-secondary font-semibold' : '' }}">
+                            <div class="flex items-center gap-3">
+                                <span class="material-symbols-outlined text-xl">calculate</span> Calculators
+                            </div>
+                            <span class="material-symbols-outlined transition-transform duration-300" :class="expanded ? 'rotate-180' : ''">expand_more</span>
+                        </button>
+                        <div x-show="expanded" x-collapse class="pl-12 space-y-1 mt-1">
+                            <a href="{{ route('age-calculator') }}" @click="open = false; toggleBodyScroll(false)" class="block py-2 text-sm text-on-surface-variant hover:text-secondary transition-colors">Age Calculator</a>
+                            <a href="{{ route('time-duration-calculator') }}" @click="open = false; toggleBodyScroll(false)" class="block py-2 text-sm text-on-surface-variant hover:text-secondary transition-colors">Time Calculator</a>
+                        </div>
+                    </div>
+
                     <a href="{{ route('blog.index') }}" @click="open = false; toggleBodyScroll(false)" class="drawer-link flex items-center gap-3 px-4 py-3 rounded-xl text-on-surface hover:bg-surface-container-low transition-colors {{ request()->routeIs('blog.*') ? 'bg-secondary/5 text-secondary font-semibold' : '' }}">
-                        <span class="material-symbols-outlined">article</span> Blog
+                        <span class="material-symbols-outlined text-xl">article</span> Blog
                     </a>
                     <a href="{{ route('about') }}" @click="open = false; toggleBodyScroll(false)" class="drawer-link flex items-center gap-3 px-4 py-3 rounded-xl text-on-surface hover:bg-surface-container-low transition-colors {{ request()->routeIs('about') ? 'bg-secondary/5 text-secondary font-semibold' : '' }}">
-                        <span class="material-symbols-outlined">info</span> About
+                        <span class="material-symbols-outlined text-xl">info</span> About
                     </a>
                     <a href="{{ route('contact') }}" @click="open = false; toggleBodyScroll(false)" class="drawer-link flex items-center gap-3 px-4 py-3 rounded-xl text-on-surface hover:bg-surface-container-low transition-colors {{ request()->routeIs('contact') ? 'bg-secondary/5 text-secondary font-semibold' : '' }}">
-                        <span class="material-symbols-outlined">mail</span> Contact
+                        <span class="material-symbols-outlined text-xl">mail</span> Contact
                     </a>
                     <div class="border-t border-outline-variant/50 my-2"></div>
                     <a href="{{ route('privacy') }}" @click="open = false; toggleBodyScroll(false)" class="drawer-link flex items-center gap-3 px-4 py-3 rounded-xl text-on-surface-variant hover:bg-surface-container-low transition-colors">
