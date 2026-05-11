@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html class="light" lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
+    <meta name="google-site-verification" content="x4LmTsgqKF_sWsd8sDD7dmMxgKfvkC2YJbKd8FVcyRI" />
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>@yield('title', 'Time&Date Tools - Free Online Calculators & Tools')</title>
