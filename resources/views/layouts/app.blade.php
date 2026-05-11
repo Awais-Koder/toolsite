@@ -13,14 +13,14 @@
     <meta property="og:url" content="{{ url()->current() }}">
     <meta property="og:title" content="@yield('title', 'Time&Date Tools - Free Online Calculators & Tools')">
     <meta property="og:description" content="@yield('meta_description', 'Free online age calculator, time duration tools, and date calculators. Get exact results with fun facts and life story statistics.')">
+    <meta property="og:image" content="@yield('og_image', asset('favicon.svg'))">
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
     <meta property="twitter:url" content="{{ url()->current() }}">
     <meta property="twitter:title" content="@yield('title', 'Time&Date Tools - Free Online Calculators & Tools')">
     <meta property="twitter:description" content="@yield('meta_description', 'Free online age calculator, time duration tools, and date calculators. Get exact results with fun facts and life story statistics.')">
-
-    @stack('head')
+    <meta property="twitter:image" content="@yield('og_image', asset('favicon.svg'))">
 
     <!-- Global Schema.org -->
     <script type="application/ld+json">
@@ -28,12 +28,7 @@
       "{{ '@' }}context": "https://schema.org",
       "{{ '@' }}type": "WebSite",
       "name": "Time&Date Tools",
-      "url": "{{ url('/') }}",
-      "potentialAction": {
-        "{{ '@' }}type": "SearchAction",
-        "target": "{{ url('/') }}/search?q={search_term_string}",
-        "query-input": "required name=search_term_string"
-      }
+      "url": "{{ url('/') }}"
     }
     </script>
     <script type="application/ld+json">
@@ -45,6 +40,8 @@
       "logo": "{{ asset('favicon.svg') }}"
     }
     </script>
+
+    @stack('head')
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -118,7 +115,7 @@
     <!-- TopAppBar -->
     <header data-header class="fixed top-0 w-full z-50 bg-surface/85 backdrop-blur-xl border-b border-outline-variant/50 h-16 transition-all">
         <div x-data="{ open: false }" @keydown.escape.window="open = false; toggleBodyScroll(false)">
-            <div class="flex justify-between items-center max-w-[1200px] mx-auto px-gutter h-full relative mt-2">
+            <div class="flex justify-between items-center max-w-[1200px] mx-auto px-gutter h-full relative">
                 <a href="{{ route('home') }}" class="font-h2 text-h2 font-bold text-primary dark:text-on-primary-fixed cursor-pointer transition-transform duration-300 hover:scale-[1.02]">
                     Time&amp;Date <span class="text-secondary">Tools</span>
                 </a>
@@ -129,7 +126,7 @@
                     <a class="nav-link h-full flex items-center {{ request()->routeIs('contact') ? 'is-active text-secondary' : 'text-on-surface-variant hover:text-primary' }} pb-1 pt-1 font-h3 text-h3 cursor-pointer transition-colors" href="{{ route('contact') }}">Contact</a>
                 </nav>
                 <div class="hidden md:block">
-                    <a href="{{ route('age-calculator') }}" class="inline-flex items-center gap-2 bg-secondary text-on-secondary px-5 py-2.5 rounded-xl font-h3 text-h3 hover:bg-secondary-container transition-all duration-300 shadow-sm hover:shadow-glow hover:-translate-y-0.5">
+                    <a href="{{ route('age-calculator') }}" class="inline-flex items-center gap-2 bg-secondary text-on-secondary px-5 py-2.5 rounded-xl font-h3 text-h3 hover:bg-secondary-container transition-all duration-300 shadow-sm hover:shadow-glow hover:-translate-y-0.5 mt-2">
                         <span class="material-symbols-outlined text-lg">calculate</span>
                         Try Now
                     </a>
@@ -237,22 +234,21 @@
                         </ul>
                     </div>
 
-                    <!-- Connect -->
                     <div>
                         <h4 class="text-on-primary dark:text-on-surface font-semibold text-sm uppercase tracking-wider mb-4">Connect</h4>
-                        <ul class="space-y-3">
-                            <li class="flex items-center gap-2 text-on-primary-container/80 dark:text-on-surface/70 text-sm">
-                                <span class="material-symbols-outlined text-base">mail</span>
-                                support@toolsite.com
-                            </li>
-                            <li class="flex items-center gap-2 text-on-primary-container/80 dark:text-on-surface/70 text-sm">
-                                <span class="material-symbols-outlined text-base">schedule</span>
-                                24-48h Response
+                        <ul class="space-y-3 mb-6">
+                            <li>
+                                <a href="{{ route('contact') }}" class="group flex items-center gap-3 text-on-primary-container/80 dark:text-on-surface/70 hover:text-secondary dark:hover:text-secondary transition-all text-sm">
+                                    <div class="w-8 h-8 rounded-lg bg-white/5 flex items-center justify-center group-hover:bg-secondary/10 transition-colors">
+                                        <span class="material-symbols-outlined text-base">mail</span>
+                                    </div>
+                                    Contact Support
+                                </a>
                             </li>
                         </ul>
                         <div class="mt-4 p-4 bg-white/5 dark:bg-black/5 rounded-xl border border-white/10 dark:border-white/5">
                             <p class="text-xs text-on-primary-container/60 dark:text-on-surface/50 leading-relaxed">
-                                Built with care using Laravel, Tailwind CSS, and Alpine.js.
+                                Precision tools crafted for accuracy and privacy.
                             </p>
                         </div>
                     </div>

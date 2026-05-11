@@ -1,6 +1,30 @@
 @extends('layouts.app')
 
-@section('title', 'Privacy Policy - Time&Date Tools')
+@section('title', 'Privacy Policy — Time&Date Tools | Your Data Privacy')
+@section('meta_description', 'Read the Time&Date Tools privacy policy. Learn how we protect your data — all calculations run locally in your browser with no personal data stored on our servers.')
+
+@push('head')
+<script type="application/ld+json">
+{
+  "{{ '@' }}context": "https://schema.org",
+  "{{ '@' }}type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "{{ '@' }}type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "{{ url('/') }}"
+    },
+    {
+      "{{ '@' }}type": "ListItem",
+      "position": 2,
+      "name": "Privacy Policy",
+      "item": "{{ url('/privacy-policy') }}"
+    }
+  ]
+}
+</script>
+@endpush
 
 @section('content')
     <!-- Hero Banner -->
@@ -36,7 +60,7 @@
             <section id="advertising" class="scroll-mt-24 pt-8 border-t border-outline-variant/30">
                 <span class="text-label-caps text-secondary font-semibold tracking-wider text-xs uppercase">Section 4</span>
                 <h2 class="font-h2 text-h2 text-on-surface mt-2 mb-4">Google DoubleClick DART Cookie</h2>
-                <p class="text-on-surface-variant font-body-md leading-relaxed">Google is one of a third-party vendor on our site. It also uses cookies, known as DART cookies, to serve ads to our site visitors based upon their visit to www.website.com and other sites on the internet. However, visitors may choose to decline the use of DART cookies by visiting the Google ad and content network Privacy Policy at the following URL – <a href="https://policies.google.com/technologies/ads" class="text-secondary hover:underline font-medium">https://policies.google.com/technologies/ads</a></p>
+                <p class="text-on-surface-variant font-body-md leading-relaxed">Google is one of a third-party vendor on our site. It also uses cookies, known as DART cookies, to serve ads to our site visitors based upon their visit to our website and other sites on the internet. However, visitors may choose to decline the use of DART cookies by visiting the Google ad and content network Privacy Policy at the following URL – <a href="https://policies.google.com/technologies/ads" class="text-secondary hover:underline font-medium">https://policies.google.com/technologies/ads</a></p>
             </section>
 
             <section id="third-party" class="scroll-mt-24 pt-8 border-t border-outline-variant/30">

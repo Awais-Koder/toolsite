@@ -1,6 +1,30 @@
 @extends('layouts.app')
 
-@section('title', 'Contact Us - Time&Date Tools')
+@section('title', 'Contact Us — Time&Date Tools | Report Bugs & Request Features')
+@section('meta_description', 'Get in touch with the Time&Date Tools team. Report bugs, request features, or ask questions about our free age calculator and date utilities.')
+
+@push('head')
+<script type="application/ld+json">
+{
+  "{{ '@' }}context": "https://schema.org",
+  "{{ '@' }}type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "{{ '@' }}type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "{{ url('/') }}"
+    },
+    {
+      "{{ '@' }}type": "ListItem",
+      "position": 2,
+      "name": "Contact",
+      "item": "{{ url('/contact-us') }}"
+    }
+  ]
+}
+</script>
+@endpush
 
 @section('content')
     <!-- Hero Banner -->
@@ -19,31 +43,10 @@
                 <div class="bg-surface-container-lowest rounded-2xl shadow-card border border-outline-variant/40 p-7 space-y-6">
                     <div class="flex items-start gap-4">
                         <div class="w-12 h-12 bg-secondary/10 rounded-xl flex items-center justify-center text-secondary shrink-0">
-                            <span class="material-symbols-outlined">email</span>
-                        </div>
-                        <div>
-                            <h3 class="font-h3 text-on-surface mb-1">Email</h3>
-                            <a href="mailto:support@toolsite.com" class="text-secondary font-semibold hover:underline">support@toolsite.com</a>
-                            <p class="text-xs text-on-surface-variant mt-1">We typically respond within 24-48 hours.</p>
-                        </div>
-                    </div>
-
-                    <div class="flex items-start gap-4">
-                        <div class="w-12 h-12 bg-secondary/10 rounded-xl flex items-center justify-center text-secondary shrink-0">
-                            <span class="material-symbols-outlined">schedule</span>
-                        </div>
-                        <div>
-                            <h3 class="font-h3 text-on-surface mb-1">Response Time</h3>
-                            <p class="text-on-surface-variant text-sm">Monday – Friday, 9AM – 6PM UTC</p>
-                        </div>
-                    </div>
-
-                    <div class="flex items-start gap-4">
-                        <div class="w-12 h-12 bg-secondary/10 rounded-xl flex items-center justify-center text-secondary shrink-0">
                             <span class="material-symbols-outlined">public</span>
                         </div>
                         <div>
-                            <h3 class="font-h3 text-on-surface mb-1">Global Reach</h3>
+                            <h2 class="font-h3 text-on-surface mb-1">Global Reach</h2>
                             <p class="text-on-surface-variant text-sm">Serving users in 150+ countries worldwide.</p>
                         </div>
                     </div>
@@ -53,7 +56,7 @@
                 <div class="bg-gradient-to-br from-secondary/5 to-primary-fixed/10 rounded-2xl border border-secondary/10 p-6" data-reveal="fade-up" data-reveal-delay="200">
                     <div class="flex items-center gap-2 mb-3">
                         <span class="material-symbols-outlined text-secondary">bug_report</span>
-                        <h4 class="font-h3 text-on-surface">Report a Bug</h4>
+                        <h3 class="font-h3 text-on-surface">Report a Bug</h3>
                     </div>
                     <p class="text-on-surface-variant text-sm leading-relaxed">
                         If you noticed a calculation error, please include the exact dates or parameters you used. It helps us investigate and fix issues quickly.

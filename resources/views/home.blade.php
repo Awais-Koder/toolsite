@@ -4,68 +4,68 @@
 @section('meta_description', 'Free age calculator to find your exact age by date of birth in years, months, days and seconds. Plus time calculator, hours calculator, and date tools. Instant, private, 100% free.')
 
 @push('head')
-{{-- <script type="application/ld+json">
+<script type="application/ld+json">
 {
-  "@context": "https://schema.org",
-  "@type": "WebSite",
-  "name": "Time & Date Tools",
-  "url": "{{ config('app.url') }}",
-  "description": "Free age calculator, time calculator, and date tools. Exact results by date of birth. Instant, private, 100% free.",
-  "potentialAction": {
-    "@type": "SearchAction",
-    "target": "{{ config('app.url') }}/age-calculator",
-    "query-input": "required name=search_term_string"
-  }
-}
-</script> --}}
-{{-- <script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "FAQPage",
+  "{{ '@' }}context": "https://schema.org",
+  "{{ '@' }}type": "FAQPage",
   "mainEntity": [
     {
-      "@type": "Question",
+      "{{ '@' }}type": "Question",
       "name": "How do I calculate my exact age by date of birth?",
       "acceptedAnswer": {
-        "@type": "Answer",
+        "{{ '@' }}type": "Answer",
         "text": "Enter your date of birth in our age calculator and it instantly shows your exact age in years, months, days, hours, minutes, and seconds. The tool accounts for leap years and the exact number of days in each month."
       }
     },
     {
-      "@type": "Question",
+      "{{ '@' }}type": "Question",
       "name": "What is the difference between an age calculator and a date of birth calculator?",
       "acceptedAnswer": {
-        "@type": "Answer",
+        "{{ '@' }}type": "Answer",
         "text": "They are the same thing. A date of birth calculator takes your birth date, compares it to today, and returns your exact age in years, months, and days."
       }
     },
     {
-      "@type": "Question",
+      "{{ '@' }}type": "Question",
       "name": "How does the age difference calculator work?",
       "acceptedAnswer": {
-        "@type": "Answer",
+        "{{ '@' }}type": "Answer",
         "text": "Switch to Age Difference mode on the calculator page. Enter two birth dates and the tool returns the exact gap in years, months, and days. It works as an age gap calculator for any two dates."
       }
     },
     {
-      "@type": "Question",
+      "{{ '@' }}type": "Question",
       "name": "Is my date of birth stored on your servers?",
       "acceptedAnswer": {
-        "@type": "Answer",
+        "{{ '@' }}type": "Answer",
         "text": "No. Every calculation runs locally in your browser. Your birth date never leaves your device and is never stored anywhere on our servers."
       }
     },
     {
-      "@type": "Question",
+      "{{ '@' }}type": "Question",
       "name": "Can I use this for legal or official age verification?",
       "acceptedAnswer": {
-        "@type": "Answer",
+        "{{ '@' }}type": "Answer",
         "text": "Yes. Our calculator uses the standard Western legal definition of age, making it suitable for checking statutory age limits for employment, insurance, and legal documents."
       }
     }
   ]
 }
-</script> --}}
+</script>
+<script type="application/ld+json">
+{
+  "{{ '@' }}context": "https://schema.org",
+  "{{ '@' }}type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "{{ '@' }}type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "{{ url('/') }}"
+    }
+  ]
+}
+</script>
 @endpush
 
 @section('content')
@@ -347,7 +347,7 @@
                     Calculate Now — It's Free
                 </a>
             </div>
-            <p class="text-white/50 text-sm">No signup. No data collection. Instant results.</p>
+            <p class="text-white/50 text-sm">Works on any device — desktop, tablet, or phone.</p>
         </div>
     </section>
 

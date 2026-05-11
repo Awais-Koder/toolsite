@@ -1,6 +1,30 @@
 @extends('layouts.app')
 
-@section('title', 'About Us - Time&Date Tools')
+@section('title', 'About Time&Date Tools — Free Age Calculator & Date Utilities')
+@section('meta_description', 'Learn about Time&Date Tools — our mission to provide free, accurate, and private age calculators and date utilities. Built for precision, privacy, and accessibility.')
+
+@push('head')
+<script type="application/ld+json">
+{
+  "{{ '@' }}context": "https://schema.org",
+  "{{ '@' }}type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "{{ '@' }}type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "{{ url('/') }}"
+    },
+    {
+      "{{ '@' }}type": "ListItem",
+      "position": 2,
+      "name": "About",
+      "item": "{{ url('/about-us') }}"
+    }
+  ]
+}
+</script>
+@endpush
 
 @section('content')
     <!-- Hero Banner -->

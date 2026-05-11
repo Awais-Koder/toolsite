@@ -1,7 +1,47 @@
 @extends('layouts.app')
 
-@section('title', 'Exact Age Calculator - Calculate Your Precise Age Online')
+@section('title', 'Age Calculator — Calculate Your Exact Age by Date of Birth | Free Online Tool')
 @section('meta_description', 'Free exact age calculator to find your age in years, months, days, and even seconds. Discover your zodiac sign, life story stats, and fun facts.')
+
+@push('head')
+<script type="application/ld+json">
+{
+  "{{ '@' }}context": "https://schema.org",
+  "{{ '@' }}type": "WebApplication",
+  "name": "Age Calculator",
+  "url": "{{ url('/age-calculator') }}",
+  "applicationCategory": "UtilityApplication",
+  "operatingSystem": "All",
+  "description": "Free exact age calculator to find your age in years, months, days, hours, minutes, and seconds. Includes zodiac sign, life story stats, and fun facts.",
+  "offers": {
+    "{{ '@' }}type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+  },
+  "browserRequirements": "Requires JavaScript"
+}
+</script>
+<script type="application/ld+json">
+{
+  "{{ '@' }}context": "https://schema.org",
+  "{{ '@' }}type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "{{ '@' }}type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "{{ url('/') }}"
+    },
+    {
+      "{{ '@' }}type": "ListItem",
+      "position": 2,
+      "name": "Age Calculator",
+      "item": "{{ url('/age-calculator') }}"
+    }
+  ]
+}
+</script>
+@endpush
 
 @section('content')
     <div class="flex flex-col lg:flex-row gap-gutter" x-data="ageCalculator()" x-init="init()">
@@ -608,15 +648,15 @@
                         <div class="flex items-center gap-3 p-3 rounded-xl bg-surface-container-low/50 border border-outline-variant/20">
                             <span class="material-symbols-outlined text-on-surface-variant/40">schedule</span>
                             <div>
-                                <div class="text-sm font-medium text-on-surface">Date Duration Calculator</div>
-                                <div class="text-xs text-on-surface-variant">Find days between any two dates</div>
+                                <div class="text-sm font-medium text-on-surface">Time Duration Calculator</div>
+                                <div class="text-xs text-on-surface-variant">Find exact hours, minutes, and seconds between times</div>
                             </div>
                         </div>
                         <div class="flex items-center gap-3 p-3 rounded-xl bg-surface-container-low/50 border border-outline-variant/20">
                             <span class="material-symbols-outlined text-on-surface-variant/40">timelapse</span>
                             <div>
-                                <div class="text-sm font-medium text-on-surface">Time Zone Converter</div>
-                                <div class="text-xs text-on-surface-variant">Compare times across the globe</div>
+                                <div class="text-sm font-medium text-on-surface">Date Calculator</div>
+                                <div class="text-xs text-on-surface-variant">Add or subtract days from any date</div>
                             </div>
                         </div>
                     </div>

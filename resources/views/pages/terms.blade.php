@@ -1,6 +1,30 @@
 @extends('layouts.app')
 
-@section('title', 'Terms of Service - Time&Date Tools')
+@section('title', 'Terms of Service — Time&Date Tools | Usage Terms & Conditions')
+@section('meta_description', 'Review the terms of service for Time&Date Tools. Understand the conditions for using our free online age calculator, date tools, and time utilities.')
+
+@push('head')
+<script type="application/ld+json">
+{
+  "{{ '@' }}context": "https://schema.org",
+  "{{ '@' }}type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "{{ '@' }}type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "{{ url('/') }}"
+    },
+    {
+      "{{ '@' }}type": "ListItem",
+      "position": 2,
+      "name": "Terms of Service",
+      "item": "{{ url('/terms-of-service') }}"
+    }
+  ]
+}
+</script>
+@endpush
 
 @section('content')
     <!-- Hero Banner -->
