@@ -45,7 +45,23 @@ class SitemapController extends Controller
                 'changefreq' => 'monthly',
                 'priority' => '0.5',
             ],
+            [
+                'loc' => route('blog.index'),
+                'lastmod' => date(DATE_ATOM),
+                'changefreq' => 'daily',
+                'priority' => '0.8',
+            ],
         ];
+
+        $posts = \App\Models\Post::where('is_published', true)->get();
+        foreach ($posts as $post) {
+            $urls[] = [
+                'loc' => route('blog.show', $post->slug),
+                'lastmod' => $post->updated_at->toIso8601String(),
+                'changefreq' => 'monthly',
+                'priority' => '0.6',
+            ];
+        }
 
         return response()->view('sitemap', compact('urls'))
             ->header('Content-Type', 'text/xml');

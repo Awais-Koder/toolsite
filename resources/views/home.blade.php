@@ -330,6 +330,51 @@
         </div>
     </section>
 
+    <!-- Latest from Blog Section -->
+    @php
+        $latestPosts = \App\Models\Post::where('is_published', true)->latest('published_at')->take(3)->get();
+    @endphp
+    @if($latestPosts->count() > 0)
+    <section class="space-y-12">
+        <div class="flex flex-col md:flex-row justify-between items-end gap-6" data-reveal="fade-up">
+            <div class="space-y-4">
+                <span class="inline-block text-secondary font-label-caps text-label-caps tracking-widest uppercase">Insights</span>
+                <h2 class="font-h1 text-h1 text-on-surface">Latest from Our Blog</h2>
+                <p class="text-on-surface-variant font-body-md max-w-xl">Deep dives into time science, productivity, and how to make the most of every second.</p>
+            </div>
+            <a href="{{ route('blog.index') }}" class="inline-flex items-center gap-2 text-secondary font-h3 hover:gap-3 transition-all duration-300">
+                View All Articles <span class="material-symbols-outlined">arrow_forward</span>
+            </a>
+        </div>
+        
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            @foreach($latestPosts as $post)
+            <article class="group bg-surface-container-lowest rounded-3xl border border-outline-variant/40 shadow-xs hover:shadow-card-hover hover:-translate-y-1 transition-all duration-500 overflow-hidden flex flex-col" data-reveal="fade-up" data-reveal-delay="{{ $loop->index * 100 }}">
+                <div class="p-8 flex flex-col flex-grow">
+                    <div class="flex items-center gap-3 mb-4">
+                        <span class="text-[10px] font-label-caps text-secondary bg-secondary/10 px-2.5 py-1 rounded-full uppercase">
+                            {{ $post->category?->name ?: 'Insight' }}
+                        </span>
+                        <span class="text-[10px] font-label-caps text-on-surface-variant/60 uppercase">
+                            {{ $post->published_at->format('M d, Y') }}
+                        </span>
+                    </div>
+                    <h3 class="font-h2 text-h2 text-on-surface mb-4 line-clamp-2 group-hover:text-secondary transition-colors">
+                        <a href="{{ route('blog.show', $post->slug) }}">{{ $post->title }}</a>
+                    </h3>
+                    <p class="text-on-surface-variant text-sm leading-relaxed line-clamp-2 mb-6">
+                        {{ $post->excerpt ?: str($post->body)->limit(100) }}
+                    </p>
+                    <a href="{{ route('blog.show', $post->slug) }}" class="inline-flex items-center gap-2 text-secondary font-h3 text-sm mt-auto group/link">
+                        Read More <span class="material-symbols-outlined text-[18px] transition-transform duration-300 group-hover/link:translate-x-1">arrow_forward</span>
+                    </a>
+                </div>
+            </article>
+            @endforeach
+        </div>
+    </section>
+    @endif
+
     <!-- CTA Banner -->
     <section class="relative overflow-hidden rounded-3xl bg-gradient-to-br from-primary via-primary-container to-secondary-container p-8 md:p-14 text-center" data-reveal="scale-in">
         <div class="absolute inset-0 opacity-10">

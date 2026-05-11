@@ -122,6 +122,7 @@
                 <nav class="hidden md:flex items-center gap-stack-md h-full absolute left-1/2 -translate-x-1/2">
                     <a class="nav-link h-full flex items-center {{ request()->routeIs('home') ? 'is-active text-secondary' : 'text-on-surface-variant hover:text-primary' }} pb-1 pt-1 font-h3 text-h3 cursor-pointer transition-colors" href="{{ route('home') }}">Home</a>
                     <a class="nav-link h-full flex items-center {{ request()->routeIs('age-calculator') ? 'is-active text-secondary' : 'text-on-surface-variant hover:text-primary' }} pb-1 pt-1 font-h3 text-h3 cursor-pointer transition-colors" href="{{ route('age-calculator') }}">Age Calculator</a>
+                    <a class="nav-link h-full flex items-center {{ request()->routeIs('blog.*') ? 'is-active text-secondary' : 'text-on-surface-variant hover:text-primary' }} pb-1 pt-1 font-h3 text-h3 cursor-pointer transition-colors" href="{{ route('blog.index') }}">Blog</a>
                     <a class="nav-link h-full flex items-center {{ request()->routeIs('about') ? 'is-active text-secondary' : 'text-on-surface-variant hover:text-primary' }} pb-1 pt-1 font-h3 text-h3 cursor-pointer transition-colors" href="{{ route('about') }}">About</a>
                     <a class="nav-link h-full flex items-center {{ request()->routeIs('contact') ? 'is-active text-secondary' : 'text-on-surface-variant hover:text-primary' }} pb-1 pt-1 font-h3 text-h3 cursor-pointer transition-colors" href="{{ route('contact') }}">Contact</a>
                 </nav>
@@ -168,6 +169,9 @@
                     </a>
                     <a href="{{ route('age-calculator') }}" @click="open = false; toggleBodyScroll(false)" class="drawer-link flex items-center gap-3 px-4 py-3 rounded-xl text-on-surface hover:bg-surface-container-low transition-colors {{ request()->routeIs('age-calculator') ? 'bg-secondary/5 text-secondary font-semibold' : '' }}">
                         <span class="material-symbols-outlined">cake</span> Age Calculator
+                    </a>
+                    <a href="{{ route('blog.index') }}" @click="open = false; toggleBodyScroll(false)" class="drawer-link flex items-center gap-3 px-4 py-3 rounded-xl text-on-surface hover:bg-surface-container-low transition-colors {{ request()->routeIs('blog.*') ? 'bg-secondary/5 text-secondary font-semibold' : '' }}">
+                        <span class="material-symbols-outlined">article</span> Blog
                     </a>
                     <a href="{{ route('about') }}" @click="open = false; toggleBodyScroll(false)" class="drawer-link flex items-center gap-3 px-4 py-3 rounded-xl text-on-surface hover:bg-surface-container-low transition-colors {{ request()->routeIs('about') ? 'bg-secondary/5 text-secondary font-semibold' : '' }}">
                         <span class="material-symbols-outlined">info</span> About
