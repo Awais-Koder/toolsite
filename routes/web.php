@@ -1,8 +1,8 @@
 <?php
 
+use App\Http\Controllers\BlogController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\SitemapController;
-use App\Http\Controllers\BlogController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -12,6 +12,10 @@ Route::get('/', function () {
 Route::get('/age-calculator', function () {
     return view('age-calculator');
 })->name('age-calculator');
+
+Route::get('/age-calculator/export-studio', function () {
+    return view('export-studio');
+})->name('age-calculator.export-studio');
 
 Route::get('/time-duration-calculator', function () {
     return view('time-duration-calculator');

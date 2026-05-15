@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Models\Post;
 
 class BlogController extends Controller
 {
     public function index()
     {
-        $posts = \App\Models\Post::with('category', 'user')
+        $posts = Post::with('category', 'user')
             ->where('is_published', true)
             ->where('published_at', '<=', now())
             ->latest('published_at')
@@ -19,7 +19,7 @@ class BlogController extends Controller
 
     public function show($slug)
     {
-        $post = \App\Models\Post::with('category', 'user')
+        $post = Post::with('category', 'user')
             ->where('slug', $slug)
             ->where('is_published', true)
             ->firstOrFail();

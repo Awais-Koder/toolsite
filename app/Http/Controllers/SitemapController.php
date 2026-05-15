@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Post;
+
 class SitemapController extends Controller
 {
     public function index()
@@ -20,6 +22,18 @@ class SitemapController extends Controller
                 'lastmod' => $lastmod('age-calculator'),
                 'changefreq' => 'monthly',
                 'priority' => '0.8',
+            ],
+            [
+                'loc' => route('time-duration-calculator'),
+                'lastmod' => $lastmod('time-duration-calculator'),
+                'changefreq' => 'monthly',
+                'priority' => '0.8',
+            ],
+            [
+                'loc' => route('age-calculator.export-studio'),
+                'lastmod' => $lastmod('export-studio'),
+                'changefreq' => 'monthly',
+                'priority' => '0.7',
             ],
             [
                 'loc' => route('about'),
@@ -53,7 +67,7 @@ class SitemapController extends Controller
             ],
         ];
 
-        $posts = \App\Models\Post::where('is_published', true)->get();
+        $posts = Post::where('is_published', true)->get();
         foreach ($posts as $post) {
             $urls[] = [
                 'loc' => route('blog.show', $post->slug),

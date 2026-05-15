@@ -108,20 +108,18 @@
 
                 <!-- Results Area -->
                 <div x-show="showResults" x-transition:enter="transition ease-out duration-500" x-transition:enter-start="opacity-0 translate-y-4" x-transition:enter-end="opacity-100 translate-y-0" x-transition:leave="transition ease-in duration-300" x-transition:leave-start="opacity-100 translate-y-0" x-transition:leave-end="opacity-0 translate-y-4" class="mt-10 bg-surface-container-low rounded-2xl border border-outline-variant/40 p-6 sm:p-8" id="results-capture" x-cloak>
-                    <div class="flex flex-col sm:flex-row items-center justify-between gap-4 mb-8">
-                        <h2 class="font-h2 text-on-surface">Age Analysis</h2>
-                        <div class="flex items-center gap-2">
-                            <button @click="updateUrl(); navigator.clipboard.writeText(window.location.href); alert('Age link copied to clipboard!')" 
-                                    class="text-[10px] font-bold text-secondary flex items-center gap-2 bg-secondary/5 px-4 py-2 rounded-xl hover:bg-secondary/10 transition-all cursor-pointer uppercase tracking-widest">
-                                <span class="material-symbols-outlined text-sm">share</span>
-                                Share
-                            </button>
-                            <button @click="downloadResults()" 
-                                    class="text-[10px] font-bold text-primary flex items-center gap-2 bg-primary/5 px-4 py-2 rounded-xl hover:bg-primary/10 transition-all cursor-pointer uppercase tracking-widest">
-                                <span class="material-symbols-outlined text-sm">download</span>
-                                Download PNG
-                            </button>
-                        </div>
+                    <div class="flex items-center justify-end gap-3 mb-8">
+                        <button @click="updateUrl(); navigator.clipboard.writeText(window.location.href); alert('Age link copied to clipboard!')" 
+                                class="text-xs font-bold text-secondary flex items-center gap-2 bg-secondary/10 px-4 py-2.5 rounded-xl hover:bg-secondary/20 transition-all cursor-pointer uppercase tracking-wider">
+                            <span class="material-symbols-outlined text-base">share</span>
+                            Share Link
+                        </button>
+                        
+                        <button @click="window.location.href = '{{ route('age-calculator.export-studio') }}' + window.location.search" 
+                                class="text-xs font-bold text-primary flex items-center gap-2 bg-primary/10 px-5 py-2.5 rounded-xl hover:bg-primary/20 transition-all cursor-pointer uppercase tracking-wider shadow-xs hover:shadow-sm">
+                            <span class="material-symbols-outlined text-base">palette</span>
+                            Customize & Print Studio
+                        </button>
                     </div>
                     <!-- Tab Navigation -->
                     <div class="flex bg-surface-container-lowest p-1.5 rounded-2xl border border-outline-variant/40 mb-8 overflow-x-auto">
@@ -296,7 +294,7 @@
                                                 <div class="flex-1 min-w-0">
                                                     <div class="text-label-caps text-on-surface-variant text-[10px] uppercase tracking-wider mb-2">A Glimpse Into The Past</div>
                                                     <!-- Skeleton shimmer when loading -->
-                                                    <template x-if="historyLoading">
+                                                    <template x-if="p1HistoryLoading">
                                                         <div class="space-y-2 animate-pulse">
                                                             <div class="h-3 bg-surface-container-high rounded w-3/4"></div>
                                                             <div class="h-3 bg-surface-container-high rounded w-1/2"></div>
@@ -306,7 +304,7 @@
                                                             </div>
                                                         </div>
                                                     </template>
-                                                    <div x-show="!historyLoading" x-text="result.p1History" class="font-body-md text-on-surface italic leading-relaxed transition-opacity duration-500" :class="historyLoading ? 'opacity-0' : 'opacity-100'"></div>
+                                                    <div x-show="!p1HistoryLoading" x-text="result.p1History" class="font-body-md text-on-surface italic leading-relaxed transition-opacity duration-500" :class="p1HistoryLoading ? 'opacity-0' : 'opacity-100'"></div>
                                                 </div>
                                             </div>
                                         </div>
@@ -371,7 +369,7 @@
                                                 </div>
                                                 <div class="flex-1 min-w-0">
                                                     <div class="text-label-caps text-on-surface-variant text-[10px] uppercase tracking-wider mb-2">A Glimpse Into The Past</div>
-                                                    <template x-if="historyLoading">
+                                                    <template x-if="p2HistoryLoading">
                                                         <div class="space-y-2 animate-pulse">
                                                             <div class="h-3 bg-surface-container-high rounded w-3/4"></div>
                                                             <div class="h-3 bg-surface-container-high rounded w-1/2"></div>
@@ -381,7 +379,7 @@
                                                             </div>
                                                         </div>
                                                     </template>
-                                                    <div x-show="!historyLoading" x-text="result.p2History" class="font-body-md text-on-surface italic leading-relaxed transition-opacity duration-500" :class="historyLoading ? 'opacity-0' : 'opacity-100'"></div>
+                                                    <div x-show="!p2HistoryLoading" x-text="result.p2History" class="font-body-md text-on-surface italic leading-relaxed transition-opacity duration-500" :class="p2HistoryLoading ? 'opacity-0' : 'opacity-100'"></div>
                                                 </div>
                                             </div>
                                         </div>
@@ -678,11 +676,180 @@
                 </div>
             </div>
         </div>
+        
+        </div>
+        
+        <!-- Export Studio Modal (Full Screen) -->
+        <template x-teleport="body">
+            <div x-show="showExportModal" x-cloak class="fixed inset-0 z-50 flex flex-col md:flex-row bg-surface-container-low/80 backdrop-blur-md overflow-hidden"
+                 x-transition:enter="transition ease-out duration-300"
+                 x-transition:enter-start="opacity-0"
+                 x-transition:enter-end="opacity-100"
+                 x-transition:leave="transition ease-in duration-200"
+                 x-transition:leave-start="opacity-100"
+                 x-transition:leave-end="opacity-0">
+                 
+                 <!-- Left Sidebar Controls -->
+                 <div class="w-full md:w-80 lg:w-96 bg-white border-r border-outline-variant/40 shadow-2xl flex flex-col h-full z-10 shrink-0">
+                     <!-- Header -->
+                     <div class="p-6 border-b border-outline-variant/30 flex items-center justify-between">
+                         <div class="flex items-center gap-3">
+                             <span class="p-2.5 bg-primary/10 rounded-xl text-primary material-symbols-outlined block text-xl">palette</span>
+                             <div>
+                                 <h3 class="font-h3 text-on-surface text-base">Export Studio</h3>
+                                 <p class="text-xs text-on-surface-variant mt-0.5">Customize your document design</p>
+                             </div>
+                         </div>
+                         <button @click="showExportModal = false" class="p-2 text-on-surface-variant hover:text-on-surface hover:bg-surface-container-low rounded-full transition-all cursor-pointer">
+                             <span class="material-symbols-outlined block">close</span>
+                         </button>
+                     </div>
+
+                     <!-- Customization Options Scrollable -->
+                     <div class="flex-1 overflow-y-auto p-6 space-y-6 text-left">
+                         <!-- Quick Preset Themes -->
+                         <div>
+                             <label class="block font-label-caps text-xs text-on-surface uppercase tracking-wider mb-3 font-bold">Theme Presets</label>
+                             <div class="grid grid-cols-3 gap-2">
+                                 <button @click="customBg = '#ffffff'; customText = '#111827'; customFont = 'font-sans'; customBorder = 'border-none'" class="p-2.5 border rounded-xl text-center hover:border-primary transition-all cursor-pointer bg-white text-gray-900 font-bold text-xs shadow-xs">Minimal</button>
+                                 <button @click="customBg = '#0f172a'; customText = '#e0e7ff'; customFont = 'font-serif'; customBorder = 'border-none'" class="p-2.5 border rounded-xl text-center hover:border-indigo-400 transition-all cursor-pointer bg-slate-900 text-indigo-200 font-bold text-xs shadow-xs">Cosmic</button>
+                                 <button @click="customBg = '#fdfbf7'; customText = '#451a03'; customFont = 'font-serif'; customBorder = 'border-[12px] border-double border-amber-700/30'" class="p-2.5 border rounded-xl text-center hover:border-amber-600 transition-all cursor-pointer bg-[#fdfbf7] text-amber-950 font-bold text-xs shadow-xs">Classic</button>
+                             </div>
+                         </div>
+
+                         <hr class="border-outline-variant/30">
+
+                         <!-- Colors -->
+                         <div class="grid grid-cols-2 gap-4">
+                             <div>
+                                 <label class="block font-label-caps text-xs text-on-surface uppercase tracking-wider mb-2 font-bold">Background</label>
+                                 <div class="flex items-center gap-2 bg-surface-container-lowest p-2 rounded-xl border border-outline-variant/40">
+                                     <input type="color" x-model="customBg" class="w-8 h-8 rounded-lg cursor-pointer border-none bg-transparent">
+                                     <span class="text-xs font-mono text-on-surface-variant uppercase font-bold" x-text="customBg"></span>
+                                 </div>
+                             </div>
+                             <div>
+                                 <label class="block font-label-caps text-xs text-on-surface uppercase tracking-wider mb-2 font-bold">Text Color</label>
+                                 <div class="flex items-center gap-2 bg-surface-container-lowest p-2 rounded-xl border border-outline-variant/40">
+                                     <input type="color" x-model="customText" class="w-8 h-8 rounded-lg cursor-pointer border-none bg-transparent">
+                                     <span class="text-xs font-mono text-on-surface-variant uppercase font-bold" x-text="customText"></span>
+                                 </div>
+                             </div>
+                         </div>
+
+                         <!-- Font Family -->
+                         <div>
+                             <label class="block font-label-caps text-xs text-on-surface uppercase tracking-wider mb-2 font-bold">Font Style</label>
+                             <select x-model="customFont" class="w-full p-3 bg-surface-container-lowest border border-outline-variant/40 rounded-xl text-sm font-medium text-on-surface cursor-pointer focus:ring-2 focus:ring-primary/20">
+                                 <option value="font-sans">Modern Sans-Serif</option>
+                                 <option value="font-serif">Classic Serif</option>
+                                 <option value="font-mono">Typewriter Mono</option>
+                             </select>
+                         </div>
+
+                         <!-- Border Style -->
+                         <div>
+                             <label class="block font-label-caps text-xs text-on-surface uppercase tracking-wider mb-2 font-bold">Document Border</label>
+                             <div class="space-y-2.5">
+                                 <label class="flex items-center gap-3 p-3 rounded-xl border border-outline-variant/40 hover:bg-surface-container-lowest cursor-pointer transition-all">
+                                     <input type="radio" name="bstyle" value="border-none" x-model="customBorder" class="text-primary focus:ring-primary">
+                                     <span class="text-xs font-medium text-on-surface">None</span>
+                                 </label>
+                                 <label class="flex items-center gap-3 p-3 rounded-xl border border-outline-variant/40 hover:bg-surface-container-lowest cursor-pointer transition-all">
+                                     <input type="radio" name="bstyle" value="border-2 border-outline-variant/40" x-model="customBorder" class="text-primary focus:ring-primary">
+                                     <span class="text-xs font-medium text-on-surface">Minimal Line</span>
+                                 </label>
+                                 <label class="flex items-center gap-3 p-3 rounded-xl border border-outline-variant/40 hover:bg-surface-container-lowest cursor-pointer transition-all">
+                                     <input type="radio" name="bstyle" value="border-[12px] border-double border-amber-700/30" x-model="customBorder" class="text-primary focus:ring-primary">
+                                     <span class="text-xs font-medium text-on-surface">Double Certificate</span>
+                                 </label>
+                                 <label class="flex items-center gap-3 p-3 rounded-xl border border-outline-variant/40 hover:bg-surface-container-lowest cursor-pointer transition-all">
+                                     <input type="radio" name="bstyle" value="border-8 border-indigo-500/20" x-model="customBorder" class="text-primary focus:ring-primary">
+                                     <span class="text-xs font-medium text-on-surface">Cosmic Glow</span>
+                                 </label>
+                             </div>
+                         </div>
+                     </div>
+
+                     <!-- Footer Actions -->
+                     <div class="p-6 border-t border-outline-variant/30 bg-surface-container-lowest space-y-3 shrink-0">
+                         <button @click="downloadCustomResults('png')" class="w-full py-3.5 bg-primary hover:bg-primary-container text-on-primary font-bold rounded-xl transition-all shadow-md flex items-center justify-center gap-2 cursor-pointer uppercase tracking-wider text-xs">
+                             <span class="material-symbols-outlined text-base">image</span>
+                             Download Custom PNG
+                         </button>
+                         <button @click="downloadCustomResults('pdf')" class="w-full py-3.5 bg-tertiary hover:bg-tertiary-container text-on-tertiary font-bold rounded-xl transition-all shadow-md flex items-center justify-center gap-2 cursor-pointer uppercase tracking-wider text-xs">
+                             <span class="material-symbols-outlined text-base">picture_as_pdf</span>
+                             Download PDF Report
+                         </button>
+                     </div>
+                 </div>
+
+                 <!-- Right Preview Canvas Area -->
+                 <div class="flex-1 flex items-center justify-center p-4 sm:p-8 overflow-y-auto bg-surface-container-lowest/50">
+                     <!-- The Canvas to be Captured -->
+                     <div id="preview-capture" 
+                          :style="`background-color: ${customBg}; color: ${customText};`"
+                          :class="`${customFont} ${customBorder}`"
+                          class="w-full max-w-[800px] p-8 sm:p-12 shadow-2xl transition-all duration-300 relative box-border overflow-hidden rounded-xs text-left">
+                          
+                          <!-- Header -->
+                          <div class="text-center mb-8 border-b pb-6" :style="`border-color: ${customText}20;`">
+                             <h1 class="text-3xl sm:text-5xl font-bold mb-3 tracking-tight" x-text="mode === 'age' ? 'Official Age Analysis' : 'Age Difference Report'"></h1>
+                             <p class="text-xs sm:text-sm opacity-80 uppercase tracking-widest font-bold" x-text="p1Name ? p1Name + (p2Name ? ' & ' + p2Name : '') : 'Personal Report'"></p>
+                          </div>
+
+                          <!-- Core Result -->
+                          <div class="mb-8 text-center">
+                             <div class="text-4xl sm:text-6xl font-bold mb-3 flex items-baseline justify-center gap-2">
+                                 <span x-text="result.years"></span> <span class="text-lg sm:text-2xl opacity-75 font-normal">Years</span>
+                                 <span x-text="result.months"></span> <span class="text-lg sm:text-2xl opacity-75 font-normal">Months</span>
+                                 <span x-text="result.days"></span> <span class="text-lg sm:text-2xl opacity-75 font-normal">Days</span>
+                             </div>
+                             <div class="text-base sm:text-xl opacity-80 font-medium" x-text="mode === 'age' ? (targetDate === '{{ date('Y-m-d') }}' ? 'Total age today' : 'Age on ' + targetDate) : 'Exact difference'"></div>
+                          </div>
+
+                          <!-- Grid Stats -->
+                          <div class="grid grid-cols-3 gap-3 sm:gap-6 mb-8">
+                             <div class="p-4 sm:p-5 rounded-xl text-center border" :style="`border-color: ${customText}15; background-color: ${customText}05;`">
+                                 <div class="text-[10px] sm:text-xs uppercase tracking-widest opacity-60 mb-1 font-bold">Total Days</div>
+                                 <div class="text-lg sm:text-2xl font-bold" x-text="result.totalDays.toLocaleString()"></div>
+                             </div>
+                             <div class="p-4 sm:p-5 rounded-xl text-center border" :style="`border-color: ${customText}15; background-color: ${customText}05;`">
+                                 <div class="text-[10px] sm:text-xs uppercase tracking-widest opacity-60 mb-1 font-bold">Total Weeks</div>
+                                 <div class="text-lg sm:text-2xl font-bold" x-text="result.totalWeeks.toLocaleString()"></div>
+                             </div>
+                             <div class="p-4 sm:p-5 rounded-xl text-center border" :style="`border-color: ${customText}15; background-color: ${customText}05;`">
+                                 <div class="text-[10px] sm:text-xs uppercase tracking-widest opacity-60 mb-1 font-bold">Total Hours</div>
+                                 <div class="text-lg sm:text-2xl font-bold" x-text="result.totalHours.toLocaleString()"></div>
+                             </div>
+                          </div>
+
+                          <!-- Insights Section -->
+                          <div class="p-6 sm:p-8 rounded-xl border" :style="`border-color: ${customText}15; background-color: ${customText}03;`">
+                              <h3 class="text-lg sm:text-2xl font-bold mb-4 opacity-95">Fascinating Insights</h3>
+                              <ul class="space-y-3 opacity-90 text-xs sm:text-base list-disc pl-5 leading-relaxed font-normal">
+                                  <li x-text="storyText.engine"></li>
+                                  <li x-text="storyText.sleep"></li>
+                                  <li x-text="storyText.cosmic"></li>
+                                  <li x-show="mode === 'age'" x-text="'Next Birthday: ' + result.nextBirthdayCountdown"></li>
+                                  <li x-text="result.comparisonText"></li>
+                              </ul>
+                          </div>
+
+                          <!-- Footer Stamp -->
+                          <div class="mt-10 text-center text-[10px] sm:text-xs opacity-50 uppercase tracking-widest font-bold">
+                              Generated securely by Time & Date Tools • {{ url('/') }}
+                          </div>
+                     </div>
+                 </div>
+            </div>
+        </template>
     </div>
 @endsection
 
 @push('scripts')
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 <script>
     function ageCalculator() {
         return {
@@ -694,6 +861,12 @@
             showResults: false,
             showStory: false,
             activeTab: 'results',
+            showExportModal: false,
+            customBg: '#ffffff',
+            customText: '#111827',
+            customFont: 'font-sans',
+            customBorder: 'border-none',
+            exportTheme: 'clean',
             result: {
                 years: 0, months: 0, days: 0, hours: 0, minutes: 0, seconds: 0,
                 totalMonths: 0, totalWeeks: 0, totalDays: 0, totalHours: 0, totalMinutes: 0, totalSeconds: 0,
@@ -707,7 +880,9 @@
             },
             summaryText: '',
             timer: null,
-            historyLoading: false,
+            typeIntervals: {},
+            p1HistoryLoading: false,
+            p2HistoryLoading: false,
             loadingQuote: '',
             historyQuotes: [
                 "Unlocking the vaults of time...",
@@ -736,6 +911,8 @@
                 this.storyText = { battery: '', weeks: '', engine: '', sleep: '', cosmic: '' };
                 this.p2StoryText = { battery: '', weeks: '', engine: '', sleep: '', cosmic: '' };
                 if (this.timer) clearInterval(this.timer);
+                Object.values(this.typeIntervals).forEach(int => clearInterval(int));
+                this.typeIntervals = {};
             },
             storyText: { battery: '', weeks: '', engine: '', sleep: '', cosmic: '' },
             p2StoryText: { battery: '', weeks: '', engine: '', sleep: '', cosmic: '' },
@@ -894,7 +1071,8 @@
 
             async fetchHistory(date, person) {
                 if (!date) return;
-                this.historyLoading = true;
+                const loadingProp = person === 1 ? 'p1HistoryLoading' : 'p2HistoryLoading';
+                this[loadingProp] = true;
                 this.loadingQuote = this.historyQuotes[Math.floor(Math.random() * this.historyQuotes.length)];
                 if (person === 1) this.result.p1History = '';
                 else this.result.p2History = '';
@@ -905,21 +1083,23 @@
                 try {
                     const response = await fetch(`/api/history/${month}/${day}`);
                     const data = await response.json();
-                    this.historyLoading = false;
+                    this[loadingProp] = false;
                     this.typeText(person === 1 ? 'p1History' : 'p2History', data.text);
                 } catch (e) {
-                    this.historyLoading = false;
+                    this[loadingProp] = false;
                     this.typeText(person === 1 ? 'p1History' : 'p2History', "On this day, something remarkable happened in history!");
                 }
             },
 
             typeText(target, text) {
+                if (this.typeIntervals?.[target]) clearInterval(this.typeIntervals[target]);
+                this.typeIntervals = this.typeIntervals || {};
                 let i = 0;
                 this.result[target] = '';
-                const interval = setInterval(() => {
+                this.typeIntervals[target] = setInterval(() => {
                     this.result[target] += text.charAt(i);
                     i++;
-                    if (i >= text.length) clearInterval(interval);
+                    if (i >= text.length) clearInterval(this.typeIntervals[target]);
                 }, 20);
             },
 
@@ -1047,20 +1227,33 @@
                 window.history.pushState({ path: newUrl }, '', newUrl);
             },
 
-            async downloadResults() {
-                const element = document.getElementById('results-capture');
+            async downloadCustomResults(type = 'png') {
+                const element = document.getElementById('preview-capture');
+                
                 const canvas = await html2canvas(element, {
-                    backgroundColor: '#F8F9FF',
+                    backgroundColor: this.customBg,
                     scale: 2,
                     logging: false,
                     useCORS: true
                 });
-                
-                const link = document.createElement('a');
-                link.download = `age-result-${this.p1Name || 'me'}.png`;
-                link.href = canvas.toDataURL('image/png');
-                link.click();
+
+                if (type === 'png') {
+                    const link = document.createElement('a');
+                    link.download = `age-customized-${this.p1Name || 'report'}.png`;
+                    link.href = canvas.toDataURL('image/png');
+                    link.click();
+                } else if (type === 'pdf') {
+                    const { jsPDF } = window.jspdf;
+                    const pdf = new jsPDF({
+                        orientation: 'portrait',
+                        unit: 'px',
+                        format: [canvas.width / 2, canvas.height / 2]
+                    });
+                    pdf.addImage(canvas.toDataURL('image/png'), 'PNG', 0, 0, canvas.width / 2, canvas.height / 2);
+                    pdf.save(`age-customized-${this.p1Name || 'report'}.pdf`);
+                }
             },
+
 
             init() {
                 this.loadFromUrl();
