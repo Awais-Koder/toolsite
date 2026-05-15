@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
-@section('title', 'Free Age Calculator & Time Tools – Exact Results by Date of Birth')
-@section('meta_description', 'Free age calculator to find your exact age by date of birth in years, months, days and seconds. Plus time calculator, hours calculator, and date tools. Instant, private, 100% free.')
+@section('title', 'Free Age Calculator, Date Calculator & Time Tools | TimeKit')
+@section('meta_description', 'Calculate your exact age in years, months, days, and seconds instantly. Free online age calculator, date calculator, and time tools with fast, accurate results.')
 
 @push('head')
 <script type="application/ld+json">
